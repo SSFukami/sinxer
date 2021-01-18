@@ -1,19 +1,23 @@
 <template>
   <div class="app">
     <div class="app-wrapper">
-      <global-header />
+      <GlobalHeader />
     </div>
   </div>
 </template>
 
-<script>
-import GlobalHeader from "@/components/layouts/GlobalHeader.vue"
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+import GlobalHeader from "@/components/layouts/GlobalHeader.vue";
+
+
+export default defineComponent({
   name: "App",
   components:{
     GlobalHeader,
   }
-}
+});
 </script>
 
 <style lang="scss" scoped>
