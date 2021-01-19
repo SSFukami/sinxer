@@ -6,49 +6,45 @@
       </div>
       <HeaderLogo />
     </div>
-    <div class="two-button">
-      <LoginForm
-      v-for="item in buttonList"
-      :key="item.id"
-      :itemData="item"
-       />
-       
+    <div class="auth-button">
+      <CommonButton :label="buttonList[0].label" />
+      <CommonButton :label="buttonList[1].label" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import HeaderLogo from "@/components/atoms/HeaderLogo.vue";
-import LoginForm from "@/components/organisms/LoginForm.vue";
+import CommonButton from "@/components/atoms/CommonButton.vue";
 
 export default {
   name: "GlobalHeader",
   components: {
     HeaderLogo,
-    LoginForm
+    CommonButton,
   },
-  data(){
+  data() {
     return {
-      buttonList:[
+      buttonList: [
         {
-          id:0,
-          label:"新規登録",
+          id: 0,
+          label: "新規登録",
         },
         {
-          id:1,
-          label:"ログイン",
+          id: 1,
+          label: "ログイン",
         },
       ],
-    }
-  }
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .global-header {
   position: fixed;
-  top:0;
-  right:0;
+  top: 0;
+  right: 0;
   width: 100%;
   height: 70px;
   background: chocolate;
@@ -63,8 +59,8 @@ export default {
     display: flex;
   }
 }
-.two-button {
-    color: white;
-    display: flex;
-  }
+.auth-button {
+  color: white;
+  display: flex;
+}
 </style>

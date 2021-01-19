@@ -1,23 +1,13 @@
 <template>
   <div class="login-form">
-    <CommonButton 
-    :label="itemData.label" 
-    />
+
   </div>
 </template>
 
-<script>
-import CommonButton from "@/components/atoms/CommonButton.vue"
+<script lang="ts">
 
 export default {
   name: "LoginForm",
-  components: {
-    CommonButton,
-  },
-  props: {
-    formData:Array,
-    itemData:Object,
-  },
 };
 </script>
 
