@@ -7,30 +7,48 @@
       <HeaderLogo />
     </div>
     <div class="two-button">
-      <SignUp />
-      |
-      <Login />
+      <LoginForm
+      v-for="item in buttonList"
+      :key="item.id"
+      :itemData="item"
+       />
+       
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Login from "@/components/atoms/Login.vue";
 import HeaderLogo from "@/components/atoms/HeaderLogo.vue";
-import SignUp from "@/components/atoms/SignUp.vue";
+import LoginForm from "@/components/organisms/LoginForm.vue";
+
 export default {
   name: "GlobalHeader",
   components: {
-    Login,
     HeaderLogo,
-    SignUp,
+    LoginForm
   },
+  data(){
+    return {
+      buttonList:[
+        {
+          id:0,
+          label:"新規登録",
+        },
+        {
+          id:1,
+          label:"ログイン",
+        },
+      ],
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .global-header {
   position: fixed;
+  top:0;
+  right:0;
   width: 100%;
   height: 70px;
   background: chocolate;
@@ -44,9 +62,9 @@ export default {
     }
     display: flex;
   }
-  .two-button {
+}
+.two-button {
     color: white;
     display: flex;
   }
-}
 </style>
