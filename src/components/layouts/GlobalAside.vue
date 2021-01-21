@@ -1,0 +1,120 @@
+<template>
+  <div class="wrapper">
+    <div class="global-aside">
+      <div class="global-aside-header">
+        <div class="aside-closer">
+          <img src="@/assets/close-black.svg" />
+        </div>
+      </div>
+      <div class="global-aside-content">
+        <router-link
+          class="aside-menu"
+          v-for="(item, index) in asideMenuList"
+          :key="index"
+          :to="item.path"
+        >
+          <img :src="require(`@/assets/${item.icon}.svg`)" />
+          <div class="aside-menu-label">{{ item.label }}</div>
+        </router-link>
+      </div>
+      <div class="global-aside-footer">
+        <div>ログアウト</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+import { ASIDE_MENU_LIST } from "@/mixins/asideMenuList";
+
+export default {
+  name: "GlobalAside",
+  data() {
+    return {
+      asideMenuList: ASIDE_MENU_LIST, //メニューのデータがあるリスト
+    };
+  },
+};
+</script>
+
+<style lang="scss" scopped>
+.wrapper {
+  z-index: -1; //通常はページの裏側
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .global-aside {
+    width: 200px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 40px 1fr 40px;
+    row-gap: 24px;
+    background: silver;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.4s ease;
+
+    &-header {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      .aside-closer {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 8px;
+        cursor: pointer;
+        img {
+          transform: scale(1.6, 1.6);
+        }
+      }
+    }
+
+    &-content {
+      width: 100%;
+      display: grid;
+      grid-template-rows: repeat(3, 48px);
+      row-gap: 16px;
+      .aside-menu {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        border-bottom: 2px solid black;
+
+        img {
+          position: relative;
+          top: 13px;
+          left: 13px;
+          border: 1px solid black;
+          border-radius: 50%;
+          padding: 2px;
+          transform: scale(1.5, 1.5);
+        }
+
+        &-label {
+          font-size: 22px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          padding: 0px 4px;
+        }
+      }
+    }
+
+    &-footer {
+      width: 100%;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+</style>
