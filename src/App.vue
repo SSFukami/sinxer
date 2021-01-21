@@ -4,6 +4,7 @@
       <GlobalHeader />
     </div>
     <GlobalAside />
+    <router-view />
   </div>
 </template>
 
@@ -22,7 +23,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 * {
   box-sizing: border-box;
 }
