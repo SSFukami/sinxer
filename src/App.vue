@@ -15,7 +15,7 @@ import GlobalAside from "@/components/layouts/GlobalAside.vue";
 
 export default defineComponent({
   name: "App",
-  components:{
+  components: {
     GlobalHeader,
     GlobalAside,
   },
@@ -23,7 +23,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-*{
+* {
   box-sizing: border-box;
 }
 
