@@ -2,6 +2,7 @@
   <div class="app">
     <div class="app-wrapper">
       <GlobalHeader />
+      <router-view />
     </div>
     <GlobalAside />
   </div>
