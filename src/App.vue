@@ -2,6 +2,7 @@
   <div class="app">
     <div class="app-wrapper">
       <GlobalHeader />
+      <router-view />
     </div>
     <GlobalAside />
   </div>
@@ -22,7 +23,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 * {
   box-sizing: border-box;
 }
@@ -38,6 +39,13 @@ body,
   &-wrapper {
     width: 100%;
     height: 100%;
+    .page {
+      width: 100%;
+      height: 100%;
+      background: white;
+      position: fixed;
+      top: 70px;
+    }
   }
 }
 </style>
