@@ -1,3 +1,3 @@
 <template>
-    <div>メッセージ</div>
+    <div class="page">メッセージ</div>
 </template>
