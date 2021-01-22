@@ -7,35 +7,19 @@
       <HeaderLogo />
     </div>
     <div class="auth-button">
-      <CommonButton :label="buttonList[0].label" />
-      <CommonButton :label="buttonList[1].label" />
+      <button class="sign-up">新規登録</button>
+      <button class="login">ログイン</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import HeaderLogo from "@/components/atoms/HeaderLogo.vue";
-import CommonButton from "@/components/atoms/CommonButton.vue";
 
 export default {
   name: "GlobalHeader",
   components: {
     HeaderLogo,
-    CommonButton,
-  },
-  data() {
-    return {
-      buttonList: [
-        {
-          id: 0,
-          label: "新規登録",
-        },
-        {
-          id: 1,
-          label: "ログイン",
-        },
-      ],
-    };
   },
 };
 </script>
@@ -60,7 +44,18 @@ export default {
   }
 }
 .auth-button {
-  color: white;
   display: flex;
+  button.sign-up {
+    color: white;
+    background-color: chocolate;
+    display: flex;
+    border: none;
+  }
+  button.login {
+    color: white;
+    background-color: chocolate;
+    display: flex;
+    border: none;
+  }
 }
 </style>

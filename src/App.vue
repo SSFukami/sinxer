@@ -5,6 +5,7 @@
       <router-view />
     </div>
     <GlobalAside />
+    <router-view />
   </div>
 </template>
 
