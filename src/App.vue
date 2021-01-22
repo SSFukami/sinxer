@@ -2,6 +2,7 @@
   <div class="app">
     <div class="app-wrapper">
       <GlobalHeader />
+      <router-view />
     </div>
     <GlobalAside />
     <router-view />
@@ -39,6 +40,13 @@ body,
   &-wrapper {
     width: 100%;
     height: 100%;
+    .page {
+      width: 100%;
+      height: 100%;
+      background: white;
+      position: fixed;
+      top: 70px;
+    }
   }
 }
 </style>

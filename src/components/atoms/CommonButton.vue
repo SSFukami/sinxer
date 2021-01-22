@@ -8,18 +8,17 @@ export default {
   props: {
     label: String,
   },
-
 };
 </script>
 
 <style lang="scss" scoped>
 button {
-  border: 2px solid black;
   height: 32px;
-  color: black;
-  background: none;
   font-size: 16px;
-  margin: 0px 0px 0px 8px;
+  font-weight: bold;
+  color: rgb(48, 48, 48);
+  background: none;
+  border: 2px solid black;
   outline: none;
   cursor: pointer;
 }

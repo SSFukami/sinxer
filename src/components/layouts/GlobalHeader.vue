@@ -21,20 +21,6 @@ export default {
   components: {
     HeaderLogo,
   },
-  data() {
-    return {
-      buttonList: [
-        {
-          id: 0,
-          label: "新規登録",
-        },
-        {
-          id: 1,
-          label: "ログイン",
-        },
-      ],
-    };
-  },
 };
 </script>
 
