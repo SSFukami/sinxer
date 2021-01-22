@@ -18,7 +18,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "HomeTile",
   props: {
-    id: Number,
+    id: {
+      //1~12の表示されてる順番
+      type: Number,
+      required: true,
+    },
   },
 });
 </script>
