@@ -6,7 +6,11 @@
 export default {
   name: "CommonButton",
   props: {
-    label: String,
+    label: {
+      //ボタンの中に表示する文字列
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
