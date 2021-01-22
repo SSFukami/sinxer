@@ -31,7 +31,7 @@ import CommonButton from "@/components/atoms/CommonButton.vue";
 
 import { ASIDE_MENU_LIST } from "@/mixins/asideMenuList";
 
-export default {
+export default defineComponent({
   name: "GlobalAside",
   components: {
     CommonButton,
@@ -41,7 +41,7 @@ export default {
       asideMenuList: ASIDE_MENU_LIST, //メニューのデータがあるリスト
     };
   },
-};
+});
 </script>
 
 <style lang="scss" scopped>
