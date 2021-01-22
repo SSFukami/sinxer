@@ -18,7 +18,7 @@
         </router-link>
       </div>
       <div class="global-aside-footer">
-        <div>ログアウト</div>
+        <CommonButton label="ログアウト" />
       </div>
     </div>
   </div>
@@ -27,10 +27,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import CommonButton from "@/components/atoms/CommonButton.vue";
+
 import { ASIDE_MENU_LIST } from "@/mixins/asideMenuList";
 
 export default {
   name: "GlobalAside",
+  components: {
+    CommonButton,
+  },
   data() {
     return {
       asideMenuList: ASIDE_MENU_LIST, //メニューのデータがあるリスト
