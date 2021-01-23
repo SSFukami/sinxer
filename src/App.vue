@@ -5,7 +5,6 @@
       <router-view />
     </div>
     <GlobalAside />
-    <router-view />
   </div>
 </template>
 
@@ -42,7 +41,7 @@ body,
     height: 100%;
     .page {
       width: 100%;
-      height: 100%;
+      height: calc(100% - 70px); //ヘッダーの分短く
       background: white;
       position: fixed;
       top: 70px;
