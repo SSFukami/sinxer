@@ -1,7 +1,11 @@
 <template>
   <div class="page">
     <div class="home-header">
-      <TextField :value="searchWord" label="検索ボックス" @change-value="changeSearchWord" />
+      <TextField
+        :value="searchWord"
+        label="検索ボックス"
+        @change-value="changeSearchWord"
+      />
       <CommonButton label="検索" />
     </div>
     <div class="home-content">
@@ -17,6 +21,10 @@ import TextField from "@/components/atoms/TextField.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 import HomeTile from "@/components/organisms/HomeTile.vue";
 
+export type DataType = {
+  searchWord: string;
+};
+
 export default defineComponent({
   name: "Home",
   components: {
@@ -24,13 +32,14 @@ export default defineComponent({
     CommonButton,
     HomeTile,
   },
-  data() {
+  data(): DataType {
     return {
       searchWord: "", //検索ボックスに入力した文字列
     };
   },
   methods: {
-    changeSearchWord(value: string, key: number) { //検索ワードの変更
+    changeSearchWord(value: string, key: number) {
+      //検索ワードの変更
       this.searchWord = value;
     },
   },
