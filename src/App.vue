@@ -5,6 +5,7 @@
       <router-view />
     </div>
     <GlobalAside />
+    <Modal v-show="$store.state.modal.isOpening" />
   </div>
 </template>
 
@@ -14,11 +15,14 @@ import { defineComponent } from "vue";
 import GlobalHeader from "@/components/layouts/GlobalHeader.vue";
 import GlobalAside from "@/components/layouts/GlobalAside.vue";
 
+import Modal from "@/components/organisms/Modal/index.vue";
+
 export default defineComponent({
   name: "App",
   components: {
     GlobalHeader,
     GlobalAside,
+    Modal,
   },
 });
 </script>
