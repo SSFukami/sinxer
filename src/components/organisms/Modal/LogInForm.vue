@@ -24,15 +24,10 @@
 import { defineComponent } from "vue";
 
 import ModalFrame from "@/components/organisms/Modal/ModalFrame.vue";
-import FormComponent from "@/components/molecules/FormComponent.vue";
+import FormComponent, {
+  PropFormType as IlogInDataList,
+} from "@/components/molecules/FormComponent.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
-
-interface IlogInDataList {
-  id: number;
-  label: string;
-  value: string;
-  formType: string;
-}
 
 export type DataType = {
   label: string;
@@ -50,7 +45,8 @@ export default defineComponent({
     return {
       label: "新規登録", //(試験的な)新規登録かログイン
 
-      logInDataList: [ //フォームのデータ
+      logInDataList: [
+        //フォームのデータ
         {
           id: 1,
           label: "メールアドレス",
