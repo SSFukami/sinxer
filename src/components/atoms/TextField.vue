@@ -8,13 +8,21 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "TextField",
   props: {
-    value: String,
+    value: {
+      //入力される文字列
+      type: String,
+      required: true,
+    },
     id: Number,
-    label: String,
+    label: {
+      //テキストフィールドに表示する文字列
+      type: String,
+      required: true,
+    },
   },
   computed: {
     innerValue: {
-      get(): string | undefined {
+      get(): any {
         return this.value;
       },
       set(value: string) {
