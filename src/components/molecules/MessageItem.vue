@@ -34,7 +34,7 @@ export default defineComponent({
   },
   computed: {
     setClassSelfOwned(): string {
-      //書いた人が自分なら真
+      //書いた人が自分ならクラス付与
       return this.sender === "self" ? "self-owned" : "";
     },
   },
