@@ -1,12 +1,13 @@
-import { createStore } from 'vuex'
+import Vuex from 'vuex';
+import { modal } from './modal/index';
 
-export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+import createPersistedState from "vuex-persistedstate";
+
+export default new Vuex.Store({
   modules: {
-  }
-})
+    modal,
+  },
+  plugins: [
+    createPersistedState()
+  ]
+});

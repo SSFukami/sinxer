@@ -46,6 +46,18 @@ import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
 import MessageForm from "@/components/molecules/MessageForm.vue"
 
+interface IchatDataList {
+  sender: string;
+  content: string;
+}
+
+export type DataType = {
+  searchWord: string;
+  message: string;
+  numberOfClient: number;
+  chatDataList: IchatDataList[];
+};
+
 export default defineComponent({
   name: "Message",
   components: {
@@ -55,7 +67,7 @@ export default defineComponent({
     MessageItem,
     MessageForm,
   },
-  data() {
+  data(): DataType {
     return {
       searchWord: "", //検索ボックスに入力した文字列
       message: "", //チャットのメッサージ

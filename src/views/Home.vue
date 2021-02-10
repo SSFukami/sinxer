@@ -1,11 +1,20 @@
 <template>
   <div class="page">
     <div class="home-header">
+<<<<<<< HEAD
       <SearchForm
        :form="searchList"
        @change-value="changeValue"
        />
        <!-- {{searchList}} -->
+=======
+      <TextField
+        :value="searchWord"
+        label="検索ボックス"
+        @change-value="changeSearchWord"
+      />
+      <CommonButton label="検索" />
+>>>>>>> adce902d12d49285a8b657f439fd6d9223d564b0
     </div>
     <div class="home-content">
       <HomeTile v-for="n in 12" :key="n" :id="n" />
@@ -21,6 +30,10 @@ import CommonButton from "@/components/atoms/CommonButton.vue";
 import SearchForm from "@/components/molecules/SearchForm.vue"
 import HomeTile from "@/components/organisms/HomeTile.vue";
 
+export type DataType = {
+  searchWord: string;
+};
+
 export default defineComponent({
   name: "Home",
   components: {
@@ -29,7 +42,7 @@ export default defineComponent({
     SearchForm,
     HomeTile,
   },
-  data() {
+  data(): DataType {
     return {
       searchWord: "", //検索ボックスに入力した文字列
       searchList:[
@@ -48,7 +61,8 @@ export default defineComponent({
     };
   },
   methods: {
-    changeSearchWord(value: string, key: number) { //検索ワードの変更
+    changeSearchWord(value: string, key: number) {
+      //検索ワードの変更
       this.searchWord = value;
     },
     changeValue(value:String, id:Number):void{

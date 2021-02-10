@@ -1,12 +1,12 @@
 <template>
-  <input type="text" :placeholder="label" v-model="innerValue" />
+  <input type="password" :placeholder="label" v-model="innerValue" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "TextField",
+  name: "PasswordField",
   props: {
     value: {
       //入力される文字列
@@ -22,11 +22,11 @@ export default defineComponent({
   },
   computed: {
     innerValue: {
-      get(): any {
+      get(): string | undefined {
         return this.value;
       },
       set(value: string) {
-        this.$emit("change-value", value, this.id);
+        this.$emit("change-value", String(value), this.id);
       },
     },
   },
@@ -34,15 +34,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-input[type="text"] {
+input[type="password"] {
   font-size: 20px;
   width: 100%;
   height: 32px;
-  color: $-primary-800;
-  background: $-primary-200;
   border: none;
-  border-bottom: 1px solid $-primary-800;
+  border-bottom: 1px solid black;
   outline: none;
 }
 </style>
