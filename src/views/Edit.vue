@@ -1,3 +1,110 @@
 <template>
-    <div class="page">編集</div>
+  <div class="page">
+    <div class="icon">
+      <div class="icon-content"></div>
+    </div>
+    <div class="page-contents">
+      <EditForm :formData="formData" @change-value="changeValue" />
+    </div>
+    <div class="done-back-button">
+      <button class="done">完了</button>
+      <button class="back">戻る</button>
+    </div>
+    <!-- {{ formData }} -->
+  </div>
 </template>
+
+<script lang="ts">
+import EditForm from "@/components/organisms/EditForm.vue";
+import CommonButton from "@/components/atoms/CommonButton.vue"
+export default {
+  name: "Edit",
+  components: {
+    EditForm,
+    CommonButton
+  },
+  data() {
+    return {
+      formData: [
+        //編集画面のデータ
+        {
+          id: 1,
+          label: "名前",
+          keyName: "name",
+          value: "",
+          formType: "TextField",
+        },
+        {
+          id: 2,
+          label: "自己紹介",
+          keyName: "self-introduction",
+          value: "",
+          formType: "TextArea",
+        },
+        {
+          id: 3,
+          label: "Twitter",
+          keyName: "twitter",
+          value: "",
+          formType: "TextField",
+        },
+        {
+          id: 4,
+          label: "料金",
+          keyName: "fee",
+          value: "",
+          formType: "TextArea",
+        },
+        {
+          id: 5,
+          label: "納期",
+          keyName: "deadline",
+          value: "",
+          formType: "TextArea",
+        },
+      ],
+    };
+  },
+  methods: {
+    changeValue(value: String, key: number): void {
+      (this as any).formData[key - 1].value = value;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
+.page {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 30px;
+  grid-auto-columns: 100px;
+  padding-top: 60px;
+  &-contents {
+    overflow-y: scroll;
+  }
+}
+.icon {
+  justify-content: center;
+  align-items:center;
+  &-content {
+    margin:20px 20px 0px 180px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: silver;
+  }
+}
+.done-back-button {
+  padding: 160px 60px 0px 60px;
+  button {
+    border: 50px;
+    margin: 30px;
+    width: 60%;
+    height: 50px;
+    color:$-primary-800;
+  }
+}
+</style>
+

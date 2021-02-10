@@ -22,7 +22,7 @@ export default defineComponent({
   },
   computed: {
     innerValue: {
-      get(): string | undefined {
+      get(): any {
         return this.value;
       },
       set(value: string) {
