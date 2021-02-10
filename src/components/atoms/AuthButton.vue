@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "CommonButton",
+  name: "AuthButton",
   props: {
     label: {
       //ボタンの中に表示する文字列
@@ -24,10 +24,11 @@ button {
   height: 32px;
   font-size: 16px;
   font-weight: bold;
-  background-color: $-primary-200;
+  color: $-primayr-800;
+  background: none;
   border: 2px solid;
-  color: $-primary-800;
-  border-color: $-primary-800;
+  border-color: $-primayr-800;
+  background-color:$-auth-button;
   outline: none;
   cursor: pointer;
 }

@@ -4,24 +4,31 @@
       <div class="icon-content"></div>
     </div>
     <div class="page-contents">
+      <!-- {{formData}} -->
       <EditForm :formData="formData" @change-value="changeValue" />
     </div>
     <div class="done-back-button">
-      <button class="done">完了</button>
-      <button class="back">戻る</button>
+      <!-- <button class="done">完了</button>
+      <button class="back">戻る</button> -->
+      <WhiteButtonsSet 
+      :form="whiteButtonsData" />
     </div>
     <!-- {{ formData }} -->
   </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+
 import EditForm from "@/components/organisms/EditForm.vue";
-import CommonButton from "@/components/atoms/CommonButton.vue"
-export default {
+import CommonButton from "@/components/atoms/CommonButton.vue";
+import WhiteButtonsSet from "@/components/molecules/WhiteButtonsSet.vue"
+export default defineComponent({
   name: "Edit",
   components: {
     EditForm,
-    CommonButton
+    CommonButton,
+    WhiteButtonsSet
   },
   data() {
     return {
@@ -32,7 +39,7 @@ export default {
           label: "名前",
           keyName: "name",
           value: "",
-          formType: "TextField",
+          formType: "TextFieldOrange",
         },
         {
           id: 2,
@@ -63,6 +70,16 @@ export default {
           formType: "TextArea",
         },
       ],
+      whiteButtonsData:[
+        {
+          label:"完了",
+          id:"0",
+        },
+        {
+          label:"キャンセル",
+          id:"1"
+        }
+      ]
     };
   },
   methods: {
@@ -70,7 +87,7 @@ export default {
       (this as any).formData[key - 1].value = value;
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -97,14 +114,14 @@ export default {
   }
 }
 .done-back-button {
-  padding: 160px 60px 0px 60px;
-  button {
-    border: 50px;
-    margin: 30px;
-    width: 60%;
-    height: 50px;
-    color:$-primary-800;
-  }
+  // padding: 160px 60px 0px 60px;
+  // button {
+  //   border: 50px;
+  //   margin: 30px;
+  //   width: 60%;
+  //   height: 50px;
+  //   color:$-primary-800;
+  // }
 }
 </style>
 

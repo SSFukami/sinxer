@@ -24,11 +24,12 @@ button {
   height: 32px;
   font-size: 16px;
   font-weight: bold;
-  background-color: $-primary-200;
+  background-color: $-primary-100;
   border: 2px solid;
   color: $-primary-800;
   border-color: $-primary-800;
   outline: none;
   cursor: pointer;
+  
 }
 </style>

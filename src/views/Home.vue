@@ -1,8 +1,11 @@
 <template>
   <div class="page">
     <div class="home-header">
-      <TextField :value="searchWord" label="検索ボックス" @change-value="changeSearchWord" />
-      <CommonButton label="検索" />
+      <SearchForm
+       :form="searchList"
+       @change-value="changeValue"
+       />
+       <!-- {{searchList}} -->
     </div>
     <div class="home-content">
       <HomeTile v-for="n in 12" :key="n" :id="n" />
@@ -15,6 +18,7 @@ import { defineComponent } from "vue";
 
 import TextField from "@/components/atoms/TextField.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
+import SearchForm from "@/components/molecules/SearchForm.vue"
 import HomeTile from "@/components/organisms/HomeTile.vue";
 
 export default defineComponent({
@@ -22,17 +26,34 @@ export default defineComponent({
   components: {
     TextField,
     CommonButton,
+    SearchForm,
     HomeTile,
   },
   data() {
     return {
       searchWord: "", //検索ボックスに入力した文字列
+      searchList:[
+        {
+          id:0,
+          label:"検索ボックス",
+          value:"",
+          formType:"TextFieldWhite",
+        },
+        {
+          id:1,
+          label:"検索",
+          formType:"CommonButton",
+        }
+      ]
     };
   },
   methods: {
     changeSearchWord(value: string, key: number) { //検索ワードの変更
       this.searchWord = value;
     },
+    changeValue(value:String, id:Number):void{
+      (this as any).searchList[0].value=value;
+    }
   },
 });
 </script>
@@ -44,9 +65,7 @@ export default defineComponent({
     width: 50%;
     min-width: 320px;
     height: 64px;
-    display: grid;
-    grid-template-columns: 1fr 48px;
-    column-gap: 16px;
+    
     margin: 0 auto; //左右中央揃え用
     padding-top: 16px; //上下中央揃え用
   }

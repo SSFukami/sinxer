@@ -10,14 +10,16 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+
 import FormComponent from "@/components/molecules/FormComponent.vue";
-export default {
+export default defineComponent({
   name: "EditForm",
   components: {
     FormComponent,
   },
   props: {
-    formData: Array,
+    formData: Array, //編集画面のデータ
     // itemData:Object,
   },
   methods: {
@@ -25,7 +27,7 @@ export default {
       (this as any).$emit("change-value", value, key);
     },
   },
-};
+});
 </script>
 
 <style>

@@ -14,9 +14,10 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import HeaderLogo from "@/components/atoms/HeaderLogo.vue";
 
-export default {
+export default defineComponent({
   name: "GlobalHeader",
   components: {
     HeaderLogo,
@@ -35,7 +36,7 @@ export default {
       ],
     };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

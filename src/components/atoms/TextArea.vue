@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
 name:"TextArea",
 props:{
   value:{
@@ -24,12 +26,18 @@ computed:{
     }
   }
 }
-}
+});
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
 textarea{
   width:100%;
-  height:200px;
+  height:180px;
+  color: $-primary-800;
+  background: $-primary-200;
+  border:none;
+  border-bottom: 1px solid $-primary-800;
+  resize: none;
 }
 </style>

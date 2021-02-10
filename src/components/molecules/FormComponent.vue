@@ -11,28 +11,38 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+
 import TextField from "@/components/atoms/TextField.vue";
+import TextFieldOrange from "@/components/atoms/TextFieldOrange.vue";
+import PassField from "@/components/atoms/PassField.vue";
 import TextArea from "@/components/atoms/TextArea.vue";
-export default {
+export default defineComponent({
   name: "FormComponent",
   components: {
     TextField,
+    TextFieldOrange,
+    PassField,
     TextArea,
   },
   props: {
-    form: Object,
+    form: Object, //フォームのデータ
   },
   methods: {
     changeValue(value: String, key: Number) {
       (this as any).$emit("change-value", value, key);
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
 .form-component {
-  padding-top: 20px;
-  padding-bottom: 60px;
+  width: 100%;
+  height: auto;
+  padding: 8px;
+  &-label {
+    height: 24px;
+  }
 }
 </style>

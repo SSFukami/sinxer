@@ -40,7 +40,7 @@ input[type="text"] {
   width: 100%;
   height: 32px;
   color: $-primary-800;
-  background: $-primary-200;
+  background-color: $-primary-600;
   border: none;
   border-bottom: 1px solid $-primary-800;
   outline: none;
