@@ -16,7 +16,7 @@
 import { defineComponent, PropType } from "vue";
 
 import TextField from "@/components/atoms/TextField.vue";
-import PasswordField from "@/components/atoms/PasswordField.vue";
+import PassField from "@/components/atoms/PassField.vue";
 
 export type PropFormType = {
   id: number;
@@ -29,7 +29,7 @@ export default defineComponent({
   name: "FormComponent",
   components: {
     TextField,
-    PasswordField,
+    PassField,
   },
   props: {
     form: {

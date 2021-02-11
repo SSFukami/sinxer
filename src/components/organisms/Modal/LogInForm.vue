@@ -57,7 +57,7 @@ export default defineComponent({
           id: 2,
           label: "パスワード",
           value: "",
-          formType: "PasswordField",
+          formType: "PassField",
         },
       ],
     };

@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "PasswordField",
+  name: "PassField",
   props: {
     value: {
       //入力される文字列
