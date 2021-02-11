@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :class="setClassOpen" @click.self="closeAside">
     <div class="global-aside">
       <div class="global-aside-header">
-        <div class="aside-closer">
+        <div class="aside-closer" @click="closeAside">
           <img src="@/assets/close-black.svg" />
         </div>
       </div>
@@ -41,6 +41,16 @@ export default defineComponent({
       asideMenuList: ASIDE_MENU_LIST, //メニューのデータがあるリスト
     };
   },
+  methods: {
+    closeAside(): void {
+      (this as any).$store.commit("common/shiftAside", false);
+    },
+  },
+  computed: {
+    setClassOpen(): string {
+      return (this as any).$store.state.common.isOpeningAside ? "open" : "";
+    },
+  },
 });
 </script>
 
@@ -55,8 +65,9 @@ export default defineComponent({
   right: 0;
   bottom: 0;
   left: 0;
+
   .global-aside {
-    width: 200px;
+    width: 0px;
     height: 100%;
     display: grid;
     grid-template-rows: 40px 1fr 40px;
@@ -64,7 +75,7 @@ export default defineComponent({
     background: silver;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition: all 0.4s ease;
+    transition: all 0.2s ease;
 
     &-header {
       width: 100%;
@@ -80,6 +91,9 @@ export default defineComponent({
         cursor: pointer;
         img {
           transform: scale(1.6, 1.6);
+          &:hover {
+            border: 0.5px solid black;
+          }
         }
       }
     }
@@ -120,6 +134,14 @@ export default defineComponent({
       display: flex;
       justify-content: center;
     }
+  }
+}
+
+.open {
+  z-index: 2;
+
+  .global-aside {
+    width: 200px !important;
   }
 }
 </style>

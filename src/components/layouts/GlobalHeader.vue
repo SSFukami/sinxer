@@ -1,7 +1,7 @@
 <template>
   <div class="global-header">
     <div class="global-header-left">
-      <div class="global-header-left-icon">
+      <div class="global-header-left-icon" @click="openAside">
         <img :src="require(`@/assets/list.svg`)" />
       </div>
       <HeaderLogo />
@@ -20,6 +20,11 @@ export default {
   name: "GlobalHeader",
   components: {
     HeaderLogo,
+  },
+  methods: {
+    openAside(): void {
+      (this as any).$store.commit("common/shiftAside", true);
+    },
   },
 };
 </script>
