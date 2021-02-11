@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "TextField",
+  name: "TextFieldWhite",
   props: {
     value: {
       //入力される文字列
@@ -22,7 +22,7 @@ export default defineComponent({
   },
   computed: {
     innerValue: {
-      get(): any {
+      get(): String | undefined {
         return this.value;
       },
       set(value: string) {

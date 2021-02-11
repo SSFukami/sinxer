@@ -18,7 +18,7 @@ props:{
 },
 computed:{
   innerValue:{
-    get():any{
+    get():String | undefined{
       return (this as any).value;
     },
     set(value:string){
