@@ -1,6 +1,8 @@
 <template>
   <div :class="['message-item', setClassSelfOwned]">
-    <div class="user-icon"></div>
+    <div class="user-icon">
+      <UserIcon />
+    </div>
     <div class="message-body">{{ id }}{{ content }}</div>
     <div class="empty"></div>
   </div>
@@ -9,8 +11,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import UserIcon from "@/components/atoms/UserIcon.vue";
+
 export default defineComponent({
   name: "MessageItem",
+  components:{
+    UserIcon,
+  },
   props: {
     id: {
       //表示されてる順番
@@ -44,6 +51,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .message-item {
   width: 100%;
+  height:auto;
   display: grid;
   grid-template-columns: 48px 1fr 48px;
   column-gap: 8px;

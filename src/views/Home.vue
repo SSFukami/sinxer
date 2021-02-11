@@ -1,12 +1,11 @@
 <template>
   <div class="page">
     <div class="home-header">
-      <TextField
-        :value="searchWord"
-        label="検索ボックス"
-        @change-value="changeSearchWord"
-      />
-      <CommonButton label="検索" />
+      <SearchForm
+       :searchWord="searchWord"
+       @change-value="changeSearchWord"
+       />
+       <!-- {{searchList}} -->
     </div>
     <div class="home-content">
       <HomeTile v-for="n in 12" :key="n" :id="n" />
@@ -19,6 +18,7 @@ import { defineComponent } from "vue";
 
 import TextField from "@/components/atoms/TextField.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
+import SearchForm from "@/components/molecules/SearchForm.vue"
 import HomeTile from "@/components/organisms/HomeTile.vue";
 
 export type DataType = {
@@ -30,6 +30,7 @@ export default defineComponent({
   components: {
     TextField,
     CommonButton,
+    SearchForm,
     HomeTile,
   },
   data(): DataType {
@@ -53,9 +54,7 @@ export default defineComponent({
     width: 50%;
     min-width: 320px;
     height: 64px;
-    display: grid;
-    grid-template-columns: 1fr 48px;
-    column-gap: 16px;
+    
     margin: 0 auto; //左右中央揃え用
     padding-top: 16px; //上下中央揃え用
   }

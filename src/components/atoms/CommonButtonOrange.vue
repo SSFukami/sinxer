@@ -19,13 +19,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
-
 button {
   width: 100%;
   height: 32px;
   font-size: 16px;
   font-weight: bold;
-  background-color: $-primary-200;
+  background-color: $-primary-500;
   border: 2px solid;
   color: $-primary-800;
   border-color: $-primary-800;

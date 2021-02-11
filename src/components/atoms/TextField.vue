@@ -22,11 +22,11 @@ export default defineComponent({
   },
   computed: {
     innerValue: {
-      get(): string | undefined {
+      get(): any {
         return this.value;
       },
       set(value: string) {
-        this.$emit("change-value", value, this.id);
+        this.$emit("change-message", value, this.id);
       },
     },
   },
@@ -34,12 +34,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
 input[type="text"] {
   font-size: 20px;
   width: 100%;
   height: 32px;
+  color: $-primary-800;
+  background: $-primary-200;
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $-primary-800;
   outline: none;
 }
 </style>

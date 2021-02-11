@@ -1,12 +1,12 @@
 <template>
-  <input type="password" :placeholder="label" v-model="innerValue" />
+  <input type="text" :placeholder="label" v-model="innerValue" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "PassField",
+  name: "TextField",
   props: {
     value: {
       //入力される文字列
@@ -35,11 +35,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
-input[type="password"] {
+input[type="text"] {
   font-size: 20px;
   width: 100%;
   height: 32px;
   color: $-primary-800;
+  background-color: $-primary-100;
   border: none;
   border-bottom: 1px solid $-primary-800;
   outline: none;

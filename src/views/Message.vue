@@ -6,6 +6,7 @@
           :value="searchWord"
           label="アカウント検索"
           @change-value="changeSearchWord"
+          
         />
       </div>
       <div class="message-aside-list">
@@ -23,12 +24,15 @@
         />
       </div>
       <div class="message-content-footer">
-        <TextField
+        <!-- <TextField
           :value="message"
           label="メッセージ"
           @change-value="changeMessage"
         />
-        <CommonButton label="送信" />
+        <CommonButton label="送信" /> -->
+        <MessageForm
+        :message="message"
+        @change-value="changeMessage" />
       </div>
     </div>
   </div>
@@ -41,6 +45,7 @@ import TextField from "@/components/atoms/TextField.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
+import MessageForm from "@/components/molecules/MessageForm.vue"
 
 interface IchatDataList {
   sender: string;
@@ -48,10 +53,12 @@ interface IchatDataList {
 }
 
 export type DataType = {
+  //TypeScriptの型宣言
   searchWord: string;
   message: string;
   numberOfClient: number;
   chatDataList: IchatDataList[];
+  // messageList: Object,
 };
 
 export default defineComponent({
@@ -61,6 +68,7 @@ export default defineComponent({
     CommonButton,
     UserTab,
     MessageItem,
+    MessageForm,
   },
   data(): DataType {
     return {
@@ -85,7 +93,7 @@ export default defineComponent({
           sender: "client",
           content: "コメント1行目\n2行目\n3行目\n4行目\n5行目",
         },
-      ], //試験的なチャット内容のデータ
+      ], 
     };
   },
   methods: {
@@ -138,9 +146,6 @@ export default defineComponent({
 
     &-footer {
       width: 90%;
-      display: grid;
-      grid-template-columns: 1fr 48px;
-      column-gap: 16px;
       margin: 0 auto; //左右中央揃え用
       padding-top: 8px; //上下中央揃え用
     }

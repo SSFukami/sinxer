@@ -1,6 +1,8 @@
 <template>
   <div class="user-tab">
-    <div class="icon"></div>
+    <div class="icon">
+      <UserIcon />
+    </div>
     <div class="name">user{{ id }}</div>
   </div>
 </template>
@@ -8,8 +10,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import UserIcon from "@/components/atoms/UserIcon.vue";
 export default defineComponent({
   name: "UserTab",
+  conponents:{
+    UserIcon,
+  },
   props: {
     id: {
       //表示されてる順番
@@ -21,6 +27,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
 .user-tab {
   width: 100%;
   height: 56px;
@@ -48,7 +55,7 @@ export default defineComponent({
   }
 
   &:hover {
-    background: gray;
+    background: $-primary-200;
   }
 }
 </style>
