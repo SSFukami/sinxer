@@ -26,7 +26,7 @@ export default defineComponent({
         return this.value;
       },
       set(value: string) {
-        this.$emit("change-value", value, this.id);
+        this.$emit("change-message", value, this.id);
       },
     },
   },

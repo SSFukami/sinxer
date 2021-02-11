@@ -1,20 +1,11 @@
 <template>
   <div class="page">
     <div class="home-header">
-<<<<<<< HEAD
       <SearchForm
-       :form="searchList"
-       @change-value="changeValue"
+       :searchWord="searchWord"
+       @change-value="changeSearchWord"
        />
        <!-- {{searchList}} -->
-=======
-      <TextField
-        :value="searchWord"
-        label="検索ボックス"
-        @change-value="changeSearchWord"
-      />
-      <CommonButton label="検索" />
->>>>>>> adce902d12d49285a8b657f439fd6d9223d564b0
     </div>
     <div class="home-content">
       <HomeTile v-for="n in 12" :key="n" :id="n" />
@@ -45,19 +36,6 @@ export default defineComponent({
   data(): DataType {
     return {
       searchWord: "", //検索ボックスに入力した文字列
-      searchList:[
-        {
-          id:0,
-          label:"検索ボックス",
-          value:"",
-          formType:"TextFieldWhite",
-        },
-        {
-          id:1,
-          label:"検索",
-          formType:"CommonButton",
-        }
-      ]
     };
   },
   methods: {
@@ -65,9 +43,6 @@ export default defineComponent({
       //検索ワードの変更
       this.searchWord = value;
     },
-    changeValue(value:String, id:Number):void{
-      (this as any).searchList[0].value=value;
-    }
   },
 });
 </script>

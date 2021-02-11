@@ -11,12 +11,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 import TextField from "@/components/atoms/TextField.vue";
 import TextFieldOrange from "@/components/atoms/TextFieldOrange.vue";
 import PassField from "@/components/atoms/PassField.vue";
 import TextArea from "@/components/atoms/TextArea.vue";
+
+export type PropFormType = {
+  id: number;
+  label: string;
+  value: string;
+  formType: string;
+};
+
 export default defineComponent({
   name: "FormComponent",
   components: {

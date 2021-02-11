@@ -91,7 +91,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
+
 .page {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

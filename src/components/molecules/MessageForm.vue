@@ -1,12 +1,11 @@
 <template>
   <div class="message-form">
       <TextField
-        :label="form[0].label"
-        :value="form[0].value"
-        :id="form[0].id"
-        @change-value="changeValue"
+        label="メッセージ"
+        :value="message"
+        @change-message="changeMessage"
       />
-      <CommonButton :label="form[1].label" :id="form[1].id" />
+      <CommonButton label="送信"/>
   </div>
 </template>
 
@@ -22,10 +21,10 @@ export default defineComponent({
     CommonButton,
   },
   props: {
-    form: Object, //メッセージフォームのデータ
+    message: String, //メッセージの値
   },
   methods: {
-    changeValue(value: String, id: Number) {
+    changeMessage(value: String, id: Number) {
       this.$emit("change-value", value, id);
     },
   },

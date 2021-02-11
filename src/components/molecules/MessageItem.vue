@@ -1,6 +1,8 @@
 <template>
   <div :class="['message-item', setClassSelfOwned]">
-    <div class="user-icon"></div>
+    <div class="user-icon">
+      <UserIcon />
+    </div>
     <div class="message-body">{{ id }}{{ content }}</div>
     <div class="empty"></div>
   </div>

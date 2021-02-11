@@ -6,6 +6,7 @@
           :value="searchWord"
           label="アカウント検索"
           @change-value="changeSearchWord"
+          
         />
       </div>
       <div class="message-aside-list">
@@ -30,8 +31,8 @@
         />
         <CommonButton label="送信" /> -->
         <MessageForm
-        :form="messageList" 
-        @change-value="changeValue"/>
+        :message="message"
+        @change-value="changeMessage" />
       </div>
     </div>
   </div>
@@ -52,10 +53,12 @@ interface IchatDataList {
 }
 
 export type DataType = {
+  //TypeScriptの型宣言
   searchWord: string;
   message: string;
   numberOfClient: number;
   chatDataList: IchatDataList[];
+  // messageList: Object,
 };
 
 export default defineComponent({
@@ -90,18 +93,7 @@ export default defineComponent({
           sender: "client",
           content: "コメント1行目\n2行目\n3行目\n4行目\n5行目",
         },
-      ], //試験的なチャット内容のデータ
-      messageList:[
-        {
-          label:"メッセージ",
-          value:"",
-          id:"0",
-        },
-        {
-          label:"送信",
-          id:"1"
-        }
-      ]
+      ], 
     };
   },
   methods: {
@@ -113,9 +105,6 @@ export default defineComponent({
       //メッセージの変更
       this.message = value;
     },
-    changeValue(value:String, id:Number):void{
-      (this as any).messageList[0].value=value;
-    }
   },
 });
 </script>
