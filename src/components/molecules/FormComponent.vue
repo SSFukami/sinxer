@@ -34,7 +34,7 @@ export default defineComponent({
     TextArea,
   },
   props: {
-    form: Object, //フォームのデータ
+    form: Object as PropType<PropFormType>, //フォームのデータ
   },
   methods: {
     changeValue(value: String, key: Number) {
