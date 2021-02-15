@@ -21,7 +21,7 @@ import CommonButton from "@/components/atoms/CommonButton.vue";
 import SearchForm from "@/components/molecules/SearchForm.vue"
 import HomeTile from "@/components/organisms/HomeTile.vue";
 
-export type DataType = {
+type DataType = {
   searchWord: string;
 };
 

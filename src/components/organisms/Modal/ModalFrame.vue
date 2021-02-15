@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-export type DataType = {
+type DataType = {
   closeUrl: NodeRequire;
 };
 

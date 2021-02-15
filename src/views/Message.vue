@@ -49,7 +49,7 @@ interface IchatDataList {
   content: string;
 }
 
-export type DataType = {
+type DataType = {
   //TypeScriptの型宣言
   searchWord: string;
   message: string;

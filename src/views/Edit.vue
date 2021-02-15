@@ -10,8 +10,7 @@
     <div class="done-back-button">
       <!-- <button class="done">完了</button>
       <button class="back">戻る</button> -->
-      <WhiteButtonsSet 
-      :form="whiteButtonsData" />
+      <WhiteButtonsSet :form="whiteButtonsData" />
     </div>
     <!-- {{ formData }} -->
   </div>
@@ -22,13 +21,14 @@ import { defineComponent } from "vue";
 
 import EditForm from "@/components/organisms/EditForm.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
-import WhiteButtonsSet from "@/components/molecules/WhiteButtonsSet.vue"
+import WhiteButtonsSet from "@/components/molecules/WhiteButtonsSet.vue";
+
 export default defineComponent({
   name: "Edit",
   components: {
     EditForm,
     CommonButton,
-    WhiteButtonsSet
+    WhiteButtonsSet,
   },
   data() {
     return {
@@ -39,7 +39,7 @@ export default defineComponent({
           label: "名前",
           keyName: "name",
           value: "",
-          formType: "TextFieldOrange",
+          formType: "TextField",
         },
         {
           id: 2,
@@ -70,16 +70,16 @@ export default defineComponent({
           formType: "TextArea",
         },
       ],
-      whiteButtonsData:[
+      whiteButtonsData: [
         {
-          label:"完了",
-          id:"0",
+          label: "完了",
+          id: "0",
         },
         {
-          label:"キャンセル",
-          id:"1"
-        }
-      ]
+          label: "キャンセル",
+          id: "1",
+        },
+      ],
     };
   },
   methods: {
@@ -91,7 +91,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 .page {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -104,24 +103,14 @@ export default defineComponent({
 }
 .icon {
   justify-content: center;
-  align-items:center;
+  align-items: center;
   &-content {
-    margin:20px 20px 0px 180px;
+    margin: 20px 20px 0px 180px;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     background-color: silver;
   }
-}
-.done-back-button {
-  // padding: 160px 60px 0px 60px;
-  // button {
-  //   border: 50px;
-  //   margin: 30px;
-  //   width: 60%;
-  //   height: 50px;
-  //   color:$-primary-800;
-  // }
 }
 </style>
 
