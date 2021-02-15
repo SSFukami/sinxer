@@ -6,7 +6,6 @@
           :value="searchWord"
           label="アカウント検索"
           @change-value="changeSearchWord"
-          
         />
       </div>
       <div class="message-aside-list">
@@ -30,9 +29,7 @@
           @change-value="changeMessage"
         />
         <CommonButton label="送信" /> -->
-        <MessageForm
-        :message="message"
-        @change-value="changeMessage" />
+        <MessageForm :message="message" @change-value="changeMessage" />
       </div>
     </div>
   </div>
@@ -45,7 +42,7 @@ import TextField from "@/components/atoms/TextField.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
-import MessageForm from "@/components/molecules/MessageForm.vue"
+import MessageForm from "@/components/molecules/MessageForm.vue";
 
 interface IchatDataList {
   sender: string;
@@ -93,7 +90,7 @@ export default defineComponent({
           sender: "client",
           content: "コメント1行目\n2行目\n3行目\n4行目\n5行目",
         },
-      ], 
+      ],
     };
   },
   methods: {

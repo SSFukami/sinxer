@@ -24,6 +24,11 @@ export default defineComponent({
     GlobalAside,
     Modal,
   },
+  watch: {
+    $route(): void {
+      (this as any).$store.commit("common/shiftAside", false);
+    },
+  },
 });
 </script>
 
