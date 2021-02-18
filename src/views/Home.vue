@@ -5,7 +5,6 @@
        :searchWord="searchWord"
        @change-value="changeSearchWord"
        />
-       <!-- {{searchList}} -->
     </div>
     <div class="home-content">
       <HomeTile v-for="n in 12" :key="n" :id="n" />
@@ -39,7 +38,7 @@ export default defineComponent({
     };
   },
   methods: {
-    changeSearchWord(value: string, key: number) {
+    changeSearchWord(value: string) {
       //検索ワードの変更
       this.searchWord = value;
     },

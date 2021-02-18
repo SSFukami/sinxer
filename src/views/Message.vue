@@ -23,12 +23,6 @@
         />
       </div>
       <div class="message-content-footer">
-        <!-- <TextField
-          :value="message"
-          label="メッセージ"
-          @change-value="changeMessage"
-        />
-        <CommonButton label="送信" /> -->
         <MessageForm :message="message" @change-value="changeMessage" />
       </div>
     </div>
@@ -98,7 +92,7 @@ export default defineComponent({
       //検索ワードの変更
       this.searchWord = value;
     },
-    changeMessage(value: string, key: number) {
+    changeMessage(value: string) {
       //メッセージの変更
       this.message = value;
     },

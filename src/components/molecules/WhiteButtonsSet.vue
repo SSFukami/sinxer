@@ -11,7 +11,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
+
 export default defineComponent({
   name: "WhiteButtonsSet",
   components: {

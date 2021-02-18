@@ -1,5 +1,5 @@
 <template>
-  <button>{{ label }}</button>
+  <button @click="clickEvent">{{ label }}</button>
 </template>
 
 <script lang="ts">
@@ -12,6 +12,11 @@ export default defineComponent({
       //ボタンの中に表示する文字列
       type: String,
       required: true,
+    },
+  },
+  methods: {
+    clickEvent(): void { //ボタンクリックのイベント
+      this.$emit("click-event");
     },
   },
 });

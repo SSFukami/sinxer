@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import HeaderLogo from "@/components/atoms/HeaderLogo.vue";
 
 export default defineComponent({

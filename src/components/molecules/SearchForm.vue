@@ -28,8 +28,8 @@ export default defineComponent({
     },
   },
   methods: {
-    changeValue(value: String, id: Number) {
-      this.$emit("change-value", value, id);
+    changeValue(value: string, key: number) {
+      this.$emit("change-value", value);
     },
   },
 });
