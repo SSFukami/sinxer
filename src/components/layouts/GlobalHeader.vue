@@ -1,8 +1,8 @@
 <template>
   <div class="global-header">
     <div class="global-header-left">
-      <div class="global-header-left-icon">
-        <img :src="require(`@/assets/list.svg`)" />
+      <div class="global-header-left-icon" @click="openAside">
+        <img :src="require(`@/assets/list-white.svg`)" />
       </div>
       <HeaderLogo />
     </div>
@@ -22,31 +22,24 @@ export default defineComponent({
   components: {
     HeaderLogo,
   },
-  data() {
-    return {
-      buttonList: [
-        {
-          id: 0,
-          label: "新規登録",
-        },
-        {
-          id: 1,
-          label: "ログイン",
-        },
-      ],
-    };
+  methods: {
+    openAside(): void {
+      (this as any).$store.commit("common/shiftAside", true);
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
+
 .global-header {
   position: fixed;
   top: 0;
   right: 0;
   width: 100%;
-  height: 70px;
-  background: chocolate;
+  height: 72px;
+  background: $-primary-700;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,14 +54,14 @@ export default defineComponent({
 .auth-button {
   display: flex;
   button.sign-up {
-    color: white;
-    background-color: chocolate;
+    color: $-primary-100;
+    background-color: $-primary-700;
     display: flex;
     border: none;
   }
   button.login {
-    color: white;
-    background-color: chocolate;
+    color: $-primary-100;
+    background-color: $-primary-700;
     display: flex;
     border: none;
   }

@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :class="setClassOpen" @click.self="closeAside">
     <div class="global-aside">
       <div class="global-aside-header">
-        <div class="aside-closer">
+        <div class="aside-closer" @click="closeAside">
           <img src="@/assets/close-black.svg" />
         </div>
       </div>
@@ -18,7 +18,7 @@
         </router-link>
       </div>
       <div class="global-aside-footer">
-        <CommonButton label="ログアウト" />
+        <CommonButtonOrange label="ログアウト" />
       </div>
     </div>
   </div>
@@ -27,24 +27,36 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import CommonButton from "@/components/atoms/CommonButton.vue";
+import CommonButtonOrange from "@/components/atoms/CommonButtonOrange.vue";
 
 import { ASIDE_MENU_LIST } from "@/mixins/asideMenuList";
 
 export default defineComponent({
   name: "GlobalAside",
   components: {
-    CommonButton,
+    CommonButtonOrange,
   },
   data() {
     return {
       asideMenuList: ASIDE_MENU_LIST, //メニューのデータがあるリスト
     };
   },
+  methods: {
+    closeAside(): void {
+      (this as any).$store.commit("common/shiftAside", false);
+    },
+  },
+  computed: {
+    setClassOpen(): string {
+      return (this as any).$store.state.common.isOpeningAside ? "open" : "";
+    },
+  },
 });
 </script>
 
 <style lang="scss" scopped>
+@import "@/assets/scss/color.scss";
+
 .wrapper {
   z-index: -1; //通常はページの裏側
   width: 100%;
@@ -55,16 +67,17 @@ export default defineComponent({
   right: 0;
   bottom: 0;
   left: 0;
+
   .global-aside {
-    width: 200px;
+    width: 0px;
     height: 100%;
     display: grid;
     grid-template-rows: 40px 1fr 40px;
     row-gap: 24px;
-    background: silver;
+    background: $-primary-700;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition: all 0.4s ease;
+    transition: all 0.2s ease;
 
     &-header {
       width: 100%;
@@ -80,6 +93,9 @@ export default defineComponent({
         cursor: pointer;
         img {
           transform: scale(1.6, 1.6);
+          &:hover {
+            border: 0.5px solid black;
+          }
         }
       }
     }
@@ -93,12 +109,12 @@ export default defineComponent({
         display: grid;
         grid-template-columns: 48px 1fr;
         border-bottom: 2px solid black;
-
         img {
           position: relative;
           top: 13px;
           left: 13px;
           border: 1px solid black;
+          background-color: $-primary-100;
           border-radius: 50%;
           padding: 2px;
           transform: scale(1.5, 1.5);
@@ -107,19 +123,30 @@ export default defineComponent({
         &-label {
           font-size: 22px;
           display: flex;
+          background-color: $-primary-400;
           justify-content: flex-start;
           align-items: center;
           padding: 0px 4px;
+          margin-right:6px;
         }
       }
     }
 
     &-footer {
-      width: 100%;
+      width: 50%;
       font-size: 18px;
       display: flex;
       justify-content: center;
+      margin-left:50px;
     }
+  }
+}
+
+.open {
+  z-index: 2;
+
+  .global-aside {
+    width: 200px !important;
   }
 }
 </style>

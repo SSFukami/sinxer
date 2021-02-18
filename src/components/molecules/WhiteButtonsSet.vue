@@ -12,13 +12,19 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
+
+export type ButtonsSetType = {
+  label: string;
+  id: number;
+};
+
 export default defineComponent({
   name: "WhiteButtonsSet",
   components: {
     CommonButtonWhite,
   },
   props: {
-    form: Object, //ボタンのデータ
+    form: Array, //ボタンのデータ
   },
 });
 </script>
