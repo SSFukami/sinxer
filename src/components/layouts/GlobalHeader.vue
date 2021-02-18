@@ -24,7 +24,7 @@ export default defineComponent({
   },
   methods: {
     openAside(): void {
-      (this as any).$store.commit("common/shiftAside", true);
+      (this as any).$store.dispatch("common/openAside");
     },
   },
 });
