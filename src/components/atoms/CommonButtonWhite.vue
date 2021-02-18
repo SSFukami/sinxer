@@ -30,6 +30,10 @@ button {
   border-color: $-primary-800;
   outline: none;
   cursor: pointer;
-  
+
+  &:hover {
+    background-color: $-primary-700;
+    color: $-primary-100;
+  }
 }
 </style>
