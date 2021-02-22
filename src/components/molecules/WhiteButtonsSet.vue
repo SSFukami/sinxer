@@ -35,7 +35,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .white-button {
   padding: 80px 60px 0px 60px;
-  &-set {
+  &-set:first-child{ //v-forしてる最初の要素
     padding-bottom: 16px;
   }
 }
