@@ -25,7 +25,7 @@ export default defineComponent({
   },
   props: {
     data: {
-      type: Array as PropType<ButtonsSetType[]>, 
+      type: Array as PropType<ButtonsSetType[]>,
       //完了ボタンとキャンセルボタンのデータ
     },
   },

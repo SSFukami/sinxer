@@ -25,8 +25,8 @@ export default defineComponent({
     searchWord: String, //検索ボックスのデータ
   },
   methods: {
-    changeValue(value: String, id: Number) {
-      this.$emit("change-value", value, id);
+    changeValue(value: string, key: number) {
+      this.$emit("change-value", value);
     },
   },
 });
@@ -34,7 +34,7 @@ export default defineComponent({
 
 <style lang="scss">
 .search-form {
-  height: 64px;
+  height: 32px;
   display: grid;
   grid-template-columns: 1fr 48px;
   column-gap: 16px;

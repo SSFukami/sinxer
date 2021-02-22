@@ -11,9 +11,10 @@
 import { defineComponent } from "vue";
 
 import UserIcon from "@/components/atoms/UserIcon.vue";
+
 export default defineComponent({
   name: "UserTab",
-  conponents:{
+  components: {
     UserIcon,
   },
   props: {

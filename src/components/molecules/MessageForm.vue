@@ -3,7 +3,7 @@
       <TextField
         label="メッセージ"
         :value="message"
-        @change-message="changeMessage"
+        @change-value="changeMessage"
       />
       <CommonButton label="送信"/>
   </div>
@@ -14,6 +14,7 @@ import { defineComponent } from "vue";
 
 import TextField from "@/components/atoms/TextField.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
+
 export default defineComponent({
   name: "MessageForm",
   components: {
@@ -25,7 +26,7 @@ export default defineComponent({
   },
   methods: {
     changeMessage(value: String, id: Number) {
-      this.$emit("change-value", value, id);
+      this.$emit("change-value", value);
     },
   },
 });
@@ -34,7 +35,7 @@ export default defineComponent({
 <style lang="scss">
 @import "@/assets/scss/color.scss";
 .message-form {
-  height: 48px;
+  height: 32px;
   display: grid;
   grid-template-columns: 1fr 48px;
   column-gap: 16px;

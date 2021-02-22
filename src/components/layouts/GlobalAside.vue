@@ -43,7 +43,7 @@ export default defineComponent({
   },
   methods: {
     closeAside(): void {
-      (this as any).$store.commit("common/shiftAside", false);
+      (this as any).$store.dispatch("common/closeAside");
     },
   },
   computed: {

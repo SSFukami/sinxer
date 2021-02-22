@@ -104,6 +104,7 @@ export default defineComponent({
   //   overflow-y: scroll;
   // }
 }
+
 .icon {
   justify-content: center; /* アイテムを中央に寄せる */
   align-items: center; /* アイテムを中央付近にまとめる */
@@ -117,10 +118,10 @@ export default defineComponent({
     top: 0;
   }
 }
+
 .done-back-button {
   height:200px;
   position: sticky;
   top: 0;
 }
 </style>
-

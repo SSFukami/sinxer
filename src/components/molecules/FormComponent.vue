@@ -41,7 +41,7 @@ export default defineComponent({
   },
   methods: {
     changeValue(value: String, key: Number) {
-      (this as any).$emit("change-value", value, key);
+      this.$emit("change-value", value, key);
     },
   },
 });

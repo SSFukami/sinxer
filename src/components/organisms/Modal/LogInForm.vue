@@ -29,13 +29,13 @@ import { defineComponent } from "vue";
 
 import ModalFrame from "@/components/organisms/Modal/ModalFrame.vue";
 import FormComponent, {
-  PropFormType as IlogInDataList,
+  PropFormType as IlogInData,
 } from "@/components/molecules/FormComponent.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 
-export type DataType = {
+type DataType = {
   label: string;
-  logInDataList: IlogInDataList[];
+  logInDataList: IlogInData[];
 };
 
 export default defineComponent({

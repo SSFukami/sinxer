@@ -1,5 +1,5 @@
 <template>
-  <button>{{ label }}</button>
+  <button @click="clickEvent">{{ label }}</button>
 </template>
 
 <script lang="ts">
@@ -12,6 +12,16 @@ export default defineComponent({
       //ボタンの中に表示する文字列
       type: String,
       required: true,
+    },
+    id: {
+      //WhiteButtonsSet用
+      type: Number,
+      required: false,
+    },
+  },
+  methods: {
+    clickEvent(): void { //ボタンクリックのイベント
+      this.$emit("click-event");
     },
   },
 });
@@ -30,6 +40,10 @@ button {
   border-color: $-primary-800;
   outline: none;
   cursor: pointer;
-  
+
+  &:hover {
+    background-color: $-primary-700;
+    color: $-primary-100;
+  }
 }
 </style>
