@@ -15,7 +15,8 @@ export default defineComponent({
     },
   },
   methods: {
-    clickEvent(): void { //ボタンクリックのイベント
+    clickEvent(): void {
+      //ボタンクリックのイベント
       this.$emit("click-event");
     },
   },
