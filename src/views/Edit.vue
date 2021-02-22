@@ -8,8 +8,6 @@
       <EditForm :formData="formData" @change-value="changeValue" />
     </div>
     <div class="done-back-button">
-      <!-- <button class="done">完了</button>
-      <button class="back">戻る</button> -->
       <WhiteButtonsSet :form="whiteButtonsData" />
     </div>
     <!-- {{ formData }} -->
@@ -18,11 +16,18 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
+import FormComponent, {
+  PropFormType as IformData,
+} from "@/components/molecules/FormComponent.vue";
 import EditForm from "@/components/organisms/EditForm.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
-import WhiteButtonsSet from "@/components/molecules/WhiteButtonsSet.vue";
-
+import WhiteButtonsSet, {
+  ButtonsSetType as IButtonsData,
+} from "@/components/molecules/WhiteButtonsSet.vue";
+export type DataType = {
+  formData: IformData[];
+  whiteButtonsData: IButtonsData[];
+};
 export default defineComponent({
   name: "Edit",
   components: {
@@ -30,42 +35,37 @@ export default defineComponent({
     CommonButton,
     WhiteButtonsSet,
   },
-  data() {
+  data(): DataType {
     return {
       formData: [
         //編集画面のデータ
         {
           id: 1,
           label: "名前",
-          keyName: "name",
           value: "",
           formType: "TextField",
         },
         {
           id: 2,
           label: "自己紹介",
-          keyName: "self-introduction",
           value: "",
           formType: "TextArea",
         },
         {
           id: 3,
           label: "Twitter",
-          keyName: "twitter",
           value: "",
           formType: "TextField",
         },
         {
           id: 4,
           label: "料金",
-          keyName: "fee",
           value: "",
           formType: "TextArea",
         },
         {
           id: 5,
           label: "納期",
-          keyName: "deadline",
           value: "",
           formType: "TextArea",
         },
@@ -73,11 +73,11 @@ export default defineComponent({
       whiteButtonsData: [
         {
           label: "完了",
-          id: "0",
+          id: 0,
         },
         {
           label: "キャンセル",
-          id: "1",
+          id: 1,
         },
       ],
     };
@@ -97,20 +97,29 @@ export default defineComponent({
   grid-column-gap: 30px;
   grid-auto-columns: 100px;
   padding-top: 60px;
-  &-contents {
-    overflow-y: scroll;
-  }
+  overflow-y: scroll;
+  // &-contents {
+  //   overflow-y: scroll;
+  // }
 }
+
 .icon {
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* アイテムを中央に寄せる */
+  align-items: center; /* アイテムを中央付近にまとめる */
   &-content {
-    margin: 20px 20px 0px 180px;
+    margin: 0px 20px 20px 180px;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     background-color: silver;
+    position: sticky;
+    top: 0;
   }
 }
-</style>
 
+.done-back-button {
+  height:200px;
+  position: sticky;
+  top: 0;
+}
+</style>

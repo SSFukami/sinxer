@@ -22,10 +22,7 @@ export default defineComponent({
     CommonButton,
   },
   props: {
-    searchWord: { //検索ワード
-      type: String,
-      required: true,
-    },
+    searchWord: String, //検索ボックスのデータ
   },
   methods: {
     changeValue(value: string, key: number) {

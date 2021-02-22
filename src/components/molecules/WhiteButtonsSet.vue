@@ -10,9 +10,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
+
+export type ButtonsSetType = {
+  label: string; //ボタンの名前
+  id: number; //ボタンのid
+};
 
 export default defineComponent({
   name: "WhiteButtonsSet",
@@ -20,16 +25,19 @@ export default defineComponent({
     CommonButtonWhite,
   },
   props: {
-    form: Object, //ボタンのデータ
+    data: {
+      type: Array as PropType<ButtonsSetType[]>,
+      //完了ボタンとキャンセルボタンのデータ
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.button-white{
+.button-white {
   padding: 80px 60px 0px 60px;
-  &-done{
-    padding-bottom:16px;
+  &-done {
+    padding-bottom: 16px;
   }
 }
 </style>
