@@ -17,7 +17,7 @@ export default defineComponent({
     label: {
       //テキストフィールドに表示する文字列
       type: String,
-      required: true,
+      default: "",
     },
   },
   computed: {

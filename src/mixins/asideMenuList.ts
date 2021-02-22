@@ -8,7 +8,7 @@ export const ASIDE_MENU_LIST: IasideMenuList[] = [
     {
         label: "ホーム",
         path: "/",
-        icon: "home"
+        icon: "home-black"
     },
     {
         label: "メッセージ",

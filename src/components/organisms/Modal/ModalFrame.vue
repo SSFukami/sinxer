@@ -30,7 +30,7 @@ export default defineComponent({
       //モーダルのサイズ
       type: String,
       default: "M",
-      validator: (value: string)　=> {
+      validator: (value: string) => {
         //プロパティの値は、必ずいずれかの文字列でなければならない
         return ["S", "M", "L"].indexOf(value) !== -1;
       },
@@ -55,10 +55,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
+
 .modal-frame {
   z-index: 1000;
   width: 400px;
-  background: white;
+  background-color: $-primary-300;
   display: grid;
   grid-template-rows: 32px 1fr 32px;
   row-gap: 8px;

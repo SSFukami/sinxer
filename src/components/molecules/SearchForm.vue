@@ -16,13 +16,13 @@ import TextFieldWhite from "@/components/atoms/TextFieldWhite.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 
 export default defineComponent({
-  name: "SearchField",
+  name: "SearchForm",
   components: {
     TextFieldWhite,
     CommonButton,
   },
   props: {
-    form: Object, //検索ボックスのデータ
+    searchWord: String, //検索ボックスのデータ
   },
   methods: {
     changeValue(value: String, id: Number) {
