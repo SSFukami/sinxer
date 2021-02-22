@@ -11,7 +11,6 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
 export type ButtonsSetType = {
@@ -34,9 +33,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.button-white {
+.white-button {
   padding: 80px 60px 0px 60px;
-  &-done {
+  &-set:first-child{ //v-forしてる最初の要素
     padding-bottom: 16px;
   }
 }

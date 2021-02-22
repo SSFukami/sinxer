@@ -8,7 +8,7 @@
       <EditForm :formData="formData" @change-value="changeValue" />
     </div>
     <div class="done-back-button">
-      <WhiteButtonsSet :form="whiteButtonsData" />
+      <WhiteButtonsSet :data="whiteButtonsData" />
     </div>
     <!-- {{ formData }} -->
   </div>
@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import FormComponent, {
   PropFormType as IformData,
 } from "@/components/molecules/FormComponent.vue";
@@ -24,6 +25,7 @@ import CommonButton from "@/components/atoms/CommonButton.vue";
 import WhiteButtonsSet, {
   ButtonsSetType as IButtonsData,
 } from "@/components/molecules/WhiteButtonsSet.vue";
+
 export type DataType = {
   formData: IformData[];
   whiteButtonsData: IButtonsData[];
