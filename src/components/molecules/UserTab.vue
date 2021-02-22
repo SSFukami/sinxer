@@ -29,6 +29,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
+
 .user-tab {
   width: 100%;
   height: 56px;

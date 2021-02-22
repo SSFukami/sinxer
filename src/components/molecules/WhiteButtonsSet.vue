@@ -1,9 +1,6 @@
 <template>
   <div class="white-button">
-    <div class="white-button-set" 
-      v-for="list in data" 
-      :key="list.id"
-      >
+    <div class="white-button-set" v-for="list in data" :key="list.id">
       <CommonButtonWhite :label="list.label" />
     </div>
   </div>
@@ -11,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
 export type ButtonsSetType = {
@@ -25,8 +23,9 @@ export default defineComponent({
   },
   props: {
     data: {
-      type: Array as PropType<ButtonsSetType[]>,
       //完了ボタンとキャンセルボタンのデータ
+      type: Array as PropType<ButtonsSetType[]>,
+      required: true,
     },
   },
 });
@@ -35,7 +34,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .white-button {
   padding: 80px 60px 0px 60px;
-  &-set:first-child{ //v-forしてる最初の要素
+  &-set:first-child {
+    //v-forしてる最初の要素
     padding-bottom: 16px;
   }
 }

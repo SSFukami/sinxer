@@ -22,7 +22,10 @@ export default defineComponent({
     CommonButton,
   },
   props: {
-    message: String, //メッセージの値
+    message: { //メッセージの値
+      type: String,
+      required: true
+    },
   },
   methods: {
     changeMessage(value: String, id: Number) {
@@ -34,6 +37,7 @@ export default defineComponent({
 
 <style lang="scss">
 @import "@/assets/scss/color.scss";
+
 .message-form {
   height: 32px;
   display: grid;

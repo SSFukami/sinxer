@@ -59,6 +59,7 @@ export default defineComponent({
     background-color: $-primary-700;
     display: flex;
     border: none;
+    border-right: 1px solid $-primary-100;
   }
   button.login {
     color: $-primary-100;
