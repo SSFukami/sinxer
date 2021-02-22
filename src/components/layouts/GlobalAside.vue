@@ -18,7 +18,7 @@
         </router-link>
       </div>
       <div class="global-aside-footer">
-        <CommonButtonOrange label="ログアウト" />
+        <CommonButtonWhite label="ログアウト" />
       </div>
     </div>
   </div>
@@ -27,14 +27,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import CommonButtonOrange from "@/components/atoms/CommonButtonOrange.vue";
+import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
 import { ASIDE_MENU_LIST } from "@/mixins/asideMenuList";
 
 export default defineComponent({
   name: "GlobalAside",
   components: {
-    CommonButtonOrange,
+    CommonButtonWhite,
   },
   data() {
     return {

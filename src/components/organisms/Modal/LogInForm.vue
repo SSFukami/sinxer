@@ -81,6 +81,6 @@ export default defineComponent({
   font-weight: bold;
 }
 .footer{
-  width: 32.6%;
+  width: 120px;
 }
 </style>

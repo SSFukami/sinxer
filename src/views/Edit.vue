@@ -8,12 +8,8 @@
       <EditForm :formData="formData" @change-value="changeValue" />
     </div>
     <div class="done-back-button">
-      <!-- <button class="done">完了</button>
-      <button class="back">戻る</button> -->
-      <WhiteButtonsSet 
-      :form="whiteButtonsData" />
+      <WhiteButtonsSet :data="whiteButtonsData" />
     </div>
-    <!-- {{ formData }} -->
   </div>
 </template>
 
@@ -27,11 +23,11 @@ import EditForm from "@/components/organisms/EditForm.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 import WhiteButtonsSet, {
   ButtonsSetType as IButtonsData,
-} from "@/components/molecules/WhiteButtonsSet.vue"
+} from "@/components/molecules/WhiteButtonsSet.vue";
 
 export type DataType = {
   formData: IformData[];
-  whiteButtonsData:IButtonsData[];
+  whiteButtonsData: IButtonsData[];
 };
 
 export default defineComponent({
@@ -39,9 +35,9 @@ export default defineComponent({
   components: {
     EditForm,
     CommonButton,
-    WhiteButtonsSet
+    WhiteButtonsSet,
   },
-  data():DataType {
+  data(): DataType {
     return {
       formData: [
         //編集画面のデータ
@@ -76,16 +72,16 @@ export default defineComponent({
           formType: "TextArea",
         },
       ],
-      whiteButtonsData:[
+      whiteButtonsData: [
         {
-          label:"完了",
-          id:0,
+          label: "完了",
+          id: 0,
         },
         {
-          label:"キャンセル",
-          id:1,
-        }
-      ]
+          label: "キャンセル",
+          id: 1,
+        },
+      ],
     };
   },
   methods: {
@@ -97,37 +93,34 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 .page {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 30px;
   grid-auto-columns: 100px;
   padding-top: 60px;
-  &-contents {
-    overflow-y: scroll;
-  }
+  overflow-y: scroll;
+  // &-contents {
+  //   overflow-y: scroll;
+  // }
 }
 .icon {
-  justify-content: center;
-  align-items:center;
+  justify-content: center; /* アイテムを中央に寄せる */
+  align-items: center; /* アイテムを中央付近にまとめる */
   &-content {
-    margin:20px 20px 0px 180px;
+    margin: 0px 20px 20px 180px;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     background-color: silver;
+    position: sticky;
+    top: 0;
   }
 }
 .done-back-button {
-  // padding: 160px 60px 0px 60px;
-  // button {
-  //   border: 50px;
-  //   margin: 30px;
-  //   width: 60%;
-  //   height: 50px;
-  //   color:$-primary-800;
-  // }
+  height:200px;
+  position: sticky;
+  top: 0;
 }
 </style>
 

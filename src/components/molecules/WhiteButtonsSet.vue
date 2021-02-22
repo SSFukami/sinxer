@@ -1,21 +1,21 @@
 <template>
-  <div class="button-white">
-    <div class="button-white-done">
-      <CommonButtonWhite :label="form[0].label" :id="form[0].id" />
-    </div>
-    <div class="button-white-cancel">
-      <CommonButtonWhite :label="form[1].label" :id="form[1].id" />
+  <div class="white-button">
+    <div class="white-button-set" 
+      v-for="list in data" 
+      :key="list.id"
+      >
+      <CommonButtonWhite :label="list.label" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
 export type ButtonsSetType = {
-  label: string;
-  id: number;
+  label: string; //ボタンの名前
+  id: number; //ボタンのid
 };
 
 export default defineComponent({
@@ -24,16 +24,19 @@ export default defineComponent({
     CommonButtonWhite,
   },
   props: {
-    form: Array, //ボタンのデータ
+    data: {
+      type: Array as PropType<ButtonsSetType[]>, 
+      //完了ボタンとキャンセルボタンのデータ
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.button-white{
+.white-button {
   padding: 80px 60px 0px 60px;
-  &-done{
-    padding-bottom:16px;
+  &-set {
+    padding-bottom: 16px;
   }
 }
 </style>

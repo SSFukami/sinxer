@@ -35,6 +35,7 @@ textarea{
   width:100%;
   height:180px;
   color: $-primary-800;
+  font-size: 20px;
   background: $-primary-200;
   border:none;
   border-bottom: 1px solid $-primary-800;

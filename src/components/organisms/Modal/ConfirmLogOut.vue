@@ -47,7 +47,7 @@ export default defineComponent({
 }
 
 .footer-wrapper {
-  width: 32.6%;
+  width: 120px;
   text-align: center;
 }
 </style>
