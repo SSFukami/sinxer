@@ -10,7 +10,6 @@
     <div class="done-back-button">
       <WhiteButtonsSet :data="whiteButtonsData" />
     </div>
-    <!-- {{ formData }} -->
   </div>
 </template>
 
@@ -30,6 +29,7 @@ export type DataType = {
   formData: IformData[];
   whiteButtonsData: IButtonsData[];
 };
+
 export default defineComponent({
   name: "Edit",
   components: {

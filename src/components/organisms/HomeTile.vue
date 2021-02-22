@@ -28,6 +28,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
+
 .home-tile {
   min-width: 320px;
   max-width: 400px;
@@ -59,13 +61,14 @@ export default defineComponent({
   }
   .name {
     grid-area: name;
-    border-left: 4px solid silver;
-    border-right: 4px solid silver;
+    // border-left: 4px solid silver;
+    // border-right: 4px solid silver;
     &-content {
       width: 100%;
       height: 100%;
       font-size: 32px;
-      color: silver;
+      color: $-primary-100;
+      background: $-primary-500;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -73,16 +76,19 @@ export default defineComponent({
   }
   .detail {
     grid-area: detail;
-    background: silver;
+    color: $-primary-100;
+      background: $-primary-500;
     border-bottom: 2px dashed silver;
   }
   .fee {
     grid-area: fee;
-    background: silver;
+    color: $-primary-100;
+    background: $-primary-500;
   }
   .deadline {
     grid-area: line;
-    background: silver;
+    color: $-primary-100;
+    background: $-primary-500;
   }
 }
 </style>

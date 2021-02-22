@@ -40,6 +40,7 @@ input[type="password"] {
   width: 100%;
   height: 32px;
   color: $-primary-800;
+  background-color: $-primary-600;
   border: none;
   border-bottom: 1px solid $-primary-800;
   outline: none;

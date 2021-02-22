@@ -18,7 +18,7 @@
         </router-link>
       </div>
       <div class="global-aside-footer">
-        <CommonButton label="ログアウト" />
+        <CommonButtonWhite label="ログアウト" />
       </div>
     </div>
   </div>
@@ -27,14 +27,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import CommonButton from "@/components/atoms/CommonButton.vue";
+import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
 import { ASIDE_MENU_LIST } from "@/mixins/asideMenuList";
 
 export default defineComponent({
   name: "GlobalAside",
   components: {
-    CommonButton,
+    CommonButtonWhite,
   },
   data() {
     return {
@@ -55,6 +55,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scopped>
+@import "@/assets/scss/color.scss";
+
 .wrapper {
   z-index: -1; //通常はページの裏側
   width: 100%;
@@ -72,7 +74,7 @@ export default defineComponent({
     display: grid;
     grid-template-rows: 40px 1fr 40px;
     row-gap: 24px;
-    background: silver;
+    background: $-primary-700;
     text-overflow: ellipsis;
     white-space: nowrap;
     transition: all 0.2s ease;
@@ -107,12 +109,12 @@ export default defineComponent({
         display: grid;
         grid-template-columns: 48px 1fr;
         border-bottom: 2px solid black;
-
         img {
           position: relative;
           top: 13px;
           left: 13px;
           border: 1px solid black;
+          background-color: $-primary-100;
           border-radius: 50%;
           padding: 2px;
           transform: scale(1.5, 1.5);
@@ -121,18 +123,21 @@ export default defineComponent({
         &-label {
           font-size: 22px;
           display: flex;
+          background-color: $-primary-400;
           justify-content: flex-start;
           align-items: center;
           padding: 0px 4px;
+          margin-right:6px;
         }
       }
     }
 
     &-footer {
-      width: 100%;
+      width: 50%;
       font-size: 18px;
       display: flex;
       justify-content: center;
+      margin-left:50px;
     }
   }
 }

@@ -1,10 +1,10 @@
 <template>
-  <div class="button-white">
-    <div class="button-white-done">
-      <CommonButtonWhite :label="form[0].label" :id="form[0].id" />
-    </div>
-    <div class="button-white-cancel">
-      <CommonButtonWhite :label="form[1].label" :id="form[1].id" />
+  <div class="white-button">
+    <div class="white-button-set" 
+      v-for="list in data" 
+      :key="list.id"
+      >
+      <CommonButtonWhite :label="list.label" />
     </div>
   </div>
 </template>

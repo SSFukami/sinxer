@@ -1,4 +1,5 @@
 <template>
+<div class="login-form">
   <ModalFrame size="M">
     <template v-slot:header>
       <div class="header-label">{{ label }}</div>
@@ -15,9 +16,12 @@
       <div></div>
     </template>
     <template v-slot:footerRight>
+      <div class="footer">
       <CommonButton :label="label" />
+      </div>
     </template>
   </ModalFrame>
+  </div>
 </template>
 
 <script lang="ts">
@@ -51,7 +55,7 @@ export default defineComponent({
           id: 1,
           label: "メールアドレス",
           value: "",
-          formType: "TextField",
+          formType: "TextFieldOrange",
         },
         {
           id: 2,
@@ -71,8 +75,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .header-label {
   font-size: 18px;
   font-weight: bold;
+}
+.footer{
+  width: 120px;
 }
 </style>

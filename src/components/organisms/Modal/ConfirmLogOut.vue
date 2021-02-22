@@ -35,13 +35,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
+
 .header-label {
   font-size: 18px;
   font-weight: bold;
 }
 
+.content-message {
+  margin:auto;
+}
+
 .footer-wrapper {
-  width: 50%;
+  width: 120px;
   text-align: center;
 }
 </style>
