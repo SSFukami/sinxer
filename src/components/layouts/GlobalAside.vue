@@ -95,7 +95,7 @@ export default defineComponent({
         img {
           transform: scale(1.6, 1.6);
           &:hover {
-            border: 0.5px solid black;
+            border: 0.5px solid $-primary-800;
           }
         }
       }
