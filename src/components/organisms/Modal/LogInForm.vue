@@ -1,26 +1,26 @@
 <template>
-<div class="login-form">
-  <ModalFrame size="M">
-    <template v-slot:header>
-      <div class="header-label">{{ label }}</div>
-    </template>
-    <template v-slot:content>
-      <FormComponent
-        v-for="form in logInDataList"
-        :key="form.id"
-        :form="form"
-        @change-value="changeFormValue"
-      />
-    </template>
-    <template v-slot:footerLeft>
-      <div></div>
-    </template>
-    <template v-slot:footerRight>
-      <div class="footer">
-      <CommonButton :label="label" />
-      </div>
-    </template>
-  </ModalFrame>
+  <div class="login-form">
+    <ModalFrame size="M">
+      <template v-slot:header>
+        <div class="header-label">{{ label }}</div>
+      </template>
+      <template v-slot:content>
+        <FormComponent
+          v-for="form in logInDataList"
+          :key="form.id"
+          :form="form"
+          @change-value="changeFormValue"
+        />
+      </template>
+      <template v-slot:footerLeft>
+        <div></div>
+      </template>
+      <template v-slot:footerRight>
+        <div class="footer">
+          <CommonButton :label="label" />
+        </div>
+      </template>
+    </ModalFrame>
   </div>
 </template>
 
@@ -75,12 +75,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 .header-label {
   font-size: 18px;
   font-weight: bold;
 }
-.footer{
+.footer {
   width: 120px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :class="setClassOpen" @click.self="closeAside">
+  <div class="aside-wrapper" :class="setClassOpen" @click.self="closeAside">
     <div class="global-aside">
       <div class="global-aside-header">
         <div class="aside-closer" @click="closeAside">
@@ -57,7 +57,7 @@ export default defineComponent({
 <style lang="scss" scopped>
 @import "@/assets/scss/color.scss";
 
-.wrapper {
+.aside-wrapper {
   z-index: -1; //通常はページの裏側
   width: 100%;
   height: 100%;
@@ -106,10 +106,13 @@ export default defineComponent({
       display: grid;
       grid-template-rows: repeat(3, 48px);
       row-gap: 16px;
+      padding: 0px 8px;
+
       .aside-menu {
         display: grid;
         grid-template-columns: 48px 1fr;
-        border-bottom: 2px solid black;
+        background-color: $-primary-400;
+        text-decoration: none;
         img {
           position: relative;
           top: 13px;
@@ -123,12 +126,16 @@ export default defineComponent({
 
         &-label {
           font-size: 22px;
+          color: $-primary-800;
           display: flex;
-          background-color: $-primary-400;
           justify-content: flex-start;
           align-items: center;
           padding: 0px 4px;
           margin-right: 6px;
+        }
+
+        &:hover {
+          box-shadow: 4px 4px 8px 0 $-primary-800;
         }
       }
     }

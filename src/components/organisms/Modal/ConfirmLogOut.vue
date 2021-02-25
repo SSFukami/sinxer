@@ -43,7 +43,7 @@ export default defineComponent({
 }
 
 .content-message {
-  margin:auto;
+  margin: auto;
 }
 
 .footer-wrapper {
