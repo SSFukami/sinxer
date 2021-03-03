@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="icon">
-      <div class="icon-content">
+      <div class="icon-content" v-if="$store.state.auth.singerState === false">
         <UserIcon />
       </div>
     </div>
