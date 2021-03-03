@@ -34,7 +34,7 @@ export default defineComponent({
 
 <style lang="scss">
 .search-form {
-  height: 64px;
+  height: 32px;
   display: grid;
   grid-template-columns: 1fr 48px;
   column-gap: 16px;

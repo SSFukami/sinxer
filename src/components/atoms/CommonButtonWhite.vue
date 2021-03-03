@@ -30,6 +30,5 @@ button {
   border-color: $-primary-800;
   outline: none;
   cursor: pointer;
-  
 }
 </style>

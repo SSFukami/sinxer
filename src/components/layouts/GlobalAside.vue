@@ -127,7 +127,7 @@ export default defineComponent({
           justify-content: flex-start;
           align-items: center;
           padding: 0px 4px;
-          margin-right:6px;
+          margin-right: 6px;
         }
       }
     }
@@ -137,7 +137,7 @@ export default defineComponent({
       font-size: 18px;
       display: flex;
       justify-content: center;
-      margin-left:50px;
+      margin-left: 50px;
     }
   }
 }
