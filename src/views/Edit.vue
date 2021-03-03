@@ -18,9 +18,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import EditForm, {
-  IformData
-} from "@/components/organisms/EditForm.vue";
+import EditForm, { IformData } from "@/components/organisms/EditForm.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 import WhiteButtonsSet, {
   ButtonsSetType as IButtonsData,
@@ -38,7 +36,7 @@ export default defineComponent({
     EditForm,
     CommonButton,
     WhiteButtonsSet,
-    UserIcon
+    UserIcon,
   },
   data(): DataType {
     return {
@@ -121,7 +119,7 @@ export default defineComponent({
   }
 }
 .done-back-button {
-  height:200px;
+  height: 200px;
   padding: 0px 60px 0px 0px;
   position: sticky;
   top: 0;

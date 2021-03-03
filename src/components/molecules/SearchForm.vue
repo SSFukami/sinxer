@@ -1,11 +1,11 @@
 <template>
   <div class="search-form">
-      <TextFieldWhite
-        label="検索ボックス"
-        :value="searchWord"
-        @change-value="changeValue"
-      />
-      <CommonButton label="検索" />
+    <TextFieldWhite
+      label="検索ボックス"
+      :value="searchWord"
+      @change-value="changeValue"
+    />
+    <CommonButton label="検索" />
   </div>
 </template>
 
