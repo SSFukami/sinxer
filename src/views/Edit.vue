@@ -1,13 +1,16 @@
 <template>
   <div class="page">
     <div class="icon">
-      <div class="icon-content" v-if="$store.state.auth.singerState === false">
+      <div class="icon-content">
         <UserIcon />
       </div>
     </div>
-    <div class="page-contents">
+    <div class="page-contents" v-if="$store.state.auth.mixerState === true">
       <!-- {{formData}} -->
       <EditForm :formData="formData" @change-value="changeValue" />
+    </div>
+    <div class="page-contents" v-if="$store.state.auth.singerState === true">
+      <EditForm :formData="singerFormData" @change-value="changeValue" />
     </div>
     <div class="done-back-button">
       <WhiteButtonsSet :data="whiteButtonsData" />
@@ -27,6 +30,7 @@ import UserIcon from "@/components/atoms/UserIcon.vue";
 
 export type DataType = {
   formData: IformData[];
+  singerFormData: IformData[];
   whiteButtonsData: IButtonsData[];
 };
 
@@ -41,7 +45,7 @@ export default defineComponent({
   data(): DataType {
     return {
       formData: [
-        //編集画面のデータ
+        //ミックス師編集画面のデータ
         {
           id: 1,
           label: "名前",
@@ -69,6 +73,33 @@ export default defineComponent({
         {
           id: 5,
           label: "納期",
+          value: "",
+          formType: "TextArea",
+        },
+      ],
+      singerFormData: [
+        //ミックス師編集画面のデータ
+        {
+          id: 1,
+          label: "名前",
+          value: "",
+          formType: "TextField",
+        },
+        {
+          id: 2,
+          label: "自己紹介",
+          value: "",
+          formType: "TextArea",
+        },
+        {
+          id: 3,
+          label: "Twitter",
+          value: "",
+          formType: "TextField",
+        },
+        {
+          id: 4,
+          label: "投稿先リンク",
           value: "",
           formType: "TextArea",
         },

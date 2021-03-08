@@ -13,12 +13,24 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    id: {
+      //WhiteButtonsSet用
+      type: Number,
+      required: false,
+    },
+  },
+  methods: {
+    clickEvent(): void {
+      //ボタンクリックのイベント
+      this.$emit("click-event");
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
+
 button {
   width: 100%;
   height: 32px;
