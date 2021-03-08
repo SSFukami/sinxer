@@ -1,5 +1,5 @@
 <template>
-  <button>{{ label }}</button>
+  <button @click="clickEvent">{{ label }}</button>
 </template>
 
 <script lang="ts">
@@ -42,5 +42,10 @@ button {
   border-color: $-primary-800;
   outline: none;
   cursor: pointer;
+
+  &:hover {
+    background-color: $-primary-700;
+    color: $-primary-100;
+  }
 }
 </style>

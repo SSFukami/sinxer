@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
 export type ButtonsSetType = {
@@ -22,8 +23,9 @@ export default defineComponent({
   },
   props: {
     data: {
-      type: Array as PropType<ButtonsSetType[]>,
       //完了ボタンとキャンセルボタンのデータ
+      type: Array as PropType<ButtonsSetType[]>,
+      required: true,
     },
   },
 });
