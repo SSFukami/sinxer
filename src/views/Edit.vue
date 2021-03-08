@@ -7,10 +7,10 @@
     </div>
     <div class="page-contents" v-if="$store.state.auth.mixerState === true">
       <!-- {{formData}} -->
-      <EditForm :formData="formData" @change-value="changeValue" />
+      <EditForm :formData="mixerFormData" @change-value="changeMixerValue" />
     </div>
     <div class="page-contents" v-if="$store.state.auth.singerState === true">
-      <EditForm :formData="singerFormData" @change-value="changeValue" />
+      <EditForm :formData="singerFormData" @change-value="changeSingerValue" />
     </div>
     <div class="done-back-button">
       <WhiteButtonsSet :data="whiteButtonsData" />
@@ -29,7 +29,7 @@ import WhiteButtonsSet, {
 import UserIcon from "@/components/atoms/UserIcon.vue";
 
 export type DataType = {
-  formData: IformData[];
+  mixerFormData: IformData[];
   singerFormData: IformData[];
   whiteButtonsData: IButtonsData[];
 };
@@ -44,7 +44,7 @@ export default defineComponent({
   },
   data(): DataType {
     return {
-      formData: [
+      mixerFormData: [
         //ミックス師編集画面のデータ
         {
           id: 1,
@@ -78,7 +78,7 @@ export default defineComponent({
         },
       ],
       singerFormData: [
-        //ミックス師編集画面のデータ
+        //歌い手編集画面のデータ
         {
           id: 1,
           label: "名前",
@@ -117,8 +117,11 @@ export default defineComponent({
     };
   },
   methods: {
-    changeValue(value: String, key: number): void {
-      (this as any).formData[key - 1].value = value;
+    changeMixerValue(value: String, key: number): void {
+      (this as any).mixerFormData[key - 1].value = value;
+    },
+    changeSingerValue(value: String, key: number): void {
+      (this as any).singerFormData[key - 1].value = value;
     },
   },
 });
