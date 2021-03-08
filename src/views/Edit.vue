@@ -139,6 +139,7 @@ export default defineComponent({
   padding: 16px;
   overflow-y: scroll;
 }
+
 .icon {
   justify-content: center; /* アイテムを中央に寄せる */
   align-items: center; /* アイテムを中央付近にまとめる */
@@ -152,6 +153,7 @@ export default defineComponent({
     top: 0;
   }
 }
+
 .done-back-button {
   height: 200px;
   padding: 0px 60px 0px 0px;
@@ -159,4 +161,3 @@ export default defineComponent({
   top: 0;
 }
 </style>
-

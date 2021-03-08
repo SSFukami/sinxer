@@ -20,7 +20,7 @@ import CommonButton from "@/components/atoms/CommonButton.vue";
 import SearchForm from "@/components/molecules/SearchForm.vue";
 import HomeTile from "@/components/organisms/HomeTile.vue";
 
-export type DataType = {
+type DataType = {
   searchWord: string;
 };
 
@@ -38,7 +38,7 @@ export default defineComponent({
     };
   },
   methods: {
-    changeSearchWord(value: string, key: number) {
+    changeSearchWord(value: string) {
       //検索ワードの変更
       this.searchWord = value;
     },
@@ -65,7 +65,7 @@ export default defineComponent({
     width: 100%;
     height: calc(100% - 70px);
     background-color: $-primary-300;
-    padding-top:20px;
+    padding-top: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     column-gap: 20px;

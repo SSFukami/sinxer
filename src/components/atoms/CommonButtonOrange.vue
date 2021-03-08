@@ -1,5 +1,5 @@
 <template>
-  <button>{{ label }}</button>
+  <button @click="clickEvent">{{ label }}</button>
 </template>
 
 <script lang="ts">
@@ -14,11 +14,18 @@ export default defineComponent({
       required: true,
     },
   },
+  methods: {
+    clickEvent(): void {
+      //ボタンクリックのイベント
+      this.$emit("click-event");
+    },
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
+
 button {
   width: 100%;
   height: 32px;
@@ -30,5 +37,10 @@ button {
   border-color: $-primary-800;
   outline: none;
   cursor: pointer;
+
+  &:hover {
+    background-color: $-primary-700;
+    color: $-primary-100;
+  }
 }
 </style>

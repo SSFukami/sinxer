@@ -6,7 +6,7 @@ export const mutations: MutationTree<IcommonState> = {
   init(state: IcommonState) {
     Object.assign(state, new CommonState());
   },
-  shiftAside(state: IcommonState, payload: boolean) {
+  setAsideState(state: IcommonState, payload: boolean) {
     state.isOpeningAside = payload;
   },
 };

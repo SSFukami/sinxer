@@ -22,11 +22,14 @@ export default defineComponent({
     CommonButton,
   },
   props: {
-    searchWord: String, //検索ボックスのデータ
+    searchWord: {//検索ワード
+      type: String,
+      required: true,
+    },
   },
   methods: {
-    changeValue(value: String, id: Number) {
-      this.$emit("change-value", value, id);
+    changeValue(value: string, key: number) {
+      this.$emit("change-value", value);
     },
   },
 });

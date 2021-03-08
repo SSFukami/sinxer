@@ -11,9 +11,10 @@
 import { defineComponent } from "vue";
 
 import UserIcon from "@/components/atoms/UserIcon.vue";
+
 export default defineComponent({
   name: "UserTab",
-  conponents:{
+  components: {
     UserIcon,
   },
   props: {
@@ -28,6 +29,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
+
 .user-tab {
   width: 100%;
   height: 56px;

@@ -17,12 +17,12 @@ export default defineComponent({
     label: {
       //テキストフィールドに表示する文字列
       type: String,
-      required: true,
+      default: "",
     },
   },
   computed: {
     innerValue: {
-      get(): String | undefined{
+      get(): String | undefined {
         return this.value;
       },
       set(value: string) {
@@ -35,6 +35,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
+
 input[type="password"] {
   font-size: 20px;
   width: 100%;

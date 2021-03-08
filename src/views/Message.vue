@@ -51,7 +51,7 @@ interface IchatDataList {
   content: string;
 }
 
-export type DataType = {
+type DataType = {
   //TypeScriptの型宣言
   searchWord: string;
   message: string;
@@ -100,7 +100,7 @@ export default defineComponent({
       //検索ワードの変更
       this.searchWord = value;
     },
-    changeMessage(value: string, key: number) {
+    changeMessage(value: string) {
       //メッセージの変更
       this.message = value;
     },

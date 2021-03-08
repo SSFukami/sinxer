@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import HeaderLogo from "@/components/atoms/HeaderLogo.vue";
 
 export default defineComponent({
@@ -24,7 +25,7 @@ export default defineComponent({
   },
   methods: {
     openAside(): void {
-      (this as any).$store.commit("common/shiftAside", true);
+      (this as any).$store.dispatch("common/openAside");
     },
   },
 });
@@ -44,11 +45,26 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   padding: 0px 16px 0px 8px;
+
   &-left {
+    display: grid;
+    grid-template-columns: 36px auto;
+    column-gap: 8px;
     &-icon {
-      padding: 6px 16px 0px 0px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      img {
+        transform: scale(1.5, 1.5);
+        &:hover {
+          border: 0.5px solid $-primary-100;
+        }
+      }
     }
-    display: flex;
   }
 }
 .auth-button {
@@ -58,6 +74,7 @@ export default defineComponent({
     background-color: $-primary-700;
     display: flex;
     border: none;
+    border-right: 1px solid $-primary-100;
   }
   button.login {
     color: $-primary-100;
