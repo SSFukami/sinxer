@@ -1,7 +1,7 @@
 <template>
   <div class="home-tile">
     <div class="icon">
-      <div class="icon-content"></div>
+      <UserIcon />
     </div>
     <div class="name">
       <div class="name-content">お名前{{ id }}</div>
@@ -15,8 +15,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import UserIcon from "@/components/atoms/UserIcon.vue";
+
 export default defineComponent({
   name: "HomeTile",
+  components: {
+    UserIcon,
+  },
   props: {
     id: {
       //1~12の表示されてる順番
@@ -39,10 +44,11 @@ export default defineComponent({
     "icon   name   name   name  " 64px
     "detail detail detail detail" 1fr
     "fee    fee    line   line  " 48px
-    / 1fr 1fr 1fr 1fr;
+    / 64px 1fr 1fr 1fr;
   column-gap: 8px;
   row-gap: 8px;
   border: 2px solid gray;
+  box-shadow: 2px 2px 8px $-primary-800;
   margin: 0 auto; //左右中央揃え用
   padding: 8px;
   cursor: pointer;
@@ -52,17 +58,11 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
-    &-content {
-      width: 60px;
-      height: 60px;
-      background: silver;
-      border-radius: 50%;
-    }
+    background: silver;
+    border-radius: 50%;
   }
   .name {
     grid-area: name;
-    // border-left: 4px solid silver;
-    // border-right: 4px solid silver;
     &-content {
       width: 100%;
       height: 100%;
@@ -77,7 +77,7 @@ export default defineComponent({
   .detail {
     grid-area: detail;
     color: $-primary-100;
-      background: $-primary-500;
+    background: $-primary-500;
     border-bottom: 2px dashed silver;
   }
   .fee {

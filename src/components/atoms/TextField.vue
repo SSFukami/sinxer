@@ -22,7 +22,7 @@ export default defineComponent({
   },
   computed: {
     innerValue: {
-      get(): String | undefined{
+      get(): String | undefined {
         return this.value;
       },
       set(value: string) {
@@ -35,6 +35,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
+
 input[type="text"] {
   font-size: 20px;
   width: 100%;

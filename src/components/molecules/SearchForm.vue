@@ -1,11 +1,11 @@
 <template>
   <div class="search-form">
-      <TextFieldWhite
-        label="検索ボックス"
-        :value="searchWord"
-        @change-value="changeValue"
-      />
-      <CommonButton label="検索" />
+    <TextFieldWhite
+      label="検索ボックス"
+      :value="searchWord"
+      @change-value="changeValue"
+    />
+    <CommonButton label="検索" />
   </div>
 </template>
 
@@ -22,7 +22,10 @@ export default defineComponent({
     CommonButton,
   },
   props: {
-    searchWord: String, //検索ボックスのデータ
+    searchWord: {//検索ワード
+      type: String,
+      required: true,
+    },
   },
   methods: {
     changeValue(value: string, key: number) {

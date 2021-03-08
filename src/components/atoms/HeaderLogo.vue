@@ -17,6 +17,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/assets/scss/color.scss";
+
 .header-logo {
   font-size: 24px;
   color: $-primary-100;
