@@ -22,11 +22,6 @@ export type DataType = {
   formData: IformData[];
 };
 
-<<<<<<< HEAD
-=======
-import FormComponent from "@/components/molecules/FormComponent.vue";
-
->>>>>>> cf680da0b331841514c08837bd27c2b310dbfca2
 export default defineComponent({
   name: "EditForm",
   components: {
