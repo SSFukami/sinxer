@@ -2,7 +2,7 @@
   <div class="page">
     <div class="message-aside">
       <div class="message-aside-header">
-        <TextField
+        <TextFieldWhite
           :value="searchWord"
           label="アカウント検索"
           @change-value="changeSearchWord"
@@ -23,7 +23,15 @@
         />
       </div>
       <div class="message-content-footer">
-        <MessageForm :message="message" @change-value="changeMessage" />
+        <div class="message-content-footer-details">
+          <!-- <TextField
+          :value="message"
+          label="メッセージ"
+          @change-value="changeMessage"
+        />
+        <CommonButton label="送信" /> -->
+          <MessageForm :message="message" @change-value="changeMessage" />
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +40,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import TextField from "@/components/atoms/TextField.vue";
+import TextFieldWhite from "@/components/atoms/TextFieldWhite.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
@@ -55,7 +63,7 @@ type DataType = {
 export default defineComponent({
   name: "Message",
   components: {
-    TextField,
+    TextFieldWhite,
     CommonButton,
     UserTab,
     MessageItem,
@@ -101,7 +109,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/color.scss";
+
 .page {
+  background-color: $-primary-300;
   display: grid;
   grid-template-columns: minmax(240px, 1fr) 3fr;
   column-gap: 8px;
@@ -127,18 +138,20 @@ export default defineComponent({
   .message-content {
     display: grid;
     grid-template-rows: 1fr 48px;
-    background: silver;
     overflow-y: hidden;
     &-log {
       height: 100%;
-      background: white;
+      background: $-primary-300;
       overflow-y: scroll;
     }
 
     &-footer {
-      width: 90%;
-      margin: 0 auto; //左右中央揃え用
-      padding-top: 8px; //上下中央揃え用
+      border-top: 1px solid black;
+      &-details {
+        width: 90%;
+        margin: 0 auto; //左右中央揃え用
+        padding-top: 8px; //上下中央揃え用
+      }
     }
   }
 }

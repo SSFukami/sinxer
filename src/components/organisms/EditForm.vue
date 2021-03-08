@@ -10,9 +10,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
-import FormComponent from "@/components/molecules/FormComponent.vue";
+import FormComponent, {
+  PropFormType as IformData,
+} from "@/components/molecules/FormComponent.vue";
+
+export { IformData };
+
+export type DataType = {
+  formData: IformData[];
+};
 
 export default defineComponent({
   name: "EditForm",
@@ -20,8 +28,7 @@ export default defineComponent({
     FormComponent,
   },
   props: {
-    formData: Array, //編集画面のデータ
-    // itemData:Object,
+    formData: Array as PropType<IformData[]>, //編集画面のデータ
   },
   methods: {
     changeValue(value: String, key: Number) {

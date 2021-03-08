@@ -39,6 +39,7 @@ export default defineComponent({
   min-width: 320px;
   max-width: 400px;
   height: 280px;
+  background-color: $-primary-200;
   display: grid;
   grid-template:
     "icon   name   name   name  " 64px
