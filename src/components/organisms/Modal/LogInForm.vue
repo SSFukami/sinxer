@@ -17,7 +17,7 @@
       </template>
       <template v-slot:footerRight>
         <div class="footer">
-          <CommonButton :label="label" @click="signUp" />
+          <CommonButton :label="label" @click-event="signUp" />
           <!-- {{logInDataList}} -->
         </div>
       </template>
@@ -72,7 +72,6 @@ export default defineComponent({
       this.logInDataList[id - 1].value = value;
     },
     signUp(): void {
-      console.log(2);
       (this as any).$store.dispatch("auth/signUp", {
         id: this.logInDataList[0].value,
         password: this.logInDataList[1].value,
