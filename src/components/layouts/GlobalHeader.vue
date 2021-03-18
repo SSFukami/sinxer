@@ -24,7 +24,7 @@ export default defineComponent({
     HeaderLogo,
   },
   methods: {
-    openAside(): void {
+    openAside(): void { //サイドバーを開く処理
       (this as any).$store.dispatch("common/openAside");
     },
   },

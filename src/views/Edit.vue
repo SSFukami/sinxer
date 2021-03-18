@@ -28,7 +28,7 @@ import WhiteButtonsSet, {
 } from "@/components/molecules/WhiteButtonsSet.vue";
 import UserIcon from "@/components/atoms/UserIcon.vue";
 
-export type DataType = {
+type DataType = {
   mixerFormData: IformData[];
   singerFormData: IformData[];
   whiteButtonsData: IButtonsData[];

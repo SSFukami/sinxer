@@ -42,12 +42,12 @@ export default defineComponent({
     };
   },
   methods: {
-    closeAside(): void {
+    closeAside(): void { //サイドバーを閉じる処理
       (this as any).$store.dispatch("common/closeAside");
     },
   },
   computed: {
-    setClassOpen(): string {
+    setClassOpen(): string { //サイドバーが開いた時のクラス
       return (this as any).$store.state.common.isOpeningAside ? "open" : "";
     },
   },

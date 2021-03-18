@@ -18,10 +18,6 @@ import FormComponent, {
 
 export { IformData };
 
-export type DataType = {
-  formData: IformData[];
-};
-
 export default defineComponent({
   name: "EditForm",
   components: {
