@@ -6,4 +6,13 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export const actions: ActionTree<IauthState, RootState> = {
+    signUp({}, payload): void {
+        firebase.auth().createUserWithEmailAndPassword(payload.id, payload.password)
+      .then(user => {
+          console.log(user);
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+    },
 };

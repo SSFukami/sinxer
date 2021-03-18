@@ -14,22 +14,21 @@
     </div>
     <div class="message-content">
       <div class="message-content-log">
-        <MessageItem
-          v-for="(item, index) in chatDataList"
-          :key="index"
-          :id="index"
-          :sender="item.sender"
-          :content="item.content"
-        />
+        <div v-if="numberOfClient != 0">
+          <MessageItem
+            v-for="(item, index) in chatDataList"
+            :key="index"
+            :id="index"
+            :sender="item.sender"
+            :content="item.content"
+          />
+        </div>
+        <div class="message-content-log-nobody" v-else-if="numberOfClient == 0">
+          まだ話し相手がいません
+        </div>
       </div>
       <div class="message-content-footer">
         <div class="message-content-footer-details">
-          <!-- <TextField
-          :value="message"
-          label="メッセージ"
-          @change-value="changeMessage"
-        />
-        <CommonButton label="送信" /> -->
           <MessageForm :message="message" @change-value="changeMessage" />
         </div>
       </div>
@@ -143,6 +142,14 @@ export default defineComponent({
       height: 100%;
       background: $-primary-300;
       overflow-y: scroll;
+      &-nobody {
+        height: 100%;
+        background: $-primary-400;
+        color:$-primary-800;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     &-footer {
