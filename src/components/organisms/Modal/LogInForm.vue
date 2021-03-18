@@ -17,7 +17,8 @@
       </template>
       <template v-slot:footerRight>
         <div class="footer">
-          <CommonButton :label="label" />
+          <CommonButton :label="label" @click="signUp" />
+          <!-- {{logInDataList}} -->
         </div>
       </template>
     </ModalFrame>
@@ -69,6 +70,13 @@ export default defineComponent({
   methods: {
     changeFormValue(value: string, id: number): void {
       this.logInDataList[id - 1].value = value;
+    },
+    signUp(): void {
+      console.log(2);
+      (this as any).$store.dispatch("auth/signUp", {
+        id: this.logInDataList[0].value,
+        password: this.logInDataList[1].value,
+      });
     },
   },
 });

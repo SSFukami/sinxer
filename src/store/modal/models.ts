@@ -5,5 +5,5 @@ export interface ImodalState {
 
 export class ModalState implements ImodalState {
     isOpening = false; //モーダルが表示されたらtrue
-    path = null; //表示中のモーダルの名前
+    path = ""; //表示中のモーダルの名前
 }
