@@ -1,7 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
 import firebase from 'firebase/app';
 
 const firebaseConfig = {
@@ -14,5 +14,6 @@ const firebaseConfig = {
   measurementId: "G-GF1PSMQZLW"
 };
 firebase.initializeApp(firebaseConfig);
+
 createApp(App).use(store).use(router).mount('#app');
 require('@/assets/scss/color.scss');
