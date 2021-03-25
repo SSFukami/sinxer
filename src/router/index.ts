@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
 import Message from '../views/Message.vue';
 import Edit from '../views/Edit.vue';
+import Profile from '../views/Profile.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Edit',
     component: Edit
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  }
 ];
 
 const router = createRouter({

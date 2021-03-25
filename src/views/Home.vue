@@ -1,13 +1,18 @@
 <template>
-  <div class="page">
-    <div class="page-wrapper">
-      <div class="home-header">
-        <SearchForm :searchWord="searchWord" @change-value="changeSearchWord" />
-        <!-- {{searchList}} -->
+  <div v-if="showMixersDetail == false">
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="home-header">
+          <SearchForm
+            :searchWord="searchWord"
+            @change-value="changeSearchWord"
+          />
+          <!-- {{searchList}} -->
+        </div>
       </div>
-    </div>
-    <div class="home-content">
-      <HomeTile v-for="n in 12" :key="n" :id="n" />
+      <div class="home-content">
+        <HomeTile v-for="n in 12" :key="n" :id="n" />
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +27,7 @@ import HomeTile from "@/components/organisms/HomeTile.vue";
 
 type DataType = {
   searchWord: string;
+  showMixersDetail: Boolean;
 };
 
 export default defineComponent({
@@ -35,6 +41,7 @@ export default defineComponent({
   data(): DataType {
     return {
       searchWord: "", //検索ボックスに入力した文字列
+      showMixersDetail: false,
     };
   },
   methods: {
@@ -63,7 +70,7 @@ export default defineComponent({
 
   .home-content {
     width: 100%;
-    height: calc(100% - 70px);
+    height: calc(100% - 48px);
     background-color: $-primary-300;
     padding-top: 20px;
     display: grid;

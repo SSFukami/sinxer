@@ -33,6 +33,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import "@/assets/scss/color.scss";
+
 * {
   box-sizing: border-box;
 }
@@ -50,8 +52,7 @@ body,
     height: 100%;
     .page {
       width: 100%;
-      height: calc(100% - 70px); //ヘッダーの分短く
-      background: white;
+      height: calc(100% - 72px); //ヘッダーの分短く
       position: fixed;
       top: 70px;
     }
