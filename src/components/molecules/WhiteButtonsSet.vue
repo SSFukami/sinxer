@@ -1,7 +1,7 @@
 <template>
   <div class="white-button">
     <div class="white-button-set" v-for="list in data" :key="list.id">
-      <CommonButtonWhite :label="list.label" />
+      <CommonButtonWhite :label="list.label" @click-event="clickButton(list.id)" />
     </div>
   </div>
 </template>
@@ -26,6 +26,11 @@ export default defineComponent({
       //完了ボタンとキャンセルボタンのデータ
       type: Array as PropType<ButtonsSetType[]>,
       required: true,
+    },
+  },
+  methods: {
+    clickButton(id: number): void { //idでボタンの種類判別
+      this.$emit("click-event", id);
     },
   },
 });

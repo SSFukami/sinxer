@@ -5,6 +5,7 @@
         <div class="header-label">{{ label }}</div>
       </template>
       <template v-slot:content>
+        <RadioButton :value="jobNumber" :data="jobList" @change-value="changeJobNum" />
         <FormComponent
           v-for="form in logInDataList"
           :key="form.id"
@@ -32,10 +33,14 @@ import ModalFrame from "@/components/organisms/Modal/ModalFrame.vue";
 import FormComponent, {
   PropFormType as IlogInData,
 } from "@/components/molecules/FormComponent.vue";
+import RadioButton from "@/components/atoms/RadioButton.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 
+import { JOB_LIST, IradioButtonList } from "@/mixins/radioButtonList";
+
 type DataType = {
-  label: string;
+  jobList: IradioButtonList[];
+  jobNumber: number;
   logInDataList: IlogInData[];
 };
 
@@ -44,12 +49,14 @@ export default defineComponent({
   components: {
     ModalFrame,
     FormComponent,
+    RadioButton,
     CommonButton,
   },
   data(): DataType {
     return {
-      label: "新規登録", //(試験的な)新規登録かログイン
+      jobList: JOB_LIST, //職業の配列リスト
 
+      jobNumber: 0, //歌い手(0)かMix師(1)かの番号
       logInDataList: [
         //フォームのデータ
         {
@@ -67,14 +74,23 @@ export default defineComponent({
       ],
     };
   },
+  computed: {
+    label(): string { //新規登録またはログイン
+      return (this as any).$store.state.common.logInLabel;
+    },
+  },
   methods: {
-    changeFormValue(value: string, id: number): void {
+    changeJobNum(value: number): void { //jobNumberの変更
+      this.jobNumber = value;
+    },
+    changeFormValue(value: string, id: number): void { //ログイン情報の変更
       this.logInDataList[id - 1].value = value;
     },
-    signUp(): void {
+    signUp(): void { //新規登録処理
       (this as any).$store.dispatch("auth/signUp", {
         id: this.logInDataList[0].value,
         password: this.logInDataList[1].value,
+        jobNumber: this.jobNumber,
       });
     },
   },

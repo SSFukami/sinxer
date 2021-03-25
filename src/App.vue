@@ -24,6 +24,9 @@ export default defineComponent({
     GlobalAside,
     Modal,
   },
+  mounted() {
+    (this as any).$store.dispatch("auth/onAuthChanged"); //認証変化の検知
+  },
   watch: {
     $route(): void {
       (this as any).$store.dispatch("common/closeAside");

@@ -8,12 +8,12 @@
     </template>
     <template v-slot:footerLeft>
       <div class="footer-wrapper">
-        <CommonButton label="いいえ" />
+        <CommonButton label="いいえ" @click-event="closeModal" />
       </div>
     </template>
     <template v-slot:footerRight>
       <div class="footer-wrapper">
-        <CommonButton label="はい" />
+        <CommonButton label="はい" @click-event="signOut" />
       </div>
     </template>
   </ModalFrame>
@@ -31,6 +31,14 @@ export default defineComponent({
     ModalFrame,
     CommonButton,
   },
+  methods: {
+    closeModal(): void { //キャンセル時はモーダル閉じる
+      (this as any).$store.dispatch("modal/closeModal");
+    },
+    signOut(): void { //ログアウト処理
+      (this as any).$store.dispatch("auth/signOut");
+    },
+  }
 });
 </script>
 

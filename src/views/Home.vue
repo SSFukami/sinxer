@@ -70,7 +70,7 @@ export default defineComponent({
 
   .home-content {
     width: 100%;
-    height: calc(100% - 48px);
+    height: calc(100% - 48px); //home-headerの分引く
     background-color: $-primary-300;
     padding-top: 20px;
     display: grid;

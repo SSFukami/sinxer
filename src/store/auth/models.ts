@@ -1,7 +1,7 @@
 export interface IauthState {
-  user: Object
-  singerState: Boolean
-  mixerState: Boolean
+  user: object | undefined;
+  singerState: Boolean;
+  mixerState: Boolean;
 }
 
 export class AuthState implements IauthState {
