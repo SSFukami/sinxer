@@ -7,7 +7,7 @@
     </div>
     <div class="page-contents" v-if="$store.state.auth.mixerState === true">
       <!-- {{formData}} -->
-      <div class="data" v-for="(data, index) in singerData" :key="index">
+      <div class="data" v-for="(data, index) in singerList" :key="index">
         <div class="data-label">{{ data.label }}</div>
         <div class="data-value">
           {{ data.id }}
@@ -21,14 +21,14 @@
 
     <div v-if="$store.state.auth.singerState === true">
       <div class="done-back-button">
-        <WhiteButtonsSet :data="whiteButtonsData.label" />
+        <WhiteButtonsSet :data="whiteButtonsList" />
       </div>
     </div>
 
     <div v-if="$store.state.auth.mixerState === true">
       <div class="done-back-button">
         <router-link to="/">
-          <CommonButtonWhite :label="BackButtonData" />
+          <CommonButtonWhite :label="BackButtonLabel" />
         </router-link>
       </div>
     </div>
@@ -40,26 +40,23 @@ import { defineComponent } from "vue";
 
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 import WhiteButtonsSet, {
-  ButtonsSetType as IButtonsData,
+  ButtonsSetType as IButtonsList,
 } from "@/components/molecules/WhiteButtonsSet.vue";
 import UserIcon from "@/components/atoms/UserIcon.vue";
 
-type IProfileData = {
+type IProfileList = {
   //IProfileDataが型名
   id: number;
   label: string;
   value: string;
 };
 
-type IBackButtonData = {
-  label: string; //ボタンの名前
-};
 
 type DataType = {
-  whiteButtonsData: IButtonsData[];
-  singerData: IProfileData[];
-  mixerData: IProfileData[];
-  BackButtonData: IBackButtonData;
+  whiteButtonsList: IButtonsList[];
+  singerList: IProfileList[];
+  mixerList: IProfileList[];
+  BackButtonLabel: String;
 };
 
 export default defineComponent({
@@ -71,7 +68,7 @@ export default defineComponent({
   },
   data(): DataType {
     return {
-      singerData: [
+      singerList: [
         {
           id: 0,
           label: "名前",
@@ -93,7 +90,7 @@ export default defineComponent({
           value: "",
         },
       ],
-      mixerData: [
+      mixerList: [
         {
           id: 0,
           label: "名前",
@@ -120,7 +117,7 @@ export default defineComponent({
           value: "",
         },
       ],
-      whiteButtonsData: [
+      whiteButtonsList: [
         {
           label: "依頼する",
           id: 0,
@@ -130,10 +127,7 @@ export default defineComponent({
           id: 1,
         },
       ],
-      BackButtonData: 
-        {
-          label: "戻る",
-        },
+       BackButtonLabel: "戻る",
     };
   },
   methods: {
