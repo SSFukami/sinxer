@@ -40,7 +40,6 @@ import { JOB_LIST, IradioButtonList } from "@/mixins/radioButtonList";
 
 type DataType = {
   jobList: IradioButtonList[];
-  label: string;
   jobNumber: number;
   logInDataList: IlogInData[];
 };
@@ -56,8 +55,6 @@ export default defineComponent({
   data(): DataType {
     return {
       jobList: JOB_LIST, //職業の配列リスト
-
-      label: "新規登録", //(試験的な)新規登録かログイン
 
       jobNumber: 0, //歌い手(0)かMix師(1)かの番号
       logInDataList: [
@@ -77,17 +74,23 @@ export default defineComponent({
       ],
     };
   },
+  computed: {
+    label(): string { //新規登録またはログイン
+      return (this as any).$store.state.common.logInLabel;
+    },
+  },
   methods: {
-    changeJobNum(value: number): void {
+    changeJobNum(value: number): void { //jobNumberの変更
       this.jobNumber = value;
     },
-    changeFormValue(value: string, id: number): void {
+    changeFormValue(value: string, id: number): void { //ログイン情報の変更
       this.logInDataList[id - 1].value = value;
     },
-    signUp(): void {
+    signUp(): void { //新規登録処理
       (this as any).$store.dispatch("auth/signUp", {
         id: this.logInDataList[0].value,
         password: this.logInDataList[1].value,
+        jobNumber: this.jobNumber,
       });
     },
   },
