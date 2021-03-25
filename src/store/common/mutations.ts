@@ -6,7 +6,10 @@ export const mutations: MutationTree<IcommonState> = {
   init(state: IcommonState) {
     Object.assign(state, new CommonState());
   },
-  setAsideState(state: IcommonState, payload: boolean) {
+  setAsideState(state: IcommonState, payload: boolean): void {
     state.isOpeningAside = payload;
+  },
+  setLogInLabel(state: IcommonState, payload: string): void {
+    state.logInLabel = payload;
   },
 };

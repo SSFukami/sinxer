@@ -7,8 +7,8 @@
       <HeaderLogo />
     </div>
     <div class="auth-button">
-      <button class="sign-up">新規登録</button>
-      <button class="login">ログイン</button>
+      <button class="sign-up" @click="setModal('新規登録')">新規登録</button>
+      <button class="login" @click="setModal('ログイン')">ログイン</button>
     </div>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default defineComponent({
   methods: {
     openAside(): void { //サイドバーを開く処理
       (this as any).$store.dispatch("common/openAside");
+    },
+    setModal(label: string): void { //ログインモーダルを開く処理
+      (this as any).$store.commit("common/setLogInLabel", label); //新規登録かログインかを変更
+      (this as any).$store.dispatch("modal/setModal", "LogInForm"); //モーダル開く
     },
   },
 });
@@ -75,12 +79,14 @@ export default defineComponent({
     display: flex;
     border: none;
     border-right: 1px solid $-primary-100;
+    cursor: pointer;
   }
   button.login {
     color: $-primary-100;
     background-color: $-primary-700;
     display: flex;
     border: none;
+    cursor: pointer;
   }
 }
 </style>
