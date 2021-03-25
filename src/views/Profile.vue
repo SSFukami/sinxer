@@ -28,7 +28,7 @@
     <div v-if="$store.state.auth.mixerState === true">
       <div class="done-back-button">
         <router-link to="/">
-          <CommonButtonWhite :label="BackButtonLabel" />
+          <CommonButtonWhite :label="backButtonLabel" />
         </router-link>
       </div>
     </div>
@@ -56,7 +56,7 @@ type DataType = {
   whiteButtonsList: IButtonsList[];
   singerList: IProfileList[];
   mixerList: IProfileList[];
-  BackButtonLabel: String;
+  backButtonLabel: String;
 };
 
 export default defineComponent({
@@ -127,7 +127,7 @@ export default defineComponent({
           id: 1,
         },
       ],
-       BackButtonLabel: "戻る",
+       backButtonLabel: "戻る",
     };
   },
   methods: {
