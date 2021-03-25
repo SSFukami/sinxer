@@ -33,8 +33,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/color.scss";
-
 * {
   box-sizing: border-box;
 }

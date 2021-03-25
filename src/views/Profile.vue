@@ -21,14 +21,14 @@
 
     <div v-if="$store.state.auth.singerState === true">
       <div class="done-back-button">
-        <WhiteButtonsSet :data="whiteButtonsData" />
+        <WhiteButtonsSet :data="whiteButtonsData.label" />
       </div>
     </div>
 
     <div v-if="$store.state.auth.mixerState === true">
       <div class="done-back-button">
         <router-link to="/">
-          <WhiteButtonsSet :data="BackButtonData" />
+          <CommonButtonWhite :label="BackButtonData" />
         </router-link>
       </div>
     </div>
@@ -38,20 +38,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import CommonButton from "@/components/atoms/CommonButton.vue";
+import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 import WhiteButtonsSet, {
   ButtonsSetType as IButtonsData,
 } from "@/components/molecules/WhiteButtonsSet.vue";
 import UserIcon from "@/components/atoms/UserIcon.vue";
 
-type ISingerData = {
-  //ISinxerDataが型名
-  id: number;
-  label: string;
-  value: string;
-};
-
-type IMixerData = {
+type IProfileData = {
+  //IProfileDataが型名
   id: number;
   label: string;
   value: string;
@@ -59,20 +53,19 @@ type IMixerData = {
 
 type IBackButtonData = {
   label: string; //ボタンの名前
-  id: number; //ボタンのid
 };
 
 type DataType = {
   whiteButtonsData: IButtonsData[];
-  singerData: ISingerData[];
-  mixerData: IMixerData[];
-  BackButtonData: IBackButtonData[];
+  singerData: IProfileData[];
+  mixerData: IProfileData[];
+  BackButtonData: IBackButtonData;
 };
 
 export default defineComponent({
   name: "Profile",
   components: {
-    CommonButton,
+    CommonButtonWhite,
     WhiteButtonsSet,
     UserIcon,
   },
@@ -137,12 +130,10 @@ export default defineComponent({
           id: 1,
         },
       ],
-      BackButtonData: [
+      BackButtonData: 
         {
           label: "戻る",
-          id: 0,
         },
-      ],
     };
   },
   methods: {

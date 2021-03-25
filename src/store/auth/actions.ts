@@ -15,4 +15,13 @@ export const actions: ActionTree<IauthState, RootState> = {
         alert(error.message);
       });
     },
+    // signIn({}, payload){
+    //   firebase.auth.signInWithEmailAndPassword(
+    //     payload.id,
+    //     payload.password
+    //   )
+    //   .then()
+    //   .catch()
+    //   }
+    // }
 };
