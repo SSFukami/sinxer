@@ -1,5 +1,4 @@
 <template>
-  <div v-if="showMixersDetail == false">
     <div class="page">
       <div class="page-wrapper">
         <div class="home-header">
@@ -14,7 +13,6 @@
         <HomeTile v-for="n in 12" :key="n" :id="n" />
       </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
