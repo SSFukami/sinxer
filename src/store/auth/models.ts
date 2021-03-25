@@ -5,7 +5,7 @@ export interface IauthState {
 }
 
 export class AuthState implements IauthState {
-  user = {};
-  singerState = false; //歌い手でログイン状態ならtrue
-  mixerState = false;//mix師でログイン状態ならtrue
+  user = {}
+  singerState = false //歌い手でログイン状態ならtrue
+  mixerState = true //mix師でログイン状態ならtrue
 }
