@@ -23,6 +23,46 @@ export const actions: ActionTree<IauthState, RootState> = {
         alert(error.message);
       });
   },
+  singerSignIn({ commit, dispatch }, payload: { id: string; password: string }): void { //歌い手のサインイン処理
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(
+        payload.id,
+        payload.password
+      )
+      .then(
+        () => {
+          commit("setSingerState", true);
+          //成功したらモーダル閉じてホーム画面へ
+          dispatch("modal/closeModal", null, { root: true });
+          router.push('/');
+          console.log("welcome,Singer!")
+        }
+      )
+      .catch(error => {
+        alert(error.message);
+      })
+  },
+  mixerSignIn({ dispatch, commit }, payload: { id: string; password: string }): void { //ミックス師のサインイン処理
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(
+        payload.id,
+        payload.password
+      )
+      .then(
+        () => {
+          commit("setMixerState", true);
+          //成功したらモーダル閉じてホーム画面へ
+          dispatch("modal/closeModal", null, { root: true });
+          router.push('/');
+          console.log("welcome,Mixer!")
+        }
+      )
+      .catch(error => {
+        alert(error.message);
+      })
+  },
   signOut({ dispatch, commit }): void { //ログアウト処理
     firebase.auth().signOut()
       .then(() => {
@@ -41,7 +81,7 @@ export const actions: ActionTree<IauthState, RootState> = {
       commit("setUserData", userData);
     });
   },
-  async initUserDocument({}, payload: { user: firebase.User; jobNumber: number }): Promise<void> { //dbのコレクションにドキュメント追加
+  async initUserDocument({ }, payload: { user: firebase.User; jobNumber: number }): Promise<void> { //dbのコレクションにドキュメント追加
     const job = payload.jobNumber === 0 ? "singers" : "mixers";
     await firebase.firestore().collection(job).doc(payload.user.uid).set({
       uid: payload.user.uid,

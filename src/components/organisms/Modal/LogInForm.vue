@@ -17,9 +17,14 @@
         <div></div>
       </template>
       <template v-slot:footerRight>
-        <div class="footer">
+        <div class="footer" v-if="$store.state.common.logInLabel=='新規登録'">
           <CommonButton :label="label" @click-event="signUp" />
-          <!-- {{logInDataList}} -->
+        </div>
+          <div class="footer" v-if="$store.state.common.logInLabel=='ログイン' && jobNumber=='0'">
+          <CommonButton :label="label" @click-event="singerSignIn" />
+        </div>
+        <div class="footer" v-if="$store.state.common.logInLabel=='ログイン' && jobNumber=='1'">
+          <CommonButton :label="label" @click-event="mixerSignIn" />
         </div>
       </template>
     </ModalFrame>
@@ -93,6 +98,18 @@ export default defineComponent({
         jobNumber: this.jobNumber,
       });
     },
+    singerSignIn(): void{
+      (this as any).$store.dispatch("auth/singerSignIn", {
+        id: this.logInDataList[0].value,
+        password:this.logInDataList[1].value,
+      });
+    },
+    mixerSignIn(): void{
+      (this as any).$store.dispatch("auth/mixerSignIn", {
+        id: this.logInDataList[0].value,
+        password:this.logInDataList[1].value,
+      });
+    }
   },
 });
 </script>
