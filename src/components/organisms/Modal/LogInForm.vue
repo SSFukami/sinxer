@@ -5,7 +5,11 @@
         <div class="header-label">{{ label }}</div>
       </template>
       <template v-slot:content>
-        <RadioButton :value="jobNumber" :data="jobList" @change-value="changeJobNum" />
+        <RadioButton
+          :value="jobNumber"
+          :data="jobList"
+          @change-value="changeJobNum"
+        />
         <FormComponent
           v-for="form in logInDataList"
           :key="form.id"
@@ -17,14 +21,11 @@
         <div></div>
       </template>
       <template v-slot:footerRight>
-        <div class="footer" v-if="$store.state.common.logInLabel=='新規登録'">
+        <div class="footer" v-if="$store.state.common.logInLabel == '新規登録'">
           <CommonButton :label="label" @click-event="signUp" />
         </div>
-          <div class="footer" v-if="$store.state.common.logInLabel=='ログイン' && jobNumber=='0'">
-          <CommonButton :label="label" @click-event="singerSignIn" />
-        </div>
-        <div class="footer" v-if="$store.state.common.logInLabel=='ログイン' && jobNumber=='1'">
-          <CommonButton :label="label" @click-event="mixerSignIn" />
+        <div class="footer" v-if="$store.state.common.logInLabel == 'ログイン'">
+          <CommonButton :label="label" @click-event="signIn" />
         </div>
       </template>
     </ModalFrame>
@@ -80,36 +81,35 @@ export default defineComponent({
     };
   },
   computed: {
-    label(): string { //新規登録またはログイン
+    label(): string {
+      //新規登録またはログイン
       return (this as any).$store.state.common.logInLabel;
     },
   },
   methods: {
-    changeJobNum(value: number): void { //jobNumberの変更
+    changeJobNum(value: number): void {
+      //jobNumberの変更
       this.jobNumber = value;
     },
-    changeFormValue(value: string, id: number): void { //ログイン情報の変更
+    changeFormValue(value: string, id: number): void {
+      //ログイン情報の変更
       this.logInDataList[id - 1].value = value;
     },
-    signUp(): void { //新規登録処理
+    signUp(): void {
+      //新規登録処理
       (this as any).$store.dispatch("auth/signUp", {
         id: this.logInDataList[0].value,
         password: this.logInDataList[1].value,
         jobNumber: this.jobNumber,
       });
     },
-    singerSignIn(): void{
-      (this as any).$store.dispatch("auth/singerSignIn", {
+    signIn(): void {
+      (this as any).$store.dispatch("auth/signIn", {
         id: this.logInDataList[0].value,
-        password:this.logInDataList[1].value,
+        password: this.logInDataList[1].value,
+        jobNumber: this.jobNumber,
       });
     },
-    mixerSignIn(): void{
-      (this as any).$store.dispatch("auth/mixerSignIn", {
-        id: this.logInDataList[0].value,
-        password:this.logInDataList[1].value,
-      });
-    }
   },
 });
 </script>

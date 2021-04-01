@@ -23,46 +23,20 @@ export const actions: ActionTree<IauthState, RootState> = {
         alert(error.message);
       });
   },
-  singerSignIn({ commit, dispatch }, payload: { id: string; password: string }): void { //歌い手のサインイン処理
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(
-        payload.id,
-        payload.password
-      )
-      .then(
-        () => {
-          commit("setSingerState", true);
-          //成功したらモーダル閉じてホーム画面へ
-          dispatch("modal/closeModal", null, { root: true });
-          router.push('/');
-          console.log("welcome,Singer!")
-        }
+  signIn({ commit, dispatch }, payload: { id: string; password: string; jobNumber: number }): void { //歌い手のサインイン処理
+    firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)
+      .then(() => {
+        dispatch("setJobState", payload.jobNumber); //vuexに歌い手かmixerか保存
+        //成功したらモーダル閉じてホーム画面へ
+        dispatch("modal/closeModal", null, { root: true });
+        router.push('/');
+      }
       )
       .catch(error => {
         alert(error.message);
       })
   },
-  mixerSignIn({ dispatch, commit }, payload: { id: string; password: string }): void { //ミックス師のサインイン処理
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(
-        payload.id,
-        payload.password
-      )
-      .then(
-        () => {
-          commit("setMixerState", true);
-          //成功したらモーダル閉じてホーム画面へ
-          dispatch("modal/closeModal", null, { root: true });
-          router.push('/');
-          console.log("welcome,Mixer!")
-        }
-      )
-      .catch(error => {
-        alert(error.message);
-      })
-  },
+
   signOut({ dispatch, commit }): void { //ログアウト処理
     firebase.auth().signOut()
       .then(() => {
@@ -90,10 +64,10 @@ export const actions: ActionTree<IauthState, RootState> = {
     });
   },
   setJobState({ commit }, payload: number): void { //歌い手かmixerかを０,1で受け取る
-    const singerState = payload === 0 ? true : false;
-    commit("setSingerState", singerState);
+    const IsSinger = payload === 0 ? true : false;
+    commit("setSingerState", IsSinger);
 
-    const mixerState = !singerState;
-    commit("setMixerState", mixerState);
+    const IsMixer = !IsSinger;
+    commit("setMixerState", IsMixer);
   },
 };

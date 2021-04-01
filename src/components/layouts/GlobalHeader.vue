@@ -9,24 +9,19 @@
     <div
       class="auth-button"
       v-if="
-        $store.state.auth.singerState == false &&
-        $store.state.auth.mixerState == false
+        !$store.state.auth.singerState &&
+        !$store.state.auth.mixerState
       "
     >
       <button class="sign-up" @click="setModal('新規登録')">新規登録</button>
-      <button class="login" @click="setModal('ログイン')">
-        ログイン
-      </button>
+      <button class="login" @click="setModal('ログイン')">ログイン</button>
     </div>
     <div
       class="auth-button"
-      v-if="
-        $store.state.auth.singerState == true ||
-        $store.state.auth.mixerState == true
-      "
+      v-else
     >
       <div class="sign-up">ようこそ</div>
-      <button class="login" @click="setLogOutModal('ログアウト')">ログアウト</button>
+      <button class="login" @click="setLogOutModal">ログアウト</button>
     </div>
   </div>
 </template>
