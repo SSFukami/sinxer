@@ -24,7 +24,7 @@
         <div class="footer" v-if="$store.state.common.logInLabel == '新規登録'">
           <CommonButton :label="label" @click-event="signUp" />
         </div>
-        <div class="footer" v-if="$store.state.common.logInLabel == 'ログイン'">
+        <div class="footer" v-else>
           <CommonButton :label="label" @click-event="signIn" />
         </div>
       </template>
