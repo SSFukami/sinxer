@@ -1,0 +1,15 @@
+import { MutationTree } from "vuex";
+import { ExchangeState, IexchangeState, profileDataType } from "./models";
+
+export const mutations: MutationTree<IexchangeState> = {
+  // 初期化
+  init(state: IexchangeState) {
+    Object.assign(state, new ExchangeState());
+  },
+  setSelfProfile(state: IexchangeState, payload: profileDataType): void { //自分のプロフィール情報の変更
+    state.selfProfileData = payload;
+  },
+  setClientProfile(state: IexchangeState, payload: profileDataType): void { //他ユーザーのプロフィール情報の変更
+    state.clientProfileData = payload;
+  },
+};
