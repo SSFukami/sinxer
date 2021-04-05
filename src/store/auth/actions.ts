@@ -27,6 +27,18 @@ export const actions: ActionTree<IauthState, RootState> = {
         alert(error.message);
       });
   },
+  signIn({ dispatch }, payload: { id: string; password: string; jobNumber: number }): void { //サインイン処理
+    firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)
+      .then(() => {
+        dispatch("setJobState", payload.jobNumber); //vuexに歌い手かmixerか保存
+        //成功したらモーダル閉じてホーム画面へ
+        dispatch("modal/closeModal", null, { root: true });
+        router.push('/');
+      })
+      .catch(error => {
+        alert(error.message);
+      })
+  },
   signOut({ dispatch, commit }): void { //ログアウト処理
     firebase.auth().signOut()
       .then(() => {
