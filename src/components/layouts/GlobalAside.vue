@@ -6,7 +6,10 @@
           <img src="@/assets/close-black.svg" />
         </div>
       </div>
-      <div class="global-aside-content">
+      <div
+        class="global-aside-content"
+        v-if="$store.state.auth.singerState || $store.state.auth.mixerState"
+      >
         <router-link
           class="aside-menu"
           v-for="(item, index) in asideMenuList"
@@ -16,6 +19,24 @@
           <img :src="require(`@/assets/${item.icon}.svg`)" />
           <div class="aside-menu-label">{{ item.label }}</div>
         </router-link>
+      </div>
+      <div
+        class="global-aside-content"
+        v-if="!$store.state.auth.singerState && !$store.state.auth.mixerState"
+      >
+        <router-link class="aside-menu" to="/">
+          <img :src="require(`@/assets/home-black.svg`)" />
+          <div class="aside-menu-label">ホーム</div>
+        </router-link>
+        <v-for
+          class="aside-menu"
+          v-for="(item, index) in asideMenuList.slice(1)"
+          :key="index"
+          @click="setModal('ログイン')"
+        >
+          <img :src="require(`@/assets/${item.icon}.svg`)" />
+          <div class="aside-menu-label">{{ item.label }}</div>
+        </v-for>
       </div>
       <div class="global-aside-footer">
         <CommonButtonWhite label="ログアウト" />
@@ -42,12 +63,19 @@ export default defineComponent({
     };
   },
   methods: {
-    closeAside(): void { //サイドバーを閉じる処理
+    closeAside(): void {
+      //サイドバーを閉じる処理
       (this as any).$store.dispatch("common/closeAside");
+    },
+    setModal(label: string): void {
+      //ログインモーダルを開く処理
+      (this as any).$store.commit("common/setLogInLabel", label); //新規登録かログインかを変更
+      (this as any).$store.dispatch("modal/setModal", "LogInForm"); //モーダル開く
     },
   },
   computed: {
-    setClassOpen(): string { //サイドバーが開いた時のクラス
+    setClassOpen(): string {
+      //サイドバーが開いた時のクラス
       return (this as any).$store.state.common.isOpeningAside ? "open" : "";
     },
   },

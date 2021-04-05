@@ -104,6 +104,7 @@ export default defineComponent({
       });
     },
     signIn(): void {
+      //サインイン処理
       (this as any).$store.dispatch("auth/signIn", {
         id: this.logInDataList[0].value,
         password: this.logInDataList[1].value,
