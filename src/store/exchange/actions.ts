@@ -7,7 +7,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 import {
-  DEFAULT_SINGER_DATA, DEFAULT_MIXER_DATA
+  DEFAULT_SINGER_DATA, DEFAULT_MIXER_DATA, ImixerData
 } from "@/mixins/defaultProfileData";
 
 type IformData = {
@@ -39,7 +39,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       .catch((error) => {
         console.log(error);
       });
-    
+
     context.commit("setSelfProfile", profileData); //vuex更新
   },
   async updateProfile(context, payload: IformData[]): Promise<void> { //dbのプロフィール情報更新処理
@@ -58,7 +58,42 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     context.dispatch("setSelfProfile"); //最後にvuex更新
   },
+  async setHomeTile({ commit }): Promise<void> {
+    const field: string = getSortField();
+    const random: number = Math.random();
+    const mixerList: { [key: string]: string }[] = [];
+    if (random < 0.5) { //半分の確率
+      await firebase.firestore().collection("mixers").orderBy(field).limit(12).get() //上から12人分取得
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            mixerList.push(doc.data());
+          });
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+    } else {
+      await firebase.firestore().collection("mixers").orderBy(field, "desc").limit(12).get() //下から12人分取得
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            mixerList.push(doc.data());
+          });
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+    }
+
+    commit("setHomeMixerList", mixerList); //vuexに保存
+  },
   error({ commit }, payload: String): void {
     commit("setErrorMessage", payload);
   },
 };
+
+function getSortField(): string { //ソートするMix師のフィールドをランダムに決定
+  const defaultMixerData = DEFAULT_MIXER_DATA;
+  const fieldList: string[] = [...Object.keys(defaultMixerData), "uid"];
+  const randomNum: number = Math.floor(Math.random() * fieldList.length);
+  return fieldList[randomNum];
+}

@@ -37,7 +37,7 @@ export const actions: ActionTree<IauthState, RootState> = {
       })
       .catch(error => {
         alert(error.message);
-      })
+      });
   },
   signOut({ dispatch, commit }): void { //ログアウト処理
     firebase.auth().signOut()
@@ -54,7 +54,7 @@ export const actions: ActionTree<IauthState, RootState> = {
   onAuthChanged(context): void { //認証情報の変更で自動的に書き換え
     firebase.auth().onAuthStateChanged(user => {
       const userData: firebase.User | undefined = user ? user : undefined;
-      context.commit("setUserData", userData);
+      context.commit("setUserData", userData); //vuexに保存
       context.dispatch("exchange/setSelfProfile", null, { root: true }); //自分のプロフィール情報を取得
     });
   },

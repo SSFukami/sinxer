@@ -12,4 +12,7 @@ export const mutations: MutationTree<IexchangeState> = {
   setClientProfile(state: IexchangeState, payload: profileDataType): void { //他ユーザーのプロフィール情報の変更
     state.clientProfileData = payload;
   },
+  setHomeMixerList(state: IexchangeState, payload: { [key: string]: string }[]): void { //ホームに表示するMix師のリストの変更
+    state.homeMixerList = payload;
+  },
 };

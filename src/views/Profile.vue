@@ -38,24 +38,23 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import UserIcon from "@/components/atoms/UserIcon.vue";
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 import WhiteButtonsSet, {
-  ButtonsSetType as IButtonsList,
+  ButtonsSetType as IbuttonsList,
 } from "@/components/molecules/WhiteButtonsSet.vue";
-import UserIcon from "@/components/atoms/UserIcon.vue";
 
-type IProfileList = {
+type IprofileData = {
   //IProfileDataが型名
   id: number;
   label: string;
   value: string;
 };
 
-
 type DataType = {
-  whiteButtonsList: IButtonsList[];
-  singerList: IProfileList[];
-  mixerList: IProfileList[];
+  whiteButtonsList: IbuttonsList[];
+  singerList: IprofileData[];
+  mixerList: IprofileData[];
   backButtonLabel: String;
 };
 
@@ -127,7 +126,7 @@ export default defineComponent({
           id: 1,
         },
       ],
-       backButtonLabel: "戻る",
+      backButtonLabel: "戻る",
     };
   },
   methods: {

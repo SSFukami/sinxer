@@ -33,7 +33,6 @@ import {
   IsingerData,
   ImixerData,
 } from "@/mixins/defaultProfileData";
-import { profileDataType } from "@/store/exchange/models";
 
 type DataType = {
   mixerFormData: IformData[];

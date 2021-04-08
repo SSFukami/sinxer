@@ -4,18 +4,21 @@
       <UserIcon />
     </div>
     <div class="name">
-      <div class="name-content">お名前{{ id }}</div>
+      <div class="name-content">{{ data.name }}</div>
     </div>
-    <div class="detail">紹介文</div>
-    <div class="fee">料金</div>
-    <div class="deadline">納期</div>
+    <div class="detail">{{ data.detail }}</div>
+    <div class="fee">{{ data.fee }}</div>
+    <div class="deadline">{{ data.deadline }}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 import UserIcon from "@/components/atoms/UserIcon.vue";
+import { ImixerData } from "@/mixins/defaultProfileData";
+
+export { ImixerData };
 
 export default defineComponent({
   name: "HomeTile",
@@ -23,9 +26,9 @@ export default defineComponent({
     UserIcon,
   },
   props: {
-    id: {
+    data: {
       //1~12の表示されてる順番
-      type: Number,
+      type: Object as PropType<ImixerData>,
       required: true,
     },
   },
