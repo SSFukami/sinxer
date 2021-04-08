@@ -1,5 +1,5 @@
 <template>
-  <div class="home-tile">
+  <div class="home-tile" @click="showProfile">
     <div class="icon">
       <UserIcon />
     </div>
@@ -30,6 +30,11 @@ export default defineComponent({
       //1~12の表示されてる順番
       type: Object as PropType<ImixerData>,
       required: true,
+    },
+  },
+  methods: {
+    showProfile(): void {
+      (this as any).$store.dispatch("exchange/setClientProfile", this.data.uid); //プロフィール情報取得処理
     },
   },
 });

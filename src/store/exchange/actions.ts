@@ -2,12 +2,14 @@ import { ActionTree } from "vuex";
 import { IexchangeState } from "./models";
 import { RootState } from "../RootState";
 
+import router from '@/router';
+
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
 import {
-  DEFAULT_SINGER_DATA, DEFAULT_MIXER_DATA, ImixerData
+  DEFAULT_SINGER_DATA, DEFAULT_MIXER_DATA
 } from "@/mixins/defaultProfileData";
 
 type IformData = {
@@ -57,6 +59,30 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     }); //dbを更新
 
     context.dispatch("setSelfProfile"); //最後にvuex更新
+  },
+  async setClientProfile(context, payload: string): Promise<void> { //閲覧する他ユーザーの情報取得
+    let profileData: { [key: string]: string } = {};
+
+    const clientJob: string = context.state.isClientSinger ? "singers" : "mixers";
+    const defaultProfile = clientJob === "singers" ? DEFAULT_SINGER_DATA : DEFAULT_MIXER_DATA; //キーの種類取得用
+
+    await firebase.firestore().collection(clientJob).doc(payload).get()
+      .then((doc) => {
+        if (doc.exists) { //情報が存在すれば情報取得
+          const userDoc: firebase.firestore.DocumentData | undefined = doc.data();
+          for (let k in defaultProfile) {
+            profileData[k] = userDoc?.[k];
+          }
+          router.push('/profile');
+        } else {
+          alert("正しく情報が取得できませんでした。アカウントが既に削除されている可能性があります。");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    context.commit("setClientProfile", profileData); //vuex更新
   },
   async setHomeTile({ commit }): Promise<void> {
     const field: string = getSortField();

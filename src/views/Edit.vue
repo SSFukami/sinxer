@@ -143,7 +143,7 @@ export default defineComponent({
         }
       } else {
         const defaultData: ImixerData = DEFAULT_MIXER_DATA; //Mix師のデータのキー取得用
-        for (let i in this.singerFormData) {
+        for (let i in this.mixerFormData) {
           const keyName: string = Object.keys(defaultData)[i];
           this.mixerFormData[i].value = selfProfile[keyName];
         }
