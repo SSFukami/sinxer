@@ -44,7 +44,7 @@ import WhiteButtonsSet, {
 } from "@/components/molecules/WhiteButtonsSet.vue";
 import UserIcon from "@/components/atoms/UserIcon.vue";
 
-type IProfileList = {
+type IProfileData = {
   //IProfileDataが型名
   id: number;
   label: string;
@@ -54,8 +54,8 @@ type IProfileList = {
 
 type DataType = {
   whiteButtonsList: IButtonsList[];
-  singerList: IProfileList[];
-  mixerList: IProfileList[];
+  singerList: IProfileData[];
+  mixerList: IProfileData[];
   backButtonLabel: String;
 };
 
