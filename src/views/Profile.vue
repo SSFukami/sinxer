@@ -5,7 +5,7 @@
         <UserIcon />
       </div>
     </div>
-    <div class="page-contents" v-if="isClientSinger">
+    <div class="page-contents" v-if="isShowingSinger">
       <div class="profile" v-for="(data, index) in singerList" :key="index">
         <div class="profile-label">{{ data.label }}</div>
         <div class="profile-value">
@@ -143,9 +143,9 @@ export default defineComponent({
       //歌い手としてログインしているならtrue
       return (this as any).$store.state.auth.singerState;
     },
-    isClientSinger(): boolean {
+    isShowingSinger(): boolean {
       //歌い手のプロフィールの場合true
-      return (this as any).$store.state.exchange.isClientSinger;
+      return (this as any).$store.state.exchange.isShowingSinger;
     },
   },
   methods: {
@@ -153,7 +153,7 @@ export default defineComponent({
       //配列にvuexのプロフィール情報を入れる
       const clientProfile = (this as any).$store.state.exchange
         .clientProfileData; //閲覧するプロフィール情報
-      if (this.isClientSinger) {
+      if (this.isShowingSinger) {
         const defaultData: IsingerData = DEFAULT_SINGER_DATA; //歌い手のデータのキー取得用
         for (let i in this.singerList) {
           const keyName: string = Object.keys(defaultData)[i];
@@ -215,24 +215,24 @@ export default defineComponent({
 
 .profile {
   &-label {
-    height: 24px;
-    padding: 8px;
+    font-size: 20px;
+    padding: 0px 12px;
   }
   &-value {
-    font-size: 20px;
-    width: 100%;
+    font-size: 24px;
+    width: calc(100% - 16px); //marginの分引く
     height: auto;
     color: $-primary-800;
     background: $-primary-200;
     border: none;
     margin: 8px;
+    padding: 4px;
   }
 }
 
 .done-back-button {
-  height: 200px;
-  padding: 0px 60px 0px 0px;
+  height: 80px;
   position: sticky;
-  top: 0;
+  top: 8px;
 }
 </style>

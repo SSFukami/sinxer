@@ -63,7 +63,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
   async setClientProfile(context, payload: string): Promise<void> { //閲覧する他ユーザーの情報取得
     let profileData: { [key: string]: string } = {};
 
-    const clientJob: string = context.state.isClientSinger ? "singers" : "mixers";
+    const clientJob: string = context.state.isShowingSinger ? "singers" : "mixers";
     const defaultProfile = clientJob === "singers" ? DEFAULT_SINGER_DATA : DEFAULT_MIXER_DATA; //キーの種類取得用
 
     await firebase.firestore().collection(clientJob).doc(payload).get()
