@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import Message from '../views/Message.vue';
 import Edit from '../views/Edit.vue';
 import Profile from '../views/Profile.vue';
+import store from '../store';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,12 +14,30 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/message',
     name: 'Message',
-    component: Message
+    component: Message,
+    beforeEnter: (to, from, next) => { //ログアウト状態だとメッセージ画面に飛べない処理
+      if(!store.state.auth.singerState && !store.state.auth.mixerState){
+        next('/');
+        store.commit("common/setLogInLabel", "ログイン");//新規登録かログインかを変更
+        store.dispatch("modal/setModal", "LogInForm"); //モーダル開く
+      }else{
+        next()
+      }
+    }
   },
   {
     path: '/edit',
     name: 'Edit',
-    component: Edit
+    component: Edit,
+    beforeEnter: (to, from, next) => { //ログアウト状態だと編集画面に飛べない処理
+      if(!store.state.auth.singerState && !store.state.auth.mixerState){
+        next('/')
+        store.commit("common/setLogInLabel", "ログイン");//新規登録かログインかを変更
+        store.dispatch("modal/setModal", "LogInForm"); //モーダル開く
+      }else{
+        next()
+      }
+    }
   },
   {
     path: '/profile',
