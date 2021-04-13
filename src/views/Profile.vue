@@ -152,7 +152,7 @@ export default defineComponent({
     setClientData(): void {
       //配列にvuexのプロフィール情報を入れる
       const clientProfile = (this as any).$store.state.exchange
-        .clientProfileData; //ユーザー自身のプロフィール情報
+        .clientProfileData; //閲覧するプロフィール情報
       if (this.isClientSinger) {
         const defaultData: IsingerData = DEFAULT_SINGER_DATA; //歌い手のデータのキー取得用
         for (let i in this.singerList) {
