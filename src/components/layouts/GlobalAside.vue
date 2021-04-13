@@ -6,7 +6,9 @@
           <img src="@/assets/close-black.svg" />
         </div>
       </div>
-      <div class="global-aside-content">
+      <div
+        class="global-aside-content"
+      >
         <router-link
           class="aside-menu"
           v-for="(item, index) in asideMenuList"
@@ -42,12 +44,14 @@ export default defineComponent({
     };
   },
   methods: {
-    closeAside(): void { //サイドバーを閉じる処理
+    closeAside(): void {
+      //サイドバーを閉じる処理
       (this as any).$store.dispatch("common/closeAside");
     },
   },
   computed: {
-    setClassOpen(): string { //サイドバーが開いた時のクラス
+    setClassOpen(): string {
+      //サイドバーが開いた時のクラス
       return (this as any).$store.state.common.isOpeningAside ? "open" : "";
     },
   },
