@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="home-content">
-        <HomeTile v-for="n in 12" :key="n" :id="n" />
+        <HomeTile v-for="(data, index) in homeMixerList" :key="index" :data="data" />
       </div>
     </div>
 </template>
@@ -21,7 +21,7 @@ import { defineComponent } from "vue";
 import TextField from "@/components/atoms/TextField.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 import SearchForm from "@/components/molecules/SearchForm.vue";
-import HomeTile from "@/components/organisms/HomeTile.vue";
+import HomeTile, { ImixerData } from "@/components/organisms/HomeTile.vue";
 
 type DataType = {
   searchWord: string;
@@ -41,6 +41,14 @@ export default defineComponent({
       searchWord: "", //検索ボックスに入力した文字列
       showMixersDetail: false,
     };
+  },
+  created() {
+    (this as any).$store.dispatch("exchange/setHomeTile"); //mix師12人の情報取得
+  },
+  computed: {
+    homeMixerList(): ImixerData[] { //ホームに表示するMix師のリスト
+      return (this as any).$store.state.exchange.homeMixerList;
+    },
   },
   methods: {
     changeSearchWord(value: string) {

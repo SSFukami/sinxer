@@ -24,7 +24,8 @@ export default defineComponent({
     GlobalAside,
     Modal,
   },
-  mounted() {
+  created() {
+    (this as any).$store.dispatch("exchange/setSelfProfile"); //自分のプロフィール情報を取得
     (this as any).$store.dispatch("auth/onAuthChanged"); //認証変化の検知
   },
   watch: {
