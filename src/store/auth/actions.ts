@@ -33,6 +33,7 @@ export const actions: ActionTree<IauthState, RootState> = {
         dispatch("setJobState", payload.jobNumber); //vuexに歌い手かmixerか保存
         //成功したらモーダル閉じてホーム画面へ
         dispatch("modal/closeModal", null, { root: true });
+        //第３引数に{ root: true }を書かなきゃダメ
         router.push('/');
       })
       .catch(error => {
