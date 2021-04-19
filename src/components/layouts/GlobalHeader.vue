@@ -8,20 +8,20 @@
     </div>
     <div
       class="auth-button"
-      v-if="
-        !$store.state.auth.singerState &&
-        !$store.state.auth.mixerState
-      "
+      v-if="!$store.state.auth.singerState && !$store.state.auth.mixerState"
     >
-      <button class="sign-up" @click="setModal('新規登録')">新規登録</button>
-      <button class="login" @click="setModal('ログイン')">ログイン</button>
+      <button class="auth-button-left" @click="setModal('新規登録')">
+        新規登録
+      </button>
+      <button class="auth-button-right" @click="setModal('ログイン')">
+        ログイン
+      </button>
     </div>
-    <div
-      class="auth-button"
-      v-else
-    >
-      <div class="sign-up">ようこそ</div>
-      <button class="login" @click="setLogOutModal">ログアウト</button>
+    <div class="auth-button" v-else>
+      <div class="letter">ようこそ</div>
+      <button class="auth-button-right" @click="setLogOutModal">
+        ログアウト
+      </button>
     </div>
   </div>
 </template>
@@ -92,23 +92,30 @@ export default defineComponent({
 }
 .auth-button {
   display: flex;
-  .sign-up {
+  &-left {
+    font-size: 15px;
     color: $-primary-100;
-    font-size: 14px;
     background-color: $-primary-700;
     display: flex;
     border: none;
-    border-right: 1px solid $-primary-100;
+    padding: 0px 8px;
     cursor: pointer;
-    padding-top: 2px;
-    padding-right: 8px;
   }
-  button.login {
+  &-right {
+    font-size: 15px;
     color: $-primary-100;
     background-color: $-primary-700;
     display: flex;
     border: none;
+    border-left: 1px solid $-primary-100;
+    padding: 0px 8px;
     cursor: pointer;
+  }
+
+  .letter {
+    font-size: 15px;
+    color: $-primary-100;
+    padding: 0px 8px;
   }
 }
 </style>

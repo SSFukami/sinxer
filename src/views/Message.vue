@@ -23,7 +23,7 @@
             :content="item.content"
           />
         </div>
-        <div class="message-content-log-nobody" v-else-if="numberOfClient == 0">
+        <div class="message-content-log-nobody" v-else >
           まだ話し相手がいません
         </div>
       </div>
@@ -71,7 +71,7 @@ export default defineComponent({
   data(): DataType {
     return {
       searchWord: "", //検索ボックスに入力した文字列
-      message: "", //チャットのメッサージ
+      message: "", //チャットのメッセージ
 
       numberOfClient: 10, //試験的なチャット相手の個数
       chatDataList: [
@@ -95,7 +95,7 @@ export default defineComponent({
     };
   },
   methods: {
-    changeSearchWord(value: string, key: number) {
+    changeSearchWord(value: string) {
       //検索ワードの変更
       this.searchWord = value;
     },
