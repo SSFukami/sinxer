@@ -45,20 +45,20 @@ export default defineComponent({
 
 .home-tile {
   min-width: 320px;
-  max-width: 400px;
+  max-width: 655px;
   height: 280px;
   background-color: $-primary-200;
   display: grid;
   grid-template:
     "icon   name   name   name  " 64px
-    "detail detail detail detail" 1fr
+    "detail detail detail detail" 132px
     "fee    fee    line   line  " 48px
     / 64px 1fr 1fr 1fr;
   column-gap: 8px;
   row-gap: 8px;
   border: 2px solid gray;
   box-shadow: 2px 2px 8px $-primary-800;
-  margin: 0 auto; //左右中央揃え用
+  margin:  0px;
   padding: 8px;
   cursor: pointer;
 

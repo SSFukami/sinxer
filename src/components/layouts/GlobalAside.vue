@@ -6,9 +6,7 @@
           <img src="@/assets/close-black.svg" />
         </div>
       </div>
-      <div
-        class="global-aside-content"
-      >
+      <div class="global-aside-content">
         <router-link
           class="aside-menu"
           v-for="(item, index) in asideMenuList"
@@ -20,7 +18,7 @@
         </router-link>
       </div>
       <div class="global-aside-footer">
-        <CommonButtonWhite label="ログアウト" />
+        <button class="logout" @click="setLogOutModal">ログアウト</button>
       </div>
     </div>
   </div>
@@ -29,15 +27,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
-
 import { ASIDE_MENU_LIST } from "@/mixins/asideMenuList";
 
 export default defineComponent({
   name: "GlobalAside",
-  components: {
-    CommonButtonWhite,
-  },
   data() {
     return {
       asideMenuList: ASIDE_MENU_LIST, //メニューのデータがあるリスト
@@ -45,6 +38,12 @@ export default defineComponent({
   },
   methods: {
     closeAside(): void {
+      //サイドバーを閉じる処理
+      (this as any).$store.dispatch("common/closeAside");
+    },
+    setLogOutModal(label: string): void {
+      //ログアウトモーダルを開く処理
+      (this as any).$store.dispatch("modal/setModal", "ConfirmLogOut");
       //サイドバーを閉じる処理
       (this as any).$store.dispatch("common/closeAside");
     },
@@ -115,13 +114,14 @@ export default defineComponent({
       .aside-menu {
         display: grid;
         grid-template-columns: 48px 1fr;
-        background-color: $-primary-400;
+        background-color: $-primary-700;
         text-decoration: none;
+        border-bottom: 2px solid $-primary-800;
         img {
           position: relative;
           top: 13px;
           left: 13px;
-          border: 1px solid black;
+          border: 1px solid $-primary-800;
           background-color: $-primary-100;
           border-radius: 50%;
           padding: 2px;
@@ -129,8 +129,8 @@ export default defineComponent({
         }
 
         &-label {
-          font-size: 22px;
-          color: $-primary-800;
+          font-size: 24px;
+          color: $-primary-100;
           display: flex;
           justify-content: flex-start;
           align-items: center;
@@ -145,11 +145,22 @@ export default defineComponent({
     }
 
     &-footer {
-      width: 50%;
-      font-size: 18px;
+      width: 70%;
       display: flex;
       justify-content: center;
-      margin-left: 50px;
+      margin-left: 30px;
+      margin-bottom: 10px;
+      button.logout {
+        width: 100%;
+        font-size: 24px;
+        color: $-primary-100;
+        border: none;
+        padding: 0px;
+        background-color: $-primary-700;
+      }
+      &:hover {
+        box-shadow: 4px 4px 8px 0 $-primary-800;
+      }
     }
   }
 }
