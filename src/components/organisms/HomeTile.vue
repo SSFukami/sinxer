@@ -67,7 +67,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
-    background: silver;
+    background: $-primary-500;
     border-radius: 50%;
   }
   .name {
@@ -87,7 +87,7 @@ export default defineComponent({
     grid-area: detail;
     color: $-primary-100;
     background: $-primary-500;
-    border-bottom: 2px dashed silver;
+    border-bottom: 2px dashed $-primary-500;
   }
   .fee {
     grid-area: fee;
