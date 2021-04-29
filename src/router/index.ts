@@ -16,12 +16,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Message',
     component: Message,
     beforeEnter: (to, from, next) => { //ログアウト状態だとメッセージ画面に飛べない処理
-      if(!store.state.auth.singerState && !store.state.auth.mixerState){
+      if (!store.state.auth.singerState && !store.state.auth.mixerState) {
         next('/');
-        store.commit("common/setLogInLabel", "ログイン");//新規登録かログインかを変更
+        store.commit("common/setLogInLabel", "ログイン"); //新規登録かログインかを変更
         store.dispatch("modal/setModal", "LogInForm"); //モーダル開く
-      }else{
-        next()
+      } else {
+        next();
       }
     }
   },
@@ -30,12 +30,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Edit',
     component: Edit,
     beforeEnter: (to, from, next) => { //ログアウト状態だと編集画面に飛べない処理
-      if(!store.state.auth.singerState && !store.state.auth.mixerState){
-        next('/')
+      if (!store.state.auth.singerState && !store.state.auth.mixerState) {
+        next('/');
         store.commit("common/setLogInLabel", "ログイン");//新規登録かログインかを変更
         store.dispatch("modal/setModal", "LogInForm"); //モーダル開く
-      }else{
-        next()
+      } else {
+        next();
       }
     }
   },

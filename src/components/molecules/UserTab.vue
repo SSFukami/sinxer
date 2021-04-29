@@ -1,16 +1,17 @@
 <template>
-  <div class="user-tab">
+  <div :class="['user-tab', setClassSelected]" @click="clickTab">
     <div class="icon">
       <UserIcon />
     </div>
-    <div class="name">user{{ id }}</div>
+    <div class="name">{{ data.name }}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 import UserIcon from "@/components/atoms/UserIcon.vue";
+import { profileDataType } from "@/store/exchange/models";
 
 export default defineComponent({
   name: "UserTab",
@@ -18,10 +19,26 @@ export default defineComponent({
     UserIcon,
   },
   props: {
-    id: {
+    data: {
       //表示されてる順番
-      type: Number,
+      type: Object as PropType<profileDataType>,
       required: true,
+    },
+    selected: {
+      //このタブのユーザーが開かれているかどうか
+      type: Boolean,
+      required: true,
+    },
+  },
+  computed: {
+    setClassSelected(): string {
+      //選択されたタブにクラス付与
+      return this.selected ? "selected" : "";
+    },
+  },
+  methods: {
+    clickTab(): void {
+      this.$emit("select-client", this.data);
     },
   },
 });
@@ -41,23 +58,29 @@ export default defineComponent({
   .icon {
     width: 52px;
     height: 52px;
-    background: silver;
     border-radius: 50%;
     margin: 2px 0px 0px 2px; //上下左右中央揃え用
   }
 
   .name {
-    font-size: 32px;
-    color: silver;
+    font-size: 24px;
+    color: $-primary-100;
     display: flex;
     justify-content: center;
     align-items: center;
     border-left: 4px solid silver;
     border-right: 4px solid silver;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   &:hover {
-    background: $-primary-200;
+    background: $-primary-300;
   }
+}
+
+.selected {
+  background: $-primary-500;
 }
 </style>

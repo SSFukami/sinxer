@@ -1,5 +1,5 @@
 import { MutationTree } from "vuex";
-import { ExchangeState, IexchangeState, profileDataType } from "./models";
+import { ExchangeState, IexchangeState, profileDataType, messageDataType } from "./models";
 
 export const mutations: MutationTree<IexchangeState> = {
   // 初期化
@@ -15,7 +15,16 @@ export const mutations: MutationTree<IexchangeState> = {
   setIsShowingSinger(state: IexchangeState, payload: boolean): void { //歌い手のプロフィールを表示中かどうかのフラッグ変更
     state.isShowingSinger = payload;
   },
-  setHomeMixerList(state: IexchangeState, payload: { [key: string]: string }[]): void { //ホームに表示するMix師のリストの変更
+  setHomeMixerList(state: IexchangeState, payload: profileDataType[]): void { //ホームに表示するMix師のリストの変更
     state.homeMixerList = payload;
+  },
+  setClientList(state: IexchangeState, payload: profileDataType[]): void { //チャット相手のリストの変更
+    state.clientList = payload;
+  },
+  setSelectedUid(state: IexchangeState, payload: string): void { //チャットを表示中の相手のユーザーID変更
+    state.selectedUid = payload;
+  },
+  setMessageList(state: IexchangeState, payload: messageDataType[]): void { //チャット相手との会話データのリストの変更
+    state.messageList = payload;
   },
 };
