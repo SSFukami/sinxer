@@ -58,7 +58,7 @@ export default defineComponent({
   row-gap: 8px;
   border: 2px solid gray;
   box-shadow: 2px 2px 8px $-primary-800;
-  margin:  0px;
+  margin: 0px;
   padding: 8px;
   cursor: pointer;
 
@@ -78,9 +78,10 @@ export default defineComponent({
       font-size: 32px;
       color: $-primary-100;
       background: $-primary-500;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 7px 0px 0px 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
   .detail {
@@ -93,11 +94,17 @@ export default defineComponent({
     grid-area: fee;
     color: $-primary-100;
     background: $-primary-500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .deadline {
     grid-area: line;
     color: $-primary-100;
     background: $-primary-500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>
