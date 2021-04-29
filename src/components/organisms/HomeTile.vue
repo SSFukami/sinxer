@@ -45,20 +45,20 @@ export default defineComponent({
 
 .home-tile {
   min-width: 320px;
-  max-width: 400px;
+  max-width: 655px;
   height: 280px;
   background-color: $-primary-200;
   display: grid;
   grid-template:
     "icon   name   name   name  " 64px
-    "detail detail detail detail" 1fr
+    "detail detail detail detail" 132px
     "fee    fee    line   line  " 48px
     / 64px 1fr 1fr 1fr;
   column-gap: 8px;
   row-gap: 8px;
   border: 2px solid gray;
   box-shadow: 2px 2px 8px $-primary-800;
-  margin: 0 auto; //左右中央揃え用
+  margin: 0px;
   padding: 8px;
   cursor: pointer;
 
@@ -67,7 +67,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
-    background: silver;
+    background: $-primary-500;
     border-radius: 50%;
   }
   .name {
@@ -78,26 +78,33 @@ export default defineComponent({
       font-size: 32px;
       color: $-primary-100;
       background: $-primary-500;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 7px 0px 0px 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
   .detail {
     grid-area: detail;
     color: $-primary-100;
     background: $-primary-500;
-    border-bottom: 2px dashed silver;
+    border-bottom: 2px dashed $-primary-500;
   }
   .fee {
     grid-area: fee;
     color: $-primary-100;
     background: $-primary-500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .deadline {
     grid-area: line;
     color: $-primary-100;
     background: $-primary-500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>

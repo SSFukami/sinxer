@@ -1,18 +1,19 @@
 <template>
-    <div class="page">
-      <div class="page-wrapper">
-        <div class="home-header">
-          <SearchForm
-            :searchWord="searchWord"
-            @change-value="changeSearchWord"
-          />
-          <!-- {{searchList}} -->
-        </div>
-      </div>
-      <div class="home-content">
-        <HomeTile v-for="(data, index) in homeMixerList" :key="index" :data="data" />
+  <div class="page">
+    <div class="page-wrapper">
+      <div class="home-header">
+        <SearchForm :searchWord="searchWord" @change-value="changeSearchWord" />
+        <!-- {{searchList}} -->
       </div>
     </div>
+    <div class="home-content">
+      <HomeTile
+        v-for="(data, index) in homeMixerList"
+        :key="index"
+        :data="data"
+      />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -46,7 +47,8 @@ export default defineComponent({
     (this as any).$store.dispatch("exchange/setHomeTile"); //mix師12人の情報取得
   },
   computed: {
-    homeMixerList(): ImixerData[] { //ホームに表示するMix師のリスト
+    homeMixerList(): ImixerData[] {
+      //ホームに表示するMix師のリスト
       return (this as any).$store.state.exchange.homeMixerList;
     },
   },
@@ -78,12 +80,19 @@ export default defineComponent({
     width: 100%;
     height: calc(100% - 48px); //home-headerの分引く
     background-color: $-primary-300;
-    padding-top: 20px;
+    padding: 50px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     column-gap: 20px;
     row-gap: 20px;
     overflow-y: scroll;
+  }
+  .home-content::after {
+    //画面下の空白のための文字列
+    content: "要素の直後にコンテンツを追加";
+    width: 100%;
+    height: 50px;
+    visibility: hidden;
   }
 }
 </style>

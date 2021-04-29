@@ -161,7 +161,38 @@ export default defineComponent({
         const editFormData: IformData[] = this.singerState
           ? this.singerFormData
           : this.mixerFormData; //編集データを職業で分岐
-        (this as any).$store.dispatch("exchange/updateProfile", editFormData);
+        if (this.singerState) {
+          if (
+            editFormData[0].value == "" ||
+            editFormData[1].value == "" ||
+            editFormData[2].value == "" ||
+            editFormData[3].value == ""
+          ) {
+            alert("全ての事項を記入してください。");
+          } else {
+            (this as any).$store.dispatch(
+              "exchange/updateProfile",
+              editFormData
+            );
+            console.log(editFormData[0].value);
+          }
+        }else{
+          if (
+            editFormData[0].value == "" ||
+            editFormData[1].value == "" ||
+            editFormData[2].value == "" ||
+            editFormData[3].value == "" ||
+            editFormData[4].value == "" 
+          ) {
+            alert("全ての事項を記入してください。");
+          } else {
+            (this as any).$store.dispatch(
+              "exchange/updateProfile",
+              editFormData
+            );
+            console.log(editFormData[0].value);
+          }
+        }
       } else {
         this.setFormDataValue(); //フォームのデータをvuexの情報に戻す
       }

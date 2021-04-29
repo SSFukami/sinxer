@@ -20,7 +20,8 @@
       class="auth-button"
       v-else
     >
-      <div class="sign-up">ようこそ</div>
+      <div class="sign-up">ようこそ、{{$store.state.exchange.selfProfileData.name}}さん！
+      </div>
       <button class="login" @click="setLogOutModal">ログアウト</button>
     </div>
   </div>
