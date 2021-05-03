@@ -1,7 +1,7 @@
 <template>
   <div class="search-form">
     <TextFieldWhite
-      label="検索ボックス"
+      label=" 検索ボックス"
       :value="searchWord"
       @change-value="changeValue"
     />

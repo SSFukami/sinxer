@@ -126,7 +126,7 @@ export default defineComponent({
   column-gap: 8px;
   padding: 8px;
   .message-aside {
-    border-right: 1px solid black;
+    border-right: 1px solid $-primary-800;
     overflow-y: hidden;
     &-header {
       width: 80%;
@@ -162,7 +162,7 @@ export default defineComponent({
     }
 
     &-footer {
-      border-top: 1px solid black;
+      border-top: 1px solid $-primary-800;
       &-details {
         width: 90%;
         margin: 0 auto; //左右中央揃え用

@@ -58,21 +58,19 @@ export default defineComponent({
   .icon {
     width: 52px;
     height: 52px;
+    background: $-primary-500;
     border-radius: 50%;
     margin: 2px 0px 0px 2px; //上下左右中央揃え用
   }
 
   .name {
-    font-size: 24px;
-    color: $-primary-100;
+    font-size: 32px;
+    color: $-primary-500;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-left: 4px solid silver;
-    border-right: 4px solid silver;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    border-left: 4px solid $-primary-500;
+    border-right: 4px solid $-primary-500;
   }
 
   &:hover {

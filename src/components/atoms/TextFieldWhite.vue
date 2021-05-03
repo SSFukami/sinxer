@@ -42,8 +42,7 @@ input[type="text"] {
   height: 32px;
   color: $-primary-800;
   background-color: $-primary-100;
-  border: none;
-  border-bottom: 1px solid $-primary-800;
+  border: 2px solid $-primary-800;
   outline: none;
 }
 </style>

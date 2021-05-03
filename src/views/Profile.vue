@@ -1,31 +1,30 @@
 <template>
   <div class="page">
-    <div class="icon">
-      <div class="icon-content">
-        <UserIcon />
-      </div>
+    <div class="confirm-header">
+      <ConfirmHeader />
     </div>
-    <div class="page-contents" v-if="isShowingSinger">
-      <div class="profile" v-for="(data, index) in singerList" :key="index">
-        <div class="profile-label">{{ data.label }}</div>
-        <div class="profile-value">
-          {{ data.value }}
+    <div class="page-details">
+      <div class="icon">
+        <div class="icon-content">
+          <UserIcon />
         </div>
       </div>
-    </div>
-    <div class="page-contents" v-else>
-      <div class="profile" v-for="(data, index) in mixerList" :key="index">
-        <div class="profile-label">{{ data.label }}</div>
-        <div class="profile-value">
-          {{ data.value }}
+      <div class="page-contents" v-if="isShowingSinger">
+        <div class="profile" v-for="(data, index) in singerList" :key="index">
+          <div class="profile-label">{{ data.label }}</div>
+          <div class="profile-value">
+            {{ data.value }}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="done-back-button" v-if="isSinger">
-      <WhiteButtonsSet :data="whiteButtonsList" @click-event="clickButton" />
-    </div>
-    <div class="done-back-button" v-else>
-      <CommonButtonWhite :label="backButtonLabel" @click-event="transBack" />
+      <div class="page-contents" v-else>
+        <div class="profile" v-for="(data, index) in mixerList" :key="index">
+          <div class="profile-label">{{ data.label }}</div>
+          <div class="profile-value">
+            {{ data.value }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +38,7 @@ import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 import WhiteButtonsSet, {
   ButtonsSetType as IbuttonsList,
 } from "@/components/molecules/WhiteButtonsSet.vue";
+import ConfirmHeader from "@/components/layouts/ConfirmHeader.vue";
 
 type IprofileData = {
   //IprofileDataが型名
@@ -62,6 +62,7 @@ export default defineComponent({
     CommonButtonWhite,
     WhiteButtonsSet,
     UserIcon,
+    ConfirmHeader,
   },
   data(): DataType {
     return {
@@ -192,49 +193,54 @@ export default defineComponent({
 @import "@/assets/scss/color.scss";
 
 .page {
-  display: grid;
   background-color: $-primary-300;
-  grid-template-columns: (120px 1fr 120px);
-  grid-column-gap: 24px;
-  grid-auto-columns: 100px;
-  padding: 16px;
   overflow-y: scroll;
+  &-details {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    overflow-y: scroll;
+  }
 }
 
 .icon {
-  justify-content: center; /* アイテムを中央に寄せる */
-  align-items: center; /* アイテムを中央付近にまとめる */
+  margin: 10px 0px 10px 10px;
   &-content {
-    margin: 0px 20px 20px 0px;
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background-color: silver;
-    position: sticky;
-    top: 0;
+    margin-left: 500px; //アイコン左寄せ
+    background-color: $-primary-500;
   }
 }
 
 .profile {
+  margin: 20px 100px 20px 0px;
   &-label {
     font-size: 20px;
     padding: 0px 12px;
   }
   &-value {
     font-size: 24px;
-    width: calc(100% - 16px); //marginの分引く
     height: auto;
     color: $-primary-800;
-    background: $-primary-200;
-    border: none;
-    margin: 8px;
-    padding: 4px;
+    padding-left: 24px;
   }
 }
 
-.done-back-button {
-  height: 80px;
-  position: sticky;
-  top: 8px;
+@media screen and (max-width: 768px) {
+  //スマホ用の描写
+  .icon {
+    &-content {
+      margin-left: 50px;
+    }
+  }
+}
+@media screen and (max-width: 1020px) and (min-width: 768px) {
+  //タブレット用の描写
+  .icon {
+    &-content {
+      margin-left: 200px;
+    }
+  }
 }
 </style>
