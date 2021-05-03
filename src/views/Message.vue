@@ -76,8 +76,8 @@ export default defineComponent({
   },
   created() {
     (this as any).$store.dispatch("exchange/setClientList"); //チャット相手のリストを取得
-    (this as any).$store.commit("exchange/setSelectedUid", ""); //チャット内容初期化
-    (this as any).$store.commit("exchange/setMessageList", []); //相手未選択状態に
+    (this as any).$store.commit("exchange/setSelectedUid", ""); //相手未選択状態に
+    (this as any).$store.commit("exchange/setMessageList", []); //チャット内容初期化
   },
   computed: {
     clientList(): profileDataType[] {

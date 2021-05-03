@@ -185,7 +185,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     if (context.state.messageList.length === 0) { //最初のチャットの場合、自分のデータを相手側の顧客リストに追加
       const profileData: { [key: string]: string } = context.state.selfProfileData;
-      console.log(profileData);
       batch.set(clientUserRef, { uid: userUid, ...profileData });
     }
 
