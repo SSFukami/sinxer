@@ -23,6 +23,8 @@ export interface IexchangeState {
     clientList: profileDataType[];
     selectedUid: string;
     messageList: messageDataType[];
+
+    unsubscribe: () => void;
 }
 
 export class ExchangeState implements IexchangeState {
@@ -35,4 +37,6 @@ export class ExchangeState implements IexchangeState {
     clientList = []; //チャットのやりとりをする相手のリスト
     selectedUid = ""; //開いているチャット相手のUID
     messageList = []; //選択した相手とのチャットデータのリスト
+
+    unsubscribe = () => {}; //メッセージのリスナー処理
 }

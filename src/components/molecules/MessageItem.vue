@@ -58,14 +58,14 @@ export default defineComponent({
   .user-icon {
     width: 44px;
     height: 44px;
-    background: $-primary-500;
+    background: $-primary-600;
     border-radius: 50%;
     margin: 2px 0px 0px 2px; //上下左右中央揃え用
   }
 
   .message-body {
     border-radius: 0px 22px 22px 22px;
-    border: 2px solid $-primary-500;
+    border: 2px solid $-primary-600;
     padding: 8px;
     white-space: pre-line; //\nがあると改行
   }

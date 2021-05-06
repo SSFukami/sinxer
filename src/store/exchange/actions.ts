@@ -190,7 +190,24 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     await batch.commit();
 
-    context.dispatch("setMessageData", clientUid); //チャット相手のリストの更新
+    context.dispatch("setMessageData", clientUid); //チャット相手とのチャットデータの更新
+  },
+  startMessageListener(context, payload: string): void { //チャットを開いた時リスナー起動
+    const userUid: string = context.rootGetters["auth/getUserUid"]; //自分のuid
+    const job: string = context.rootGetters["auth/getJob"]; //自分の職業
+
+    const unsubscribe = firebase.firestore().collection(job).doc(userUid).collection('clients').doc(payload).collection('message').where('uid', '==', payload) //相手側の発言をリスナー
+      .onSnapshot(() => {
+        context.dispatch("setMessageData", payload); //変更があればdbからメッセージ内容取得
+      });
+
+    context.commit("setUnsubscribe", unsubscribe); //停止のために処理をstateに登録
+  },
+  stopMessageListener({ state, commit }): void { //チャットを閉じた時リスナー停止
+    const unsubscribe = state.unsubscribe;
+    unsubscribe(); //リスナーの停止
+
+    commit("setUnsubscribe", () => {}); //処理初期化
   },
   error({ commit }, payload: string): void {
     commit("setErrorMessage", payload);
@@ -206,21 +223,21 @@ function getSortField(): string { //ソートするMix師のフィールドを�
 
 function updateClientDoc(userDocRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>, profileData: { [key: string]: string }, userUid: string, clientJob: string): void { //顧客側のドキュメント下の更新
   userDocRef.collection('clients').get()
-      .then((doc) => {
-        doc.forEach(element => {
-          //顧客ごとにチャットがあるか確認
-          element.ref.collection('message').limit(1).get()
-            .then((querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                if (doc.data()) { //チャットがある場合のみ更新処理
-                  const clientDocRef = firebase.firestore().collection(clientJob).doc(element.data().uid).collection('clients').doc(userUid);
-                  clientDocRef.update(profileData); //顧客側のドキュメント下の更新
-                }
-              });
+    .then((doc) => {
+      doc.forEach(element => {
+        //顧客ごとにチャットがあるか確認
+        element.ref.collection('message').limit(1).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              if (doc.data()) { //チャットがある場合のみ更新処理
+                const clientDocRef = firebase.firestore().collection(clientJob).doc(element.data().uid).collection('clients').doc(userUid);
+                clientDocRef.update(profileData); //顧客側のドキュメント下の更新
+              }
             });
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+          });
       });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }

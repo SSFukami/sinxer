@@ -54,31 +54,32 @@ export default defineComponent({
   grid-template-columns: 52px 1fr;
   column-gap: 16px;
   margin: 16px 0px;
+  overflow: hidden;
   cursor: pointer;
   .icon {
     width: 52px;
     height: 52px;
-    background: $-primary-500;
+    background: $-primary-600;
     border-radius: 50%;
     margin: 2px 0px 0px 2px; //上下左右中央揃え用
   }
 
   .name {
     font-size: 32px;
-    color: $-primary-500;
+    color: $-primary-600;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-left: 4px solid $-primary-500;
-    border-right: 4px solid $-primary-500;
+    border-left: 4px solid $-primary-600;
+    border-right: 4px solid $-primary-600;
   }
 
   &:hover {
-    background: $-primary-300;
+    background: $-primary-200;
   }
 }
 
 .selected {
-  background: $-primary-500;
+  background: $-primary-200;
 }
 </style>
