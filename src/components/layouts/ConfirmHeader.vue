@@ -16,9 +16,9 @@ export default defineComponent({
     transHome(): void {
       this.$router.push("/");
     },
-    transMessage():void{
-      this.$router.push("/message")
-    }
+    transMessage(): void {
+      this.$router.push("/message");
+    },
   },
 });
 </script>

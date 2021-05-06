@@ -229,9 +229,8 @@ export default defineComponent({
 }
 
 .done-back-button {
-  height: 200px;
-  padding: 0px 60px 0px 0px;
+  height: 80px;
   position: sticky;
-  top: 0;
+  top: 8px;
 }
 </style>

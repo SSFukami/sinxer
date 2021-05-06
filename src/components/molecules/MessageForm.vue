@@ -5,7 +5,7 @@
         :value="message"
         @change-value="changeMessage"
       />
-      <CommonButton label="送信"/>
+      <CommonButton label="送信" @click-event="sendMessage" />
   </div>
 </template>
 
@@ -28,8 +28,11 @@ export default defineComponent({
     },
   },
   methods: {
-    changeMessage(value: String, id: Number) {
+    changeMessage(value: string): void { //テキストフィールドの文字変更
       this.$emit("change-value", value);
+    },
+    sendMessage(): void {
+      this.$emit("send-message"); //メッセージの送信処理
     },
   },
 });

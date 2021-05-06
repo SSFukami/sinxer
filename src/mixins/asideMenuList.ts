@@ -1,7 +1,7 @@
 interface IasideMenuList {
-    label: string
-    path: string
-    icon: string
+    label: string;
+    path: string;
+    icon: string;
 }
 
 export const ASIDE_MENU_LIST: IasideMenuList[] = [
