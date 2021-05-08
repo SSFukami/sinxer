@@ -38,8 +38,7 @@ textarea {
   height: 180px;
   color: $-primary-800;
   background: $-primary-200;
-  border: none;
-  border-bottom: 1px solid $-primary-800;
+  border: 2px solid $-primary-800;
   resize: none;
 }
 </style>

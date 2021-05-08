@@ -1,9 +1,10 @@
 <template>
   <div class="page">
     <div class="confirm-header">
-      <ConfirmHeader />
+      <RequestHeader />
     </div>
     <div class="page-details">
+      <div class="left-blank"></div>
       <div class="icon">
         <div class="icon-content">
           <UserIcon />
@@ -38,7 +39,7 @@ import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 import WhiteButtonsSet, {
   ButtonsSetType as IbuttonsList,
 } from "@/components/molecules/WhiteButtonsSet.vue";
-import ConfirmHeader from "@/components/layouts/ConfirmHeader.vue";
+import RequestHeader from "@/components/layouts/RequestHeader.vue";
 
 import {
   DEFAULT_MIXER_DATA,
@@ -68,7 +69,7 @@ export default defineComponent({
     CommonButtonWhite,
     WhiteButtonsSet,
     UserIcon,
-    ConfirmHeader,
+    RequestHeader,
   },
   data(): DataType {
     return {
@@ -188,25 +189,26 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
 
 .page {
   background-color: $-primary-300;
   overflow-y: scroll;
   &-details {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 3fr 11.9fr; //画面の左端が100pxになるように調節
     overflow-y: scroll;
   }
 }
 
+.left-blank {
+  margin: 0px;
+}
 .icon {
   margin: 10px 0px 10px 10px;
   &-content {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    margin-left: 500px; //アイコン左寄せ
     background-color: $-primary-500;
   }
 }
@@ -225,20 +227,16 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 735px) {
   //スマホ用の描写
-  .icon {
-    &-content {
-      margin-left: 50px;
-    }
+  .profile{
+    margin-right:43px;//画面の両端の空白が同じサイズになるように調節
   }
 }
-@media screen and (max-width: 1020px) and (min-width: 768px) {
+@media screen and (max-width: 1020px) and (min-width: 735px) {
   //タブレット用の描写
-  .icon {
-    &-content {
-      margin-left: 200px;
-    }
+  .profile {
+    margin-right:60px;//画面の両端の空白が同じサイズになるように調節
   }
 }
 </style>

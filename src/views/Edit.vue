@@ -2,7 +2,18 @@
   <div class="page">
     <div class="icon">
       <div class="icon-content">
-        <UserIcon />
+        <label v-show="!uploadedImage"
+          >ここをクリック!
+          <UserIcon @change="onFileChange" />
+        </label>
+        <div class="icon-item">
+          <img
+            v-show="uploadedImage"
+            class="icon-item-file"
+            :src="uploadedImage"
+            alt=""
+          />
+        </div>
       </div>
     </div>
     <div class="page-contents" v-if="singerState">
@@ -35,6 +46,7 @@ import {
 } from "@/mixins/defaultProfileData";
 
 type DataType = {
+  uploadedImage: string;
   mixerFormData: IformData[];
   singerFormData: IformData[];
   whiteButtonsData: IButtonsData[];
@@ -50,6 +62,7 @@ export default defineComponent({
   },
   data(): DataType {
     return {
+      uploadedImage: "",
       singerFormData: [
         //歌い手編集画面のデータ
         {
@@ -132,6 +145,23 @@ export default defineComponent({
     },
   },
   methods: {
+    onFileChange(e: any) {
+      console.log(1);
+      const files = e.target.files || e.dataTransfer.files;
+      console.log(files[0]);
+      this.createImage(files[0]);
+      console.log(3);
+    },
+    //アップロードした画像を表示
+    createImage(file: any) {
+      console.log(2);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        //データの読み込みが正常に完了した時に発火
+        (this as any).uploadedImage = e.target!.result;
+      };
+      reader.readAsDataURL(file); //fileの内容を読み込み
+    },
     setFormDataValue(): void {
       //formDataにvuexのプロフィール情報を入れる
       const selfProfile = (this as any).$store.state.exchange.selfProfileData; //ユーザー自身のプロフィール情報
@@ -176,13 +206,13 @@ export default defineComponent({
             );
             console.log(editFormData[0].value);
           }
-        }else{
+        } else {
           if (
             editFormData[0].value == "" ||
             editFormData[1].value == "" ||
             editFormData[2].value == "" ||
             editFormData[3].value == "" ||
-            editFormData[4].value == "" 
+            editFormData[4].value == ""
           ) {
             alert("全ての事項を記入してください。");
           } else {
@@ -202,7 +232,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
 
 .page {
   display: grid;
@@ -219,6 +248,7 @@ export default defineComponent({
   align-items: center; /* アイテムを中央付近にまとめる */
   &-content {
     margin: 0px 20px 20px 0px;
+    padding-top: 35px;
     width: 120px;
     height: 120px;
     border-radius: 50%;
