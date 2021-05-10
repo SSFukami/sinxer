@@ -112,7 +112,7 @@ export default defineComponent({
       ],
       whiteButtonsData: [
         {
-          label: "完了",
+          label: "保存",
           id: 0,
         },
         {
