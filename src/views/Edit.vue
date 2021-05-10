@@ -122,7 +122,7 @@ export default defineComponent({
       ],
     };
   },
-  created() {
+  created() { //呼び出された直後
     this.setFormDataValue(); //初期はvuexの情報を表示
   },
   computed: {
@@ -174,15 +174,14 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-            console.log(editFormData[0].value);
           }
-        }else{
+        } else {
           if (
             editFormData[0].value == "" ||
             editFormData[1].value == "" ||
             editFormData[2].value == "" ||
             editFormData[3].value == "" ||
-            editFormData[4].value == "" 
+            editFormData[4].value == ""
           ) {
             alert("全ての事項を記入してください。");
           } else {
@@ -190,7 +189,6 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-            console.log(editFormData[0].value);
           }
         }
       } else {
