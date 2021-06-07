@@ -10,7 +10,7 @@
       </div>
       <div class="message-aside-list">
         <UserTab
-          v-for="(data, index) in clientList"
+          v-for="(data, index) in filteredClientList"
           :key="index"
           :data="data"
           :selected="data.uid === selectedUid"
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="message-content">
-      <div class="message-content-log" v-if="clientList.length !== 0">
+      <div class="message-content-log" v-if="filteredClientList.length !== 0">
         <MessageItem
           v-for="(item, index) in messageDataList"
           :key="index"
@@ -85,15 +85,26 @@ export default defineComponent({
   watch: {
     selectedUid: async function (newValue: string) {
       await (this as any).$store.dispatch("exchange/stopMessageListener"); //前回までのリスナーを停止
-      if (newValue !== "") { //相手が選択された場合
-        (this as any).$store.dispatch("exchange/startMessageListener", newValue); //今回の相手とのメッセージデータをリスナー
+      if (newValue !== "") {
+        //相手が選択された場合
+        (this as any).$store.dispatch(
+          "exchange/startMessageListener",
+          newValue
+        ); //今回の相手とのメッセージデータをリスナー
       }
     },
   },
   computed: {
-    clientList(): profileDataType[] {
-      //チャット相手のリスト
-      return (this as any).$store.state.exchange.clientList;
+    filteredClientList(): profileDataType[] {
+      //検索後のチャット相手のリスト
+      const clientList = (this as any).$store.state.exchange.clientList; //チャット相手のリスト
+      const word = this.searchWord;
+      const filteredList = clientList.filter((client: profileDataType) => {
+        const result: number = client.name.indexOf(word); //ワードが一致した最初のインデックス
+        return result !== -1;
+      });
+
+      return filteredList;
     },
     selectedUid(): profileDataType[] {
       //チャット相手のユーザーID
