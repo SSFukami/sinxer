@@ -15,6 +15,7 @@ import {
 type IformData = {
   id: number;
   label: string;
+  option?: { min?: number; step?: number };
   value: string;
   formType: string;
 };
@@ -93,7 +94,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
   async setHomeTile({ commit }): Promise<void> {
     const field: string = getSortField();
     const random: number = Math.random();
-    const mixerList: { [key: string]: string }[] = [];
+    const mixerList: Partial<ImixerData>[] = [];
     if (random < 0.5) { //半分の確率
       await firebase.firestore().collection("mixers").orderBy(field).limit(12).get() //上から12人分取得
         .then((querySnapshot) => {
@@ -116,6 +117,57 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         });
     }
 
+    commit("setHomeMixerList", mixerList); //vuexに保存
+  },
+  async searchMixer({ commit, rootState }): Promise<void> { //検索にヒットしたMixerのデータ取得
+    const searchWord = rootState.common.searchWord;
+    const searchType = rootState.common.searchTypeId;
+
+    let mixerList: Partial<ImixerData>[] = [];
+
+    switch (searchType) {
+      case 0: //名前を前方一致で検索
+        await firebase.firestore().collection('mixers').orderBy('name').startAt(searchWord).endAt(searchWord + '\uf8ff').get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              mixerList.push(doc.data());
+            });
+          })
+          .catch((error) => {
+            console.log("Error getting documents: ", error);
+          });
+        break;
+      case 1: //料金の上限で検索
+        if (typeof searchWord === "number") {
+          mixerList = getHitMixer('fee', searchWord, '<');
+        } else {
+          alert("数字を入力して検索する必要があります");
+        }
+        break;
+      case 2: //料金の下限で検索
+        if (typeof searchWord === "number") {
+          mixerList = getHitMixer('fee', searchWord, '>');
+        } else {
+          alert("数字を入力して検索する必要があります");
+        }
+        break;
+      case 3: //納期の上限で検索
+        if (typeof searchWord === "number") {
+          mixerList = getHitMixer('deadline', searchWord, '<');
+        } else {
+          alert("数字を入力して検索する必要があります");
+        }
+        break;
+      case 4: //納期の下限で検索
+        if (typeof searchWord === "number") {
+          mixerList = getHitMixer('deadline', searchWord, '>');
+        } else {
+          alert("数字を入力して検索する必要があります");
+        }
+        break;
+    }
+
+    console.log(mixerList, searchType, searchWord);
     commit("setHomeMixerList", mixerList); //vuexに保存
   },
   async startMessage(context, payload: ImixerData): Promise<void> { //歌い手側が依頼した時にチャット相手に追加
@@ -184,7 +236,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     batch.set(clientMessageRef, messageDoc); //ドキュメントセット
 
     if (context.state.messageList.length === 0) { //最初のチャットの場合、自分のデータを相手側の顧客リストに追加
-      const profileData: { [key: string]: string } = context.state.selfProfileData;
+      const profileData = context.state.selfProfileData;
       batch.set(clientUserRef, { uid: userUid, ...profileData });
     }
 
@@ -207,7 +259,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     const unsubscribe = state.unsubscribe;
     unsubscribe(); //リスナーの停止
 
-    commit("setUnsubscribe", () => {}); //処理初期化
+    commit("setUnsubscribe", () => { }); //処理初期化
   },
   error({ commit }, payload: string): void {
     commit("setErrorMessage", payload);
@@ -219,6 +271,21 @@ function getSortField(): string { //ソートするMix師のフィールドを�
   const fieldList: string[] = [...Object.keys(defaultMixerData), "uid"];
   const randomNum: number = Math.floor(Math.random() * fieldList.length);
   return fieldList[randomNum];
+}
+
+function getHitMixer(field: string, searchWord: number, type: '<' | '>'): Partial<ImixerData>[] {
+  const mixerList: Partial<ImixerData>[] = [];
+  firebase.firestore().collection('mixers').where(field, type, searchWord).get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        mixerList.push(doc.data());
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+
+  return mixerList;
 }
 
 function updateClientDoc(userDocRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>, profileData: { [key: string]: string }, userUid: string, clientJob: string): void { //顧客側のドキュメント下の更新

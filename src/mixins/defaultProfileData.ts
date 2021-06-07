@@ -14,18 +14,18 @@ export const DEFAULT_SINGER_DATA: IsingerData = { //歌い手のデータの初�
 }
 
 export interface ImixerData {
+    uid?: string;
     name: string;
     detail: string;
     twitter: string;
-    fee: string;
-    deadline: string;
-    [key: string]: string;
+    fee: number;
+    deadline: number;
 }
 
 export const DEFAULT_MIXER_DATA: ImixerData = { //Mixerのデータの初期値(後にiconキー追加)
     name: "お名前",
     detail: "よろしくお願いします。",
     twitter: "@",
-    fee: "",
-    deadline: "",
+    fee: 0,
+    deadline: 0,
 }

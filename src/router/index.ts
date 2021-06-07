@@ -4,6 +4,7 @@ import Message from '../views/Message.vue';
 import Edit from '../views/Edit.vue';
 import Profile from '../views/Profile.vue';
 import store from '../store';
+import { profileDataType } from '@/store/exchange/models';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -62,8 +63,9 @@ router.beforeResolve((to, from, next) => {
   } else if (from.name === 'Edit' || from.name === undefined) { //編集画面から離れる時やURLを叩いてサイトを開いた時
     const selfProfile = store.state.exchange.selfProfileData;
     let hasEmpty: boolean = false; //プロフィール情報に空があるならtrue
-    for (let i in selfProfile) {
-      hasEmpty = selfProfile[i] === "" || hasEmpty ? true : false; //どれか一つでも値が空なら真偽値をtrueに
+    const profileItemList = Object.values(selfProfile); //プロフィールの値のリスト
+    for (let i in profileItemList) {
+      hasEmpty = profileItemList[i] === "" || hasEmpty ? true : false; //どれか一つでも値が空なら真偽値をtrueに
     }
 
     if (hasEmpty) {

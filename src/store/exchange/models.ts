@@ -14,8 +14,8 @@ export type messageDataType = {
 }
 
 export interface IexchangeState {
-    selfProfileData: profileDataType | { [key: string]: string }; //キーはdefaultProfileと同じ
-    clientProfileData: profileDataType | { [key: string]: string }; //キーはdefaultProfileのキーとuid
+    selfProfileData: Partial<profileDataType>; //キーはdefaultProfileと同じ
+    clientProfileData: Partial<profileDataType>; //キーはdefaultProfileのキーとuid
 
     isShowingSinger: boolean;
     homeMixerList: profileDataType[];

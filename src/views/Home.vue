@@ -2,8 +2,8 @@
   <div class="page">
     <div class="page-wrapper">
       <div class="home-header">
-        <SearchForm :searchWord="searchWord" @change-value="changeSearchWord" />
-        <!-- {{searchList}} -->
+        <SelectBox :value="searchTypeId" :data="searchTypeList" @change-value="changeSearchType" />
+        <SearchForm :searchWord="searchWord" :formData="searchTypeList[searchTypeId]" @change-value="changeSearchWord" @search-mixer="searchMixer" />
       </div>
     </div>
     <div class="home-content">
@@ -19,43 +19,57 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import TextField from "@/components/atoms/TextField.vue";
-import CommonButton from "@/components/atoms/CommonButton.vue";
+import SelectBox from "@/components/atoms/SelectBox.vue";
 import SearchForm from "@/components/molecules/SearchForm.vue";
 import HomeTile, { ImixerData } from "@/components/organisms/HomeTile.vue";
 
+import { HOME_SEARCH_TYPE_LIST, IselectBoxList } from "@/mixins/selectBoxList";
+
 type DataType = {
-  searchWord: string;
-  showMixersDetail: Boolean;
+  searchTypeList: IselectBoxList[];
 };
 
 export default defineComponent({
   name: "Home",
   components: {
-    TextField,
-    CommonButton,
+    SelectBox,
     SearchForm,
     HomeTile,
   },
   data(): DataType {
     return {
-      searchWord: "", //検索ボックスに入力した文字列
-      showMixersDetail: false,
+      searchTypeList: HOME_SEARCH_TYPE_LIST, //セレクトボックスのデータリスト
     };
   },
   created() {
     (this as any).$store.dispatch("exchange/setHomeTile"); //mix師12人の情報取得
   },
   computed: {
+    searchWord(): string {
+      //検索ボックスに入力した文字列
+      return (this as any).$store.state.common.searchWord;
+    },
+    searchTypeId(): string {
+      //検索モードのID(0~4)
+      return (this as any).$store.state.common.searchTypeId;
+    },
     homeMixerList(): ImixerData[] {
       //ホームに表示するMix師のリスト
       return (this as any).$store.state.exchange.homeMixerList;
     },
   },
   methods: {
-    changeSearchWord(value: string) {
+    changeSearchWord(value: string | number) {
       //検索ワードの変更
-      this.searchWord = value;
+      (this as any).$store.commit("common/setSearchWord", value);
+    },
+    changeSearchType(value: number): void {
+      //検索モードの変更
+      (this as any).$store.dispatch("common/changeSearchType", value);
+    },
+    searchMixer(): void {
+      //検索処理
+      (this as any).$store.dispatch("exchange/searchMixer");
     },
   },
 });

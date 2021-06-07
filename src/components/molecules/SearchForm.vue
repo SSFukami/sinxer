@@ -1,35 +1,48 @@
 <template>
   <div class="search-form">
-    <TextFieldWhite
+    <component
+      :is="formData.formType"
       label=" 検索ボックス"
       :value="searchWord"
+      :option="formData.option"
       @change-value="changeValue"
     />
-    <CommonButton label="検索" />
+    <CommonButton label="検索" @click-event="searchMixer"/>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 import TextFieldWhite from "@/components/atoms/TextFieldWhite.vue";
+import NumberField from "@/components/atoms/NumberField.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
+
+import { IselectBoxList } from "@/mixins/selectBoxList";
 
 export default defineComponent({
   name: "SearchForm",
   components: {
     TextFieldWhite,
+    NumberField,
     CommonButton,
   },
   props: {
-    searchWord: {//検索ワード
-      type: String,
+    searchWord: { //検索ワード
+      type: [String, Number],
+      required: true,
+    },
+    formData: { //検索ボックスの種類
+      type: Object as PropType<IselectBoxList>,
       required: true,
     },
   },
   methods: {
-    changeValue(value: string, key: number) {
+    changeValue(value: string | number, key: number) { //検索ワードを文字列にして変更
       this.$emit("change-value", value);
+    },
+    searchMixer(): void {
+      this.$emit("search-mixer");
     },
   },
 });

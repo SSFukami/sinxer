@@ -45,7 +45,7 @@ type IprofileData = {
   id: number;
   keyName: string;
   label: string;
-  value: string;
+  value: string | number;
 };
 
 type DataType = {
@@ -53,7 +53,6 @@ type DataType = {
   singerList: IprofileData[];
   mixerList: IprofileData[];
   backButtonLabel: string;
-  prevRoute: RouteLocationNormalized | undefined;
 };
 
 export default defineComponent({
@@ -115,13 +114,13 @@ export default defineComponent({
           id: 3,
           keyName: "fee",
           label: "料金",
-          value: "",
+          value: 0,
         },
         {
           id: 4,
           keyName: "deadline",
           label: "納期",
-          value: "",
+          value: 0,
         },
       ],
       whiteButtonsList: [
@@ -135,8 +134,6 @@ export default defineComponent({
         },
       ],
       backButtonLabel: "戻る",
-
-      prevRoute: undefined, //前回のルート情報(初期はundefined)
     };
   },
   created() {

@@ -12,4 +12,10 @@ export const mutations: MutationTree<IcommonState> = {
   setLogInLabel(state: IcommonState, payload: string): void {
     state.logInLabel = payload;
   },
+  setSearchWord(state: IcommonState, payload: string | number): void {
+    state.searchWord = payload;
+  },
+  setSearchTypeId(state: IcommonState, payload: number): void {
+    state.searchTypeId = payload;
+  },
 };
