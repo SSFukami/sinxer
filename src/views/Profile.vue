@@ -41,16 +41,10 @@ import WhiteButtonsSet, {
 } from "@/components/molecules/WhiteButtonsSet.vue";
 import RequestHeader from "@/components/layouts/RequestHeader.vue";
 
-import {
-  DEFAULT_MIXER_DATA,
-  DEFAULT_SINGER_DATA,
-  IsingerData,
-  ImixerData,
-} from "@/mixins/defaultProfileData";
-
 type IprofileData = {
   //IprofileDataが型名
   id: number;
+  keyName: string;
   label: string;
   value: string;
 };
@@ -76,21 +70,25 @@ export default defineComponent({
       singerList: [
         {
           id: 0,
+          keyName: "name",
           label: "名前",
           value: "",
         },
         {
           id: 1,
+          keyName: "detail",
           label: "自己紹介",
           value: "",
         },
         {
           id: 2,
+          keyName: "twitter",
           label: "Twitter",
           value: "",
         },
         {
           id: 3,
+          keyName: "link",
           label: "投稿先URL",
           value: "",
         },
@@ -98,26 +96,31 @@ export default defineComponent({
       mixerList: [
         {
           id: 0,
+          keyName: "name",
           label: "名前",
           value: "",
         },
         {
           id: 1,
+          keyName: "detail",
           label: "自己紹介",
           value: "",
         },
         {
           id: 2,
+          keyName: "twitter",
           label: "Twitter",
           value: "",
         },
         {
           id: 3,
+          keyName: "fee",
           label: "料金",
           value: "",
         },
         {
           id: 4,
+          keyName: "deadline",
           label: "納期",
           value: "",
         },
@@ -156,16 +159,14 @@ export default defineComponent({
       const clientProfile = (this as any).$store.state.exchange
         .clientProfileData; //閲覧するプロフィール情報
       if (this.isShowingSinger) {
-        const defaultData: IsingerData = DEFAULT_SINGER_DATA; //歌い手のデータのキー取得用
         for (let i in this.singerList) {
-          const keyName: string = Object.keys(defaultData)[i];
-          this.singerList[i].value = clientProfile[keyName];
+          const keyName: string = this.singerList[i].keyName;
+          this.singerList[i].value = clientProfile[keyName]; //情報をリストのvalueキーに代入
         }
       } else {
-        const defaultData: ImixerData = DEFAULT_MIXER_DATA; //Mix師のデータのキー取得用
         for (let i in this.mixerList) {
-          const keyName: string = Object.keys(defaultData)[i];
-          this.mixerList[i].value = clientProfile[keyName];
+          const keyName: string = this.mixerList[i].keyName;
+          this.mixerList[i].value = clientProfile[keyName]; //情報をリストのvalueキーに代入
         }
       }
     },
@@ -176,7 +177,8 @@ export default defineComponent({
     clickButton(id: number): void {
       //idで処理分岐
       if (id === 0 && this.isSinger) {
-        console.log("チャット情報取得処理");
+        const clientProfile = (this as any).$store.state.exchange.clientProfileData; //閲覧中のプロフィール情報
+        (this as any).$store.dispatch("exchange/startMessage", clientProfile); //チャット相手に登録する処理
         (this as any).$router.push("/message"); //ユーザーが歌い手ならメッセージ画面へ
       } else if (id === 0) {
         alert("Mix師の方はご依頼することはできません"); //Mix師向け

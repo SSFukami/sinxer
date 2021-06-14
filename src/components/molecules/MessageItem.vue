@@ -1,9 +1,10 @@
 <template>
-  <div :class="['message-item', setClassSelfOwned]">
+  <div :class="['message-item', setClassSelf]">
     <div class="user-icon">
       <UserIcon />
     </div>
-    <div class="message-body">{{ id }}{{ content }}</div>
+    <div class="message-body">{{ content }}</div>
+    <!-- アイコン入れ替え用の空のdiv -->
     <div class="empty"></div>
   </div>
 </template>
@@ -19,30 +20,26 @@ export default defineComponent({
     UserIcon,
   },
   props: {
-    id: {
-      //表示されてる順番
-      type: Number,
-      required: true,
-    },
-    sender: {
-      //メッセージを書いた人
+    senderId: {
+      //メッセージを書いた人のuid
       type: String,
       required: true,
-      validator: (value: string) => {
-        //プロパティの値は、必ずいずれかの文字列でなければならない
-        return ["self", "client"].indexOf(value) !== -1;
-      },
     },
     content: {
       //メッセージの内容
       type: String,
       required: true,
     },
+    clientId: {
+      //話し相手のuid
+      type: String,
+      required: true,
+    },
   },
   computed: {
-    setClassSelfOwned(): string {
+    setClassSelf(): string {
       //書いた人が自分ならクラス付与
-      return this.sender === "self" ? "self-owned" : "";
+      return this.senderId !== this.clientId ? "self" : "";
     },
   },
 });
@@ -74,7 +71,7 @@ export default defineComponent({
   }
 }
 
-.self-owned {
+.self {
   //順番入れ替えでアイコンを右側に
   .user-icon {
     order: 3;

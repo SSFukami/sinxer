@@ -4,6 +4,7 @@ export interface IsingerData {
     twitter: string;
     link: string;
     [key: string]: string;
+    icon:string;
 }
 
 export const DEFAULT_SINGER_DATA: IsingerData = { //歌い手のデータの初期値(後にiconキー追加)
@@ -11,6 +12,7 @@ export const DEFAULT_SINGER_DATA: IsingerData = { //歌い手のデータの初�
     detail: "よろしくお願いします。",
     twitter: "@",
     link: "",
+    icon:"1",//ナビゲーションガード対策
 }
 
 export interface ImixerData {
@@ -20,6 +22,7 @@ export interface ImixerData {
     fee: string;
     deadline: string;
     [key: string]: string;
+    icon:string;
 }
 
 export const DEFAULT_MIXER_DATA: ImixerData = { //Mixerのデータの初期値(後にiconキー追加)
@@ -28,4 +31,5 @@ export const DEFAULT_MIXER_DATA: ImixerData = { //Mixerのデータの初期値(
     twitter: "@",
     fee: "",
     deadline: "",
+    icon:"1",//ナビゲーションガード対策
 }

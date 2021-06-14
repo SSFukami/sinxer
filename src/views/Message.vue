@@ -9,27 +9,33 @@
         />
       </div>
       <div class="message-aside-list">
-        <UserTab v-for="n in numberOfClient" :key="n" :id="n" />
+        <UserTab
+          v-for="(data, index) in clientList"
+          :key="index"
+          :data="data"
+          :selected="data.uid === selectedUid"
+          @select-client="selectClient"
+        />
       </div>
     </div>
     <div class="message-content">
-      <div class="message-content-log">
-        <div v-if="numberOfClient != 0">
-          <MessageItem
-            v-for="(item, index) in chatDataList"
-            :key="index"
-            :id="index"
-            :sender="item.sender"
-            :content="item.content"
-          />
-        </div>
-        <div class="message-content-log-nobody" v-else-if="numberOfClient == 0">
-          まだ話し相手がいません
-        </div>
+      <div class="message-content-log" v-if="clientList.length !== 0">
+        <MessageItem
+          v-for="(item, index) in messageDataList"
+          :key="index"
+          :senderId="item.uid"
+          :content="item.content"
+          :clientId="selectedUid"
+        />
       </div>
+      <div class="message-content-nobody" v-else>まだ話し相手がいません</div>
       <div class="message-content-footer">
         <div class="message-content-footer-details">
-          <MessageForm :message="message" @change-value="changeMessage" />
+          <MessageForm
+            :message="message"
+            @change-value="changeMessage"
+            @send-message="sendMessage"
+          />
         </div>
       </div>
     </div>
@@ -45,18 +51,12 @@ import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
 import MessageForm from "@/components/molecules/MessageForm.vue";
 
-interface IchatDataList {
-  sender: string;
-  content: string;
-}
+import { messageDataType, profileDataType } from "@/store/exchange/models";
 
 type DataType = {
   //TypeScriptの型宣言
   searchWord: string;
   message: string;
-  numberOfClient: number;
-  chatDataList: IchatDataList[];
-  // messageList: Object,
 };
 
 export default defineComponent({
@@ -71,37 +71,46 @@ export default defineComponent({
   data(): DataType {
     return {
       searchWord: "", //検索ボックスに入力した文字列
-      message: "", //チャットのメッサージ
-
-      numberOfClient: 10, //試験的なチャット相手の個数
-      chatDataList: [
-        {
-          sender: "self",
-          content: "コメント1行目\n2行目\n3行目\n4行目\n5行目",
-        },
-        {
-          sender: "client",
-          content: "コメント1行目\n2行目\n3行目\n4行目\n5行目",
-        },
-        {
-          sender: "self",
-          content: "コメント1行目\n2行目\n3行目\n4行目\n5行目",
-        },
-        {
-          sender: "client",
-          content: "コメント1行目\n2行目\n3行目\n4行目\n5行目",
-        },
-      ],
+      message: "", //チャットのメッセージ
     };
   },
+  created() {
+    (this as any).$store.dispatch("exchange/setClientList"); //チャット相手のリストを取得
+    (this as any).$store.commit("exchange/setSelectedUid", ""); //相手未選択状態に
+    (this as any).$store.commit("exchange/setMessageList", []); //チャット内容初期化
+  },
+  computed: {
+    clientList(): profileDataType[] {
+      //チャット相手のリスト
+      return (this as any).$store.state.exchange.clientList;
+    },
+    selectedUid(): profileDataType[] {
+      //チャット相手のユーザーID
+      return (this as any).$store.state.exchange.selectedUid;
+    },
+    messageDataList(): messageDataType[] {
+      //チャット相手とのコメントリスト
+      return (this as any).$store.state.exchange.messageList;
+    },
+  },
   methods: {
-    changeSearchWord(value: string, key: number) {
+    changeSearchWord(value: string): void {
       //検索ワードの変更
       this.searchWord = value;
     },
-    changeMessage(value: string) {
+    changeMessage(value: string): void {
       //メッセージの変更
       this.message = value;
+    },
+    selectClient(data: profileDataType): void {
+      //ユーザータブをクリック時の処理
+      (this as any).$store.commit("exchange/setSelectedUid", data.uid); //どの相手を選択したかvuexに保存
+      (this as any).$store.dispatch("exchange/setMessageData", data.uid); //選択した相手とのチャット内容をdbから取得
+    },
+    sendMessage(): void {
+      //メッセージをdbに送信する処理
+      (this as any).$store.dispatch("exchange/sendMessage", this.message);
+      this.message = "";
     },
   },
 });
@@ -111,7 +120,7 @@ export default defineComponent({
 @import "@/assets/scss/color.scss";
 
 .page {
-  background-color: $-primary-300;
+  background-color: $-primary-400;
   display: grid;
   grid-template-columns: minmax(240px, 1fr) 3fr;
   column-gap: 8px;
@@ -140,16 +149,16 @@ export default defineComponent({
     overflow-y: hidden;
     &-log {
       height: 100%;
-      background: $-primary-300;
+      background: $-primary-400;
       overflow-y: scroll;
-      &-nobody {
-        height: 100%;
-        background: $-primary-400;
-        color:$-primary-800;
-        display:flex;
-        justify-content: center;
-        align-items: center;
-      }
+    }
+    &-nobody {
+      height: 100%;
+      color: $-primary-800;
+      background: $-primary-400;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     &-footer {

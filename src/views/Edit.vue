@@ -1,29 +1,29 @@
 <template>
-  <div class="page">
-    <div class="icon">
-      <div class="icon-content">
-        <label v-show="!uploadedImage"
-          >ここをクリック!
-          <UserIcon @change="onFileChange" />
-        </label>
-        <div class="icon-item">
-          <img
-            v-show="uploadedImage"
-            class="icon-item-file"
-            :src="uploadedImage"
-            alt=""
-          />
+  <div>
+    <label>
+      <img src="@/assets/add_a_photo.svg" class="add-photo" />
+      <input type="file" class="add-file" @change="onFileChange" />
+    </label>
+    <div class="page">
+      <div class="icon">
+        <div class="icon-content">
+          <div class="icon-content-crop">
+            <UserIcon :icon="cropImage" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="page-contents" v-if="singerState">
-      <EditForm :formData="singerFormData" @change-value="changeSingerValue" />
-    </div>
-    <div class="page-contents" v-else>
-      <EditForm :formData="mixerFormData" @change-value="changeMixerValue" />
-    </div>
-    <div class="done-back-button">
-      <WhiteButtonsSet :data="whiteButtonsData" @click-event="clickButton" />
+      <div class="page-contents" v-if="singerState">
+        <EditForm
+          :formData="singerFormData"
+          @change-value="changeSingerValue"
+        />
+      </div>
+      <div class="page-contents" v-else>
+        <EditForm :formData="mixerFormData" @change-value="changeMixerValue" />
+      </div>
+      <div class="done-back-button">
+        <WhiteButtonsSet :data="whiteButtonsData" @click-event="clickButton" />
+      </div>
     </div>
   </div>
 </template>
@@ -47,6 +47,9 @@ import {
 
 type DataType = {
   uploadedImage: string;
+  targetWidth: number;
+  targetHeight: number;
+  filename: string;
   mixerFormData: IformData[];
   singerFormData: IformData[];
   whiteButtonsData: IButtonsData[];
@@ -54,6 +57,11 @@ type DataType = {
 
 export default defineComponent({
   name: "Edit",
+  beforeRouteLeave(to, form, next) {
+    (this as any).$store.dispatch("trimming/closeTrimming");
+    //コンポーネントから遷移する前にトリミングエリアを閉じる
+    next();
+  },
   components: {
     EditForm,
     CommonButton,
@@ -63,6 +71,9 @@ export default defineComponent({
   data(): DataType {
     return {
       uploadedImage: "",
+      targetWidth: 1,
+      targetHeight: 1,
+      filename: "",
       singerFormData: [
         //歌い手編集画面のデータ
         {
@@ -137,28 +148,34 @@ export default defineComponent({
   },
   created() {
     this.setFormDataValue(); //初期はvuexの情報を表示
-  },
+    (this as any).$store.dispatch("trimming/closeTrimming");
+  }, //トリミングエリアを閉じる
+
   computed: {
     singerState(): boolean {
       //歌い手としてログインしているならtrue
       return (this as any).$store.state.auth.singerState;
     },
+    cropImage(): string {
+      return (this as any).$store.state.trimming.cropImage;
+    },
   },
   methods: {
     onFileChange(e: any) {
-      console.log(1);
       const files = e.target.files || e.dataTransfer.files;
-      console.log(files[0]);
+      (this as any).$store.dispatch("trimming/openTrimming"); //トリミングエリアの表示
       this.createImage(files[0]);
-      console.log(3);
     },
     //アップロードした画像を表示
     createImage(file: any) {
-      console.log(2);
       const reader = new FileReader();
       reader.onload = (e) => {
         //データの読み込みが正常に完了した時に発火
-        (this as any).uploadedImage = e.target!.result;
+        (this as any).uploadedImage = e.target!.result; //画像データそのもの
+        (this as any).$store.dispatch(
+          "trimming/updateImage",
+          this.uploadedImage
+        );
       };
       reader.readAsDataURL(file); //fileの内容を読み込み
     },
@@ -204,7 +221,10 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-            console.log(editFormData[0].value);
+            (this as any).$store.dispatch(
+              "trimming/updateCropImage",
+              (this as any).$store.state.trimming.cropImage
+            );
           }
         } else {
           if (
@@ -220,7 +240,10 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-            console.log(editFormData[0].value);
+            (this as any).$store.dispatch(
+              "trimming/updateCropImage",
+              (this as any).$store.state.trimming.cropImage
+            );
           }
         }
       } else {
@@ -232,6 +255,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.add-photo {
+  z-index: 1;
+  margin: 135px 0px 0px 53px;
+  position: absolute;
+}
+.add-file {
+  z-index: 0;
+  padding: 140px 0px 0px 65px;
+  position: absolute;
+}
 
 .page {
   display: grid;
@@ -248,7 +281,6 @@ export default defineComponent({
   align-items: center; /* アイテムを中央付近にまとめる */
   &-content {
     margin: 0px 20px 20px 0px;
-    padding-top: 35px;
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -263,5 +295,33 @@ export default defineComponent({
   padding: 0px 60px 0px 0px;
   position: sticky;
   top: 0;
+}
+
+.icon-content-crop {
+  height: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+label {
+  width: 100%;
+  height: 32px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: $-primary-100;
+  border: 2px solid;
+  color: $-primary-800;
+  border-color: $-primary-800;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 8px 10px 8px;
+  &:hover {
+    background-color: $-primary-700;
+    color: $-primary-100;
+  }
+}
+
+input[type="file"] {
+  display: none;
 }
 </style>
