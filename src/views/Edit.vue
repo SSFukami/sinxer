@@ -159,7 +159,7 @@ export default defineComponent({
     },
     //アップロードした画像を表示
     createImage(file: any) {
-      var uploadedImage: any = "";
+      let uploadedImage: any = "";
       const reader = new FileReader();
       reader.onload = (e) => {
         //データの読み込みが正常に完了した時に発火
@@ -167,7 +167,7 @@ export default defineComponent({
         (this as any).$store.dispatch("trimming/updateImage", uploadedImage);
       };
       reader.readAsDataURL(file); //fileの内容をbase64形式で読み込み
-      reader.onloadend  
+      reader.onloadend;
     },
     setFormDataValue(): void {
       //formDataにvuexのプロフィール情報を入れる
@@ -211,9 +211,7 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-            (this as any).$store.dispatch(
-              "trimming/updateCropImage"
-            );
+            (this as any).$store.dispatch("trimming/updateCropImage");
           }
         } else {
           if (
@@ -229,9 +227,7 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-            (this as any).$store.dispatch(
-              "trimming/updateCropImage"
-            );
+            (this as any).$store.dispatch("trimming/setSelfIcon");
           }
         }
       } else {

@@ -1,5 +1,5 @@
 <template>
-  <div class="trimming"  @click.self="closeTrimming">
+  <div class="trimming" @click.self="closeTrimming">
     <div class="trimming-image">
       <VueCropper
         class="image"
