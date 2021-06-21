@@ -1,6 +1,6 @@
 <template>
   <div class="icon">
-    <img src="icon" />
+    <img :src="icon" class="cropImg" />
   </div>
 </template>
 
@@ -16,10 +16,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.icon {
-  width: 100%;
+.cropImg {
   height: 100%;
+  width: 100%;
   border-radius: 50%;
-  background: silver; //テスト用
+}
+input {
+  display: none;
 }
 </style>

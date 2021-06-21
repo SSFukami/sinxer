@@ -40,6 +40,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           const userDoc: firebase.firestore.DocumentData | undefined = doc.data();
           for (let k in defaultProfile) {
             profileData[k] = userDoc?.[k];
+            // console.log(k);
+            // console.log(profileData[k]);
           }
         }
       })
@@ -50,7 +52,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     context.commit("setSelfProfile", profileData); //vuex更新
   },
   async updateProfile(context, payload: IformData[]): Promise<void> { //dbのプロフィール情報更新処理
-    const defaultProfile = context.rootState.auth.singerState ? DEFAULT_SINGER_DATA : DEFAULT_MIXER_DATA; //キーの種類取得用
+    const defaultProfile = context.rootState.auth.singerState ? DEFAULT_SINGER_DATA : DEFAULT_MIXER_DATA;
+    //キーの種類取得用
     let profileData: { [key: string]: string } = {};
     for (let i in payload) {
       const keyName: string = Object.keys(defaultProfile)[i];

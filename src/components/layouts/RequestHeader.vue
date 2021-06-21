@@ -11,7 +11,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ConfirmHeader",
+  name: "RequestHeader",
   methods: {
     transHome(): void {
       this.$router.push("/");
@@ -24,7 +24,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
 
 .confirm-header {
   width: 100%;
