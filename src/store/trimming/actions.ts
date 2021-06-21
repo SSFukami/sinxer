@@ -20,10 +20,6 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
   cropImage({ commit }, payload): void {
     commit("setCropImage", payload);
   },
-  beforeUpdateImage(context, payload): void {
-    context.commit("setBeforeUpdateImage", payload);
-    context.dispatch("cropImage", payload);
-  },
   async setSelfIcon(context): Promise<void> { //自分のアイコンのプロフィール情報取得してvuexに
     const userUid: string = context.rootGetters["auth/getUserUid"];
     //ストレージのルートのリファレンスを取得
@@ -47,8 +43,6 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
     uploadRef.putString(context.state.cropImage, 'data_url').then(function () {
       console.log('Uploaded a data_url string!');
     });
-
-    context.dispatch("setSelfIcon"); //最後にvuex更新
   },
   cancelUpdateImage(context){//トリミングした画像をアイコンとして保存しない処理
     const userUid: string = context.rootGetters["auth/getUserUid"];

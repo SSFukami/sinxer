@@ -28,7 +28,6 @@ import { defineComponent } from "vue";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
-
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
 type DataType = {
@@ -56,7 +55,7 @@ export default defineComponent({
         .getCroppedCanvas()
         .toDataURL();
       (this as any).$store.dispatch("trimming/closeTrimming");
-      (this as any).$store.dispatch("trimming/beforeUpdateImage", cropImg); //登録前のアイコンを表示
+      (this as any).$store.dispatch("trimming/cropImage", cropImg); //登録前のアイコンを表示
     },
     closeTrimming(): void {
       (this as any).$store.dispatch("trimming/closeTrimming");
