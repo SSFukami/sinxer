@@ -27,4 +27,7 @@ export const mutations: MutationTree<IexchangeState> = {
   setMessageList(state: IexchangeState, payload: messageDataType[]): void { //チャット相手との会話データのリストの変更
     state.messageList = payload;
   },
+  setUnsubscribe(state: IexchangeState, payload: () => void): void { //チャット相手との会話データのリストの変更
+    state.unsubscribe = payload;
+  },
 };

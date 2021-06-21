@@ -5,6 +5,7 @@
       :is="form.formType"
       :value="form.value"
       :id="form.id"
+      :option="form.option"
       @change-value="changeValue"
     />
   </div>
@@ -15,13 +16,15 @@ import { defineComponent, PropType } from "vue";
 
 import TextField from "@/components/atoms/TextField.vue";
 import TextFieldOrange from "@/components/atoms/TextFieldOrange.vue";
+import NumberField from "@/components/atoms/NumberField.vue";
 import PassField from "@/components/atoms/PassField.vue";
 import TextArea from "@/components/atoms/TextArea.vue";
 
 export type PropFormType = {
   id: number;
   label: string;
-  value: string;
+  option?: { min?: number; step?: number };
+  value: string | number;
   formType: string;
 };
 
@@ -30,6 +33,7 @@ export default defineComponent({
   components: {
     TextField,
     TextFieldOrange,
+    NumberField,
     PassField,
     TextArea,
   },
@@ -40,7 +44,7 @@ export default defineComponent({
     },
   },
   methods: {
-    changeValue(value: String, key: Number) {
+    changeValue(value: string | number, key: number) {
       this.$emit("change-value", value, key);
     },
   },

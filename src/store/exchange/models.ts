@@ -14,8 +14,8 @@ export type messageDataType = {
 }
 
 export interface IexchangeState {
-    selfProfileData: profileDataType | { [key: string]: string }; //キーはdefaultProfileと同じ
-    clientProfileData: profileDataType | { [key: string]: string }; //キーはdefaultProfileのキーとuid
+    selfProfileData: Partial<profileDataType>; //キーはdefaultProfileと同じ
+    clientProfileData: Partial<profileDataType>; //キーはdefaultProfileのキーとuid
 
     isShowingSinger: boolean;
     homeMixerList: profileDataType[];
@@ -23,6 +23,8 @@ export interface IexchangeState {
     clientList: profileDataType[];
     selectedUid: string;
     messageList: messageDataType[];
+
+    unsubscribe: () => void;
 }
 
 export class ExchangeState implements IexchangeState {
@@ -35,4 +37,6 @@ export class ExchangeState implements IexchangeState {
     clientList = []; //チャットのやりとりをする相手のリスト
     selectedUid = ""; //開いているチャット相手のUID
     messageList = []; //選択した相手とのチャットデータのリスト
+
+    unsubscribe = () => {}; //メッセージのリスナー処理
 }
