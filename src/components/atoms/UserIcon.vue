@@ -12,25 +12,16 @@ export default defineComponent({
   props: {
     icon: String, //アイコンのルート
   },
-  computed: {},
 });
 </script>
 
 <style lang="scss" scoped>
 .cropImg {
-  height: 120px;
-  height: 120px;
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
 }
 input {
   display: none;
 }
-// img{
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   margin: auto;
-// }
 </style>

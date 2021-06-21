@@ -8,7 +8,7 @@
       <div class="icon">
         <div class="icon-content">
           <div class="icon-content-crop">
-            <UserIcon :icon="cropImage" />
+            <UserIcon :icon="cropImage" class="icon-content-crop-detail" />
           </div>
         </div>
       </div>
@@ -46,10 +46,6 @@ import {
 } from "@/mixins/defaultProfileData";
 
 type DataType = {
-  uploadedImage: string;
-  targetWidth: number;
-  targetHeight: number;
-  filename: string;
   mixerFormData: IformData[];
   singerFormData: IformData[];
   whiteButtonsData: IButtonsData[];
@@ -57,11 +53,6 @@ type DataType = {
 
 export default defineComponent({
   name: "Edit",
-  beforeRouteLeave(to, form, next) {
-    (this as any).$store.dispatch("trimming/closeTrimming");
-    //コンポーネントから遷移する前にトリミングエリアを閉じる
-    next();
-  },
   components: {
     EditForm,
     CommonButton,
@@ -70,10 +61,6 @@ export default defineComponent({
   },
   data(): DataType {
     return {
-      uploadedImage: "",
-      targetWidth: 1,
-      targetHeight: 1,
-      filename: "",
       singerFormData: [
         //歌い手編集画面のデータ
         {
@@ -149,8 +136,11 @@ export default defineComponent({
   created() {
     this.setFormDataValue(); //初期はvuexの情報を表示
     (this as any).$store.dispatch("trimming/closeTrimming");
-  }, //トリミングエリアを閉じる
-
+  },
+  unmounted() {
+    (this as any).$store.dispatch("trimming/closeTrimming");
+    //コンポーネントから遷移する前にトリミングエリアを閉じる
+  },
   computed: {
     singerState(): boolean {
       //歌い手としてログインしているならtrue
@@ -165,19 +155,19 @@ export default defineComponent({
       const files = e.target.files || e.dataTransfer.files;
       (this as any).$store.dispatch("trimming/openTrimming"); //トリミングエリアの表示
       this.createImage(files[0]);
+      console.log(files);
     },
     //アップロードした画像を表示
     createImage(file: any) {
+      var uploadedImage: any = "";
       const reader = new FileReader();
       reader.onload = (e) => {
         //データの読み込みが正常に完了した時に発火
-        (this as any).uploadedImage = e.target!.result; //画像データそのもの
-        (this as any).$store.dispatch(
-          "trimming/updateImage",
-          this.uploadedImage
-        );
+        uploadedImage = e.target!.result; //画像データそのもの
+        (this as any).$store.dispatch("trimming/updateImage", uploadedImage);
       };
-      reader.readAsDataURL(file); //fileの内容を読み込み
+      reader.readAsDataURL(file); //fileの内容をbase64形式で読み込み
+      reader.onloadend  
     },
     setFormDataValue(): void {
       //formDataにvuexのプロフィール情報を入れる
@@ -222,8 +212,7 @@ export default defineComponent({
               editFormData
             );
             (this as any).$store.dispatch(
-              "trimming/updateCropImage",
-              (this as any).$store.state.trimming.cropImage
+              "trimming/updateCropImage"
             );
           }
         } else {
@@ -241,13 +230,13 @@ export default defineComponent({
               editFormData
             );
             (this as any).$store.dispatch(
-              "trimming/updateCropImage",
-              (this as any).$store.state.trimming.cropImage
+              "trimming/updateCropImage"
             );
           }
         }
       } else {
         this.setFormDataValue(); //フォームのデータをvuexの情報に戻す
+        (this as any).$store.dispatch("trimming/cancelUpdateImage");
       }
     },
   },
@@ -299,8 +288,12 @@ export default defineComponent({
 
 .icon-content-crop {
   height: 120px;
-  height: 120px;
+  width: 120px;
   border-radius: 50%;
+  &-detail {
+    height: 120px;
+    width: 120px;
+  }
 }
 
 label {

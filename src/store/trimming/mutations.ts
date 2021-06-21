@@ -19,7 +19,4 @@ export const mutations: MutationTree<ItrimmingState> = {
   setBeforeUpdateImage(state: ItrimmingState, payload: string): void {
     state.beforeUpdateImage = payload;
   },
-  setSelfIcon(state: ItrimmingState, payload: string): void { //自分のプロフィール情報の変更
-    state.cropImage = payload;
-  },
 };
