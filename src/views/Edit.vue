@@ -99,20 +99,22 @@ export default defineComponent({
         },
         {
           id: 4,
-          label: "料金",
-          value: "",
-          formType: "TextArea",
+          label: "料金（円）",
+          option: { min: 0, step: 100 },
+          value: 0,
+          formType: "NumberField",
         },
         {
           id: 5,
-          label: "納期",
-          value: "",
-          formType: "TextArea",
+          label: "納期（日以内）",
+          option: { min: 0 },
+          value: 0,
+          formType: "NumberField",
         },
       ],
       whiteButtonsData: [
         {
-          label: "完了",
+          label: "保存",
           id: 0,
         },
         {
@@ -122,7 +124,7 @@ export default defineComponent({
       ],
     };
   },
-  created() {
+  created() { //呼び出された直後
     this.setFormDataValue(); //初期はvuexの情報を表示
   },
   computed: {
@@ -149,10 +151,10 @@ export default defineComponent({
         }
       }
     },
-    changeSingerValue(value: string, key: number): void {
+    changeSingerValue(value: string | number, key: number): void {
       this.singerFormData[key - 1].value = value;
     },
-    changeMixerValue(value: string, key: number): void {
+    changeMixerValue(value: string | number, key: number): void {
       this.mixerFormData[key - 1].value = value;
     },
     clickButton(id: number): void {
@@ -174,15 +176,14 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-            console.log(editFormData[0].value);
           }
-        }else{
+        } else {
           if (
             editFormData[0].value == "" ||
             editFormData[1].value == "" ||
             editFormData[2].value == "" ||
-            editFormData[3].value == "" ||
-            editFormData[4].value == "" 
+            editFormData[3].value == NaN ||
+            editFormData[4].value == NaN
           ) {
             alert("全ての事項を記入してください。");
           } else {
@@ -190,7 +191,6 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-            console.log(editFormData[0].value);
           }
         }
       } else {

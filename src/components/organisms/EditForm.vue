@@ -27,7 +27,7 @@ export default defineComponent({
     formData: Array as PropType<IformData[]>, //編集画面のデータ
   },
   methods: {
-    changeValue(value: String, key: Number) {
+    changeValue(value: string | number, key: number) {
       (this as any).$emit("change-value", value, key);
     },
   },
