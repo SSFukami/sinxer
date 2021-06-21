@@ -229,6 +229,7 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
+
             (this as any).$store.dispatch("trimming/setSelfIcon");
           }
         }
