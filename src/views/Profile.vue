@@ -3,16 +3,9 @@
     <div class="confirm-header">
       <RequestHeader />
     </div>
-<<<<<<< HEAD
-    <div class="page-details">
-      <div class="left-blank"></div>
-      <div class="icon">
-        <div class="icon-content">
-=======
     <div class="page-contents">
       <div class="page-contents-left">
         <div class="icon">
->>>>>>> 99f471291405ea6a8901f0b939a60f3896e584ae
           <UserIcon />
         </div>
       </div>
@@ -41,14 +34,7 @@ import { defineComponent } from "vue";
 
 import UserIcon from "@/components/atoms/UserIcon.vue";
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
-<<<<<<< HEAD
-import WhiteButtonsSet, {
-  ButtonsSetType as IbuttonsList,
-} from "@/components/molecules/WhiteButtonsSet.vue";
 import RequestHeader from "@/components/layouts/RequestHeader.vue";
-=======
-import ConfirmHeader from "@/components/layouts/ConfirmHeader.vue";
->>>>>>> 99f471291405ea6a8901f0b939a60f3896e584ae
 
 type IprofileData = {
   //IprofileDataが型名
@@ -195,12 +181,6 @@ export default defineComponent({
 
 .page {
   background-color: $-primary-300;
-<<<<<<< HEAD
-  overflow-y: scroll;
-  &-details {
-    display: grid;
-    grid-template-columns: 1fr 3fr 11.9fr; //画面の左端が100pxになるように調節
-=======
   &-contents {
     width: 100%;
     max-width: 1020px;
@@ -208,29 +188,12 @@ export default defineComponent({
     display: flex;
     margin: 0 auto;
     padding: 24px;
->>>>>>> 99f471291405ea6a8901f0b939a60f3896e584ae
     overflow-y: scroll;
-
-<<<<<<< HEAD
-.left-blank {
-  margin: 0px;
-}
-.icon {
-  margin: 10px 0px 10px 10px;
-  &-content {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: $-primary-500;
-  }
-}
-=======
     &-left {
       width: 40%;
       display: flex;
       justify-content: flex-end;
       padding-right: 10%;
->>>>>>> 99f471291405ea6a8901f0b939a60f3896e584ae
 
       .icon {
         width: 120px;
@@ -257,18 +220,6 @@ export default defineComponent({
   }
 }
 
-<<<<<<< HEAD
-@media screen and (max-width: 735px) {
-  //スマホ用の描写
-  .profile{
-    margin-right:43px;//画面の両端の空白が同じサイズになるように調節
-  }
-}
-@media screen and (max-width: 1020px) and (min-width: 735px) {
-  //タブレット用の描写
-  .profile {
-    margin-right:60px;//画面の両端の空白が同じサイズになるように調節
-=======
 @media screen and (max-width: 380px) {
   //スマホ用の描写
   .page-contents {
@@ -317,7 +268,6 @@ export default defineComponent({
         }
       }
     }
->>>>>>> 99f471291405ea6a8901f0b939a60f3896e584ae
   }
 }
 </style>
