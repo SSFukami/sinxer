@@ -39,8 +39,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 input[type="number"] {
   font-size: 20px;
   width: 100%;

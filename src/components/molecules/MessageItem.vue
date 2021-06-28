@@ -46,8 +46,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .message-item {
   width: 100%;
   height:auto;

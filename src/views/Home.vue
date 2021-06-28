@@ -85,8 +85,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .page {
   &-wrapper {
     //背景をつけるためのdivクラス

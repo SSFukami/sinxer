@@ -58,8 +58,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scopped>
-@import "@/assets/scss/color.scss";
-
 .aside-wrapper {
   z-index: -1; //通常はページの裏側
   width: 100%;

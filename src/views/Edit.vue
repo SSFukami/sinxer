@@ -202,8 +202,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .page {
   display: grid;
   background-color: $-primary-300;

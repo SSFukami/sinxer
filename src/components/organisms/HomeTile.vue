@@ -41,8 +41,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .home-tile {
   min-width: 320px;
   max-width: 655px;
