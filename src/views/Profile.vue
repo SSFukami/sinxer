@@ -189,7 +189,6 @@ export default defineComponent({
     display: flex;
     margin: 0 auto;
     padding: 24px;
-    overflow-y: scroll;
 
     &-left {
       width: 40%;
@@ -204,6 +203,7 @@ export default defineComponent({
     }
 
     &-right {
+      overflow-y: scroll;
       flex: 1;
 
       .profile {

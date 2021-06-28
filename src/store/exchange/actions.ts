@@ -41,6 +41,9 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           for (let k in defaultProfile) {
             profileData[k] = userDoc?.[k];
           }
+        } else { //アカウント情報がない場合firebaseでログアウトさせる
+          context.dispatch("auth/signOut", null, { root: true });
+          alert("このメールアドレスでアカウント情報が取得できませんでした");
         }
       })
       .catch((error) => {

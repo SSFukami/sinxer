@@ -22,7 +22,7 @@ export default defineComponent({
   },
   computed: {
     innerValue: {
-      get(): String | undefined {
+      get(): string | undefined {
         return this.value;
       },
       set(value: string) {
@@ -34,7 +34,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
 
 input[type="password"] {
   font-size: 20px;

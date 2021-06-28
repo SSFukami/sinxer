@@ -36,22 +36,22 @@ export default defineComponent({
       asideMenuList: ASIDE_MENU_LIST, //メニューのデータがあるリスト
     };
   },
+  computed: {
+    setClassOpen(): string {
+      //サイドバーが開いた時のクラス
+      return (this as any).$store.state.common.isOpeningAside ? "open" : "";
+    },
+  },
   methods: {
     closeAside(): void {
       //サイドバーを閉じる処理
       (this as any).$store.dispatch("common/closeAside");
     },
-    setLogOutModal(label: string): void {
+    setLogOutModal(): void {
       //ログアウトモーダルを開く処理
       (this as any).$store.dispatch("modal/setModal", "ConfirmLogOut");
       //サイドバーを閉じる処理
       (this as any).$store.dispatch("common/closeAside");
-    },
-  },
-  computed: {
-    setClassOpen(): string {
-      //サイドバーが開いた時のクラス
-      return (this as any).$store.state.common.isOpeningAside ? "open" : "";
     },
   },
 });
