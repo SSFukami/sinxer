@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="confirm-header">
-      <ConfirmHeader />
+      <RequestHeader />
     </div>
     <div class="page-contents">
       <div class="page-contents-left">
@@ -34,7 +34,7 @@ import { defineComponent } from "vue";
 
 import UserIcon from "@/components/atoms/UserIcon.vue";
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
-import ConfirmHeader from "@/components/layouts/ConfirmHeader.vue";
+import RequestHeader from "@/components/layouts/RequestHeader.vue";
 
 type IprofileData = {
   //IprofileDataが型名
@@ -55,7 +55,7 @@ export default defineComponent({
   components: {
     CommonButtonWhite,
     UserIcon,
-    ConfirmHeader,
+    RequestHeader,
   },
   data(): DataType {
     return {
@@ -187,7 +187,6 @@ export default defineComponent({
     display: flex;
     margin: 0 auto;
     padding: 24px;
-
     &-left {
       width: 40%;
       display: flex;

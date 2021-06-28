@@ -11,7 +11,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ConfirmHeader",
+  name: "RequestHeader",
   methods: {
     transHome(): void {
       this.$router.push("/");

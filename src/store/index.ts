@@ -3,6 +3,7 @@ import { auth } from './auth/index';
 import { common } from './common/index';
 import { exchange } from './exchange/index';
 import { modal } from './modal/index';
+import { trimming } from './trimming/index';
 
 import createPersistedState from "vuex-persistedstate";
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({ //storeをmoduleに分割
     common,
     exchange,
     modal,
+    trimming,
   },
   plugins: [
     createPersistedState()

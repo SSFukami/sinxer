@@ -55,7 +55,6 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 });
-
 router.beforeResolve((to, from, next) => {
   //グローバルなルートの変更時
   if (to.name === 'Edit') { //編集画面に入るときはバリデート不必要
