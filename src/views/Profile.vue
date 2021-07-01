@@ -1,12 +1,12 @@
 <template>
   <div class="page">
     <div class="confirm-header">
-      <RequestHeader />
+      <RequestHeader @click-button="clickButton" :id="id"/>
     </div>
     <div class="page-contents">
       <div class="page-contents-left">
         <div class="icon">
-          <UserIcon />
+          <UserIcon :icon="mixerCropImage"/>
         </div>
       </div>
       <div class="page-contents-right" v-if="isShowingSinger">
@@ -45,6 +45,7 @@ type IprofileData = {
 };
 
 type DataType = {
+  id:Number;
   singerList: IprofileData[];
   mixerList: IprofileData[];
   backButtonLabel: string;
@@ -59,6 +60,7 @@ export default defineComponent({
   },
   data(): DataType {
     return {
+      id:0,
       singerList: [
         {
           id: 0,
@@ -132,6 +134,9 @@ export default defineComponent({
       //歌い手のプロフィールの場合true
       return (this as any).$store.state.exchange.isShowingSinger;
     },
+    mixerCropImage(): string {
+      return (this as any).$store.state.trimming.mixerCropImage;
+    },
   },
   methods: {
     setClientData(): void {
@@ -169,9 +174,10 @@ export default defineComponent({
         (this as any).$router.push("/message"); //ユーザーが歌い手ならメッセージ画面へ
       } else if (id === 0) {
         alert("Mix師の方はご依頼することはできません"); //Mix師向け
-      } else {
-        this.transBack(); //プロフィール画面を閉じる
-      }
+      } 
+      // else {
+      //   this.transBack(); //プロフィール画面を閉じる
+      // }
     },
   },
 });

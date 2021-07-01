@@ -2,7 +2,7 @@
   <div class="confirm-header">
     <div class="back-button">
       <button class="back" @click="transHome">戻る</button>
-      <button class="confirm" @click="transMessage">依頼する</button>
+      <button class="confirm" @click="clickButton">依頼する</button>
     </div>
   </div>
 </template>
@@ -12,19 +12,25 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "RequestHeader",
+  props: {
+    id: Number,
+  },
   methods: {
     transHome(): void {
       this.$router.push("/");
     },
-    transMessage(): void {
-      this.$router.push("/message");
+    // transMessage(): void {
+    //   // this.$router.push("/message");
+    //   this.$emit("click-button");
+    // },
+    clickButton(): void {
+      this.$emit("click-button",this.id);
     },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-
 .confirm-header {
   width: 100%;
   height: 50px;

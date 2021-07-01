@@ -2,8 +2,17 @@
   <div class="page">
     <div class="page-wrapper">
       <div class="home-header">
-        <SelectBox :value="searchTypeId" :data="searchTypeList" @change-value="changeSearchType" />
-        <SearchForm :searchWord="searchWord" :formData="searchTypeList[searchTypeId]" @change-value="changeSearchWord" @search-mixer="searchMixer" />
+        <SelectBox
+          :value="searchTypeId"
+          :data="searchTypeList"
+          @change-value="changeSearchType"
+        />
+        <SearchForm
+          :searchWord="searchWord"
+          :formData="searchTypeList[searchTypeId]"
+          @change-value="changeSearchWord"
+          @search-mixer="searchMixer"
+        />
       </div>
     </div>
     <div class="home-content">
@@ -11,6 +20,7 @@
         v-for="(data, index) in homeMixerList"
         :key="index"
         :data="data"
+        @click="getMixerIcon(index)"
       />
     </div>
   </div>
@@ -70,6 +80,9 @@ export default defineComponent({
     searchMixer(): void {
       //検索処理
       (this as any).$store.dispatch("exchange/searchMixer");
+    },
+    getMixerIcon(index: number): void {
+      (this as any).$store.dispatch("trimming/getMixerIcon",index);
     },
   },
 });
