@@ -19,6 +19,7 @@ export default defineComponent({
   },
   methods: {
     transHome(): void {
+      this.id = 1;
       this.$emit("click-button", this.id);
     },
     clickButton(): void {
