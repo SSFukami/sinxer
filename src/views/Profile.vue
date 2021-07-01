@@ -182,11 +182,11 @@ export default defineComponent({
   background-color: $-primary-300;
   &-contents {
     width: 100%;
-    max-width: 1020px;
     height: calc(100% - 50px);
     display: flex;
     margin: 0 auto;
     padding: 24px;
+    overflow-y: scroll;
     &-left {
       width: 40%;
       display: flex;
@@ -196,11 +196,13 @@ export default defineComponent({
       .icon {
         width: 120px;
         height: 120px;
+        position: sticky;
+        top: 0px;
       }
     }
 
     &-right {
-      overflow-y: scroll;
+      max-width: 600px;
       flex: 1;
 
       .profile {

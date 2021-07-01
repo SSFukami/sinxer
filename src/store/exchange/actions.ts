@@ -45,7 +45,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           }
         } else { //アカウント情報がない場合firebaseでログアウトさせる
           context.dispatch("auth/signOut", null, { root: true });
-          alert("このメールアドレスでアカウント情報が取得できませんでした");
         }
       })
       .catch((error) => {
