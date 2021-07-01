@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="confirm-header">
-      <RequestHeader @click-button="clickButton" :id="id"/>
+      <RequestHeader @click-button="clickButton"/>
     </div>
     <div class="page-contents">
       <div class="page-contents-left">
@@ -45,7 +45,6 @@ type IprofileData = {
 };
 
 type DataType = {
-  id:Number;
   singerList: IprofileData[];
   mixerList: IprofileData[];
   backButtonLabel: string;
@@ -60,7 +59,6 @@ export default defineComponent({
   },
   data(): DataType {
     return {
-      id:0,
       singerList: [
         {
           id: 0,
@@ -175,9 +173,9 @@ export default defineComponent({
       } else if (id === 0) {
         alert("Mix師の方はご依頼することはできません"); //Mix師向け
       } 
-      // else {
-      //   this.transBack(); //プロフィール画面を閉じる
-      // }
+      else {
+        this.transBack(); //プロフィール画面を閉じる
+      }
     },
   },
 });
