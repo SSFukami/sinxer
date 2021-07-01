@@ -1,7 +1,7 @@
 <template>
   <div :class="['user-tab', setClassSelected]" @click="clickTab">
     <div class="icon">
-      <UserIcon />
+      <UserIcon @click="clickIcon" />
     </div>
     <div class="name">{{ data.name }}</div>
   </div>
@@ -37,8 +37,11 @@ export default defineComponent({
     },
   },
   methods: {
-    clickTab(): void {
+    clickTab(): void { //クリックした人とのメッセージを表示
       this.$emit("select-client", this.data);
+    },
+    clickIcon(): void { //クリックした人のプロフィールを表示
+      this.$emit("show-profile", this.data.uid);
     },
   },
 });

@@ -15,6 +15,7 @@
           :data="data"
           :selected="data.uid === selectedUid"
           @select-client="selectClient"
+          @show-profile="showProfile"
         />
       </div>
     </div>
@@ -26,6 +27,7 @@
           :senderId="item.uid"
           :content="item.content"
           :clientId="selectedUid"
+          @show-profile="showProfile"
         />
       </div>
       <div class="message-content-nobody" v-else>まだ話し相手がいません</div>
@@ -128,6 +130,9 @@ export default defineComponent({
       //ユーザータブをクリック時の処理
       (this as any).$store.commit("exchange/setSelectedUid", data.uid); //どの相手を選択したかvuexに保存
       (this as any).$store.dispatch("exchange/setMessageData", data.uid); //選択した相手とのチャット内容をdbから取得
+    },
+    showProfile(clientUid: string): void { //アイコンクリック時、プロフィール表示
+      (this as any).$store.dispatch("exchange/setClientProfile", clientUid); //プロフィール情報取得後、プロフィール画面へ
     },
     sendMessage(): void {
       //メッセージをdbに送信する処理

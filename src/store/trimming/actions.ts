@@ -4,10 +4,9 @@ import { RootState } from "../RootState";
 
 import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/firestore";
+import "firebase/storage";
 
 export const actions: ActionTree<ItrimmingState, RootState> = {
-
   openTrimming({ commit }): void {
     commit("setTrimmingState", true);
   },
@@ -23,11 +22,11 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
   async setSelfIcon(context): Promise<void> { //自分のアイコンのプロフィール情報取得してvuexに
     const userUid: string = context.rootGetters["auth/getUserUid"];
     //ストレージのルートのリファレンスを取得
-    let storageRef: any = firebase.storage().ref();
+    const storageRef: any = firebase.storage().ref();
     //ストレージのルートにあるuserUid+'icon.png'のリファレンスを取得   
-    let uploadRef: any = storageRef.child(userUid + 'icon.png');
+    const uploadRef: any = storageRef.child(userUid + 'icon.png');
 
-    if (uploadRef != null) {//アイコンを登録してない人対策
+    if (uploadRef != null) { //アイコンを登録してない人対策
       uploadRef.getDownloadURL().then((url: any) => {
         context.commit("setCropImage", url);
       });
@@ -38,8 +37,8 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
   async updateCropImage(context): Promise<void> {//アイコンの更新処理
     const userUid: string = context.rootGetters["auth/getUserUid"];
     //ストレージへアップロードするファイルのパスを生成する
-    let storageRef = firebase.storage().ref();
-    let uploadRef = storageRef.child(userUid + 'icon.png');
+    const storageRef = firebase.storage().ref();
+    const uploadRef = storageRef.child(userUid + 'icon.png');
 
     //base64形式の画像保存方法
     uploadRef.putString(context.state.cropImage, 'data_url').then(function () {
