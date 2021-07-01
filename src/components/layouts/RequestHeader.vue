@@ -12,18 +12,12 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "RequestHeader",
-  data(): any {
-    return {
-      id: 0,
-    };
-  },
   methods: {
     transHome(): void {
-      this.id = 1;
-      this.$emit("click-button", this.id);
+      this.$emit("click-button", 1);
     },
     clickButton(): void {
-      this.$emit("click-button", this.id);
+      this.$emit("click-button", 0);
     },
   },
 });
