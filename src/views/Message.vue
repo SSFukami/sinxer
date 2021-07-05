@@ -98,6 +98,7 @@ export default defineComponent({
     filteredClientList(): profileDataType[] {
       //検索後のチャット相手のリスト
       const clientList = (this as any).$store.state.exchange.clientList; //チャット相手のリスト
+      // console.log(clientList);
       const word = this.searchWord;
       const filteredList = clientList.filter((client: profileDataType) => {
         const result: number = client.name.indexOf(word); //ワードが一致した最初のインデックス

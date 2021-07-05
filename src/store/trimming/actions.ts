@@ -25,15 +25,24 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
     //ストレージのルートのリファレンスを取得
     let storageRef: any = firebase.storage().ref();
     //ストレージのルートにあるuserUid+'icon.png'のリファレンスを取得   
-    let uploadRef: any = storageRef.child(userUid + 'icon.png');
+    let uploadRef: any | undefined = storageRef.child(userUid + 'icon.png');
 
-    if (uploadRef != null) {//アイコンを登録してない人対策
+    let basicIconRef: any = firebase.storage().ref('basic_icon.png');
+
+    await firebase.storage().ref(userUid + 'icon.png').getDownloadURL()
+    .then(() => { //uploadRefがstorageに存在する(=アイコン登録をしたことがある)時
+      console.log("Found it. Do whatever")
       uploadRef.getDownloadURL().then((url: any) => {
-        context.commit("setCropImage", url);
+        context.commit("setCropImage", url); 
       });
-    } else { //キャンセルボタンを押した時アイコンを登録してない人にはアイコンを表示しないようにする
-      context.commit("setCropImage", "");
-    }
+    })
+      .catch(() => {
+        basicIconRef.getDownloadURL().then(() =>{
+          firebase.storage().ref('basic_icon.png').getDownloadURL().then((url:any)  =>{
+            context.commit("setCropImage", url);
+          })
+        })
+      })
   },
   async updateCropImage(context): Promise<void> {//アイコンの更新処理
     const userUid: string = context.rootGetters["auth/getUserUid"];
@@ -46,7 +55,23 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
       console.log('Uploaded a data_url string!');
     });
   },
-  error({ commit }, payload) {
-    commit("setErrorMessage", payload);
+  async getMixerIcon(context,payload): Promise<void>{//ミックス師のアイコン表示処理
+    const homeMixerUidList: any = context.rootState.exchange.homeMixerUidList;
+
+    let storageRef: any = firebase.storage().ref();
+
+    let uploadRef: any | undefined = storageRef.child(homeMixerUidList[payload] + 'icon.png');
+
+    let basicIconRef: any = firebase.storage().ref('basic_icon.png');
+
+    await uploadRef.getDownloadURL().then((url: any) => {
+      context.commit("setMixerCropImage", url);
+    }).catch(() => {
+      basicIconRef.getDownloadURL().then(() =>{
+        firebase.storage().ref('basic_icon.png').getDownloadURL().then((url:any)  =>{
+          context.commit("setMixerCropImage", url);
+        })
+      })
+    });
   },
 };
