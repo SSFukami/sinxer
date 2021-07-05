@@ -20,6 +20,7 @@
         v-for="(data, index) in homeMixerList"
         :key="index"
         :data="data"
+        @click="getMixerIcon(index)"
       />
     </div>
   </div>
@@ -79,6 +80,9 @@ export default defineComponent({
     searchMixer(): void {
       //検索処理
       (this as any).$store.dispatch("exchange/searchMixer");
+    },
+    getMixerIcon(index: number): void {
+      (this as any).$store.dispatch("trimming/getMixerIcon",index);
     },
   },
 });

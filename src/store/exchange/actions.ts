@@ -100,11 +100,15 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     const field: string = getSortField();
     const random: number = Math.random();
     const mixerList: Partial<ImixerData>[] = [];
+    let mixerUidList:string[] = new Array();
     if (random < 0.5) { //半分の確率
       await firebase.firestore().collection("mixers").orderBy(field).limit(12).get() //上から12人分取得
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             mixerList.push(doc.data());
+            const mixerUid = doc.data().uid;
+            // console.log(mixerUidList);
+            mixerUidList.push(mixerUid);
           });
         })
         .catch((error) => {
@@ -115,6 +119,9 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             mixerList.push(doc.data());
+            const mixerUid = doc.data().uid;
+            // console.log(mixerUidList);
+            mixerUidList.push(mixerUid);
           });
         })
         .catch((error) => {
@@ -123,6 +130,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     }
 
     commit("setHomeMixerList", mixerList); //vuexに保存
+    commit("getMixerUidList", mixerUidList);
   },
   async searchMixer({ commit, rootState }): Promise<void> { //検索にヒットしたMixerのデータ取得
     const searchWord = rootState.common.searchWord;

@@ -1,7 +1,7 @@
 <template>
   <div :class="['user-tab', setClassSelected]" @click="clickTab">
     <div class="icon">
-      <UserIcon @click="clickIcon" />
+      <UserIcon @click="clickIcon" :icon="icon" />
     </div>
     <div class="name">{{ data.name }}</div>
   </div>
@@ -29,6 +29,7 @@ export default defineComponent({
       type: Boolean,
       required: true,
     },
+    icon: String,
   },
   computed: {
     setClassSelected(): string {

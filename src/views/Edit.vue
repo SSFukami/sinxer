@@ -135,7 +135,8 @@ export default defineComponent({
       ],
     };
   },
-  created() { //呼び出された直後
+  created() {
+    //呼び出された直後
     this.setFormDataValue(); //初期はvuexの情報を表示
     (this as any).$store.dispatch("trimming/closeTrimming");
   },
@@ -229,13 +230,12 @@ export default defineComponent({
               "exchange/updateProfile",
               editFormData
             );
-
-            (this as any).$store.dispatch("trimming/setSelfIcon");
+            (this as any).$store.dispatch("trimming/updateCropImage");
           }
         }
       } else {
         this.setFormDataValue(); //フォームのデータをvuexの情報に戻す
-        (this as any).$store.dispatch("trimming/cancelUpdateImage");
+        (this as any).$store.dispatch("trimming/setSelfIcon");
       }
     },
   },
@@ -245,8 +245,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 .add-photo {
   z-index: 1;
-  margin: 135px 0px 0px 53px;
+  margin: 120px 0px 0px 38px;
+  padding: 15px;
+  border-radius: 50%;
   position: absolute;
+  &:hover{
+    background:rgba(236, 225, 225, 0.5);
+  }
 }
 .add-file {
   z-index: 0;

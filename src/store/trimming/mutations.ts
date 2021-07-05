@@ -16,4 +16,7 @@ export const mutations: MutationTree<ItrimmingState> = {
   setCropImage(state: ItrimmingState, payload: string): void {
     state.cropImage = payload;
   },
+  setMixerCropImage(state: ItrimmingState, payload: string): void {
+    state.mixerCropImage = payload;
+  },
 };

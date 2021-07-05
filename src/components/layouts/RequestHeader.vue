@@ -2,7 +2,7 @@
   <div class="confirm-header">
     <div class="back-button">
       <button class="back" @click="transHome">戻る</button>
-      <button class="confirm" @click="transMessage">依頼する</button>
+      <button class="confirm" @click="clickButton">依頼する</button>
     </div>
   </div>
 </template>
@@ -14,10 +14,10 @@ export default defineComponent({
   name: "RequestHeader",
   methods: {
     transHome(): void {
-      this.$router.push("/");
+      this.$emit("click-button", 1);
     },
-    transMessage(): void {
-      this.$router.push("/message");
+    clickButton(): void {
+      this.$emit("click-button", 0);
     },
   },
 });

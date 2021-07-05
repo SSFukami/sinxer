@@ -1,7 +1,7 @@
 <template>
   <div class="home-tile" @click="showProfile">
     <div class="icon">
-      <UserIcon />
+      <UserIcon :icon="icon"/>
     </div>
     <div class="name">
       <div class="name-content">{{ data.name }}</div>
@@ -31,6 +31,7 @@ export default defineComponent({
       type: Object as PropType<ImixerData>,
       required: true,
     },
+    icon:String,
   },
   methods: {
     showProfile(): void {
