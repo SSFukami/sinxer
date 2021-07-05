@@ -68,7 +68,7 @@ export default defineComponent({
         },
         {
           id: 1,
-          keyName: "content",
+          keyName: "detail",
           label: "自己紹介",
           value: "",
         },
@@ -122,6 +122,9 @@ export default defineComponent({
   },
   created() {
     this.setClientData(); //初期はvuexの情報を表示
+  },
+  unmounted() {
+    (this as any).$store.commit("exchange/setIsShowingSinger", false); //mix師のプロフィールの表示に戻す
   },
   computed: {
     isSinger(): boolean {
