@@ -68,7 +68,7 @@ export default defineComponent({
         },
         {
           id: 1,
-          keyName: "content",
+          keyName: "detail",
           label: "自己紹介",
           value: "",
         },
@@ -122,6 +122,9 @@ export default defineComponent({
   },
   created() {
     this.setClientData(); //初期はvuexの情報を表示
+  },
+  unmounted() {
+    (this as any).$store.commit("exchange/setIsShowingSinger", false); //mix師のプロフィールの表示に戻す
   },
   computed: {
     isSinger(): boolean {
@@ -182,12 +185,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 .page {
   background-color: $-primary-300;
   &-contents {
     width: 100%;
-    max-width: 1020px;
     height: calc(100% - 50px);
     display: flex;
     margin: 0 auto;
@@ -202,10 +203,13 @@ export default defineComponent({
       .icon {
         width: 120px;
         height: 120px;
+        position: sticky;
+        top: 0px;
       }
     }
 
     &-right {
+      max-width: 600px;
       flex: 1;
 
       .profile {

@@ -43,8 +43,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .header-label {
   font-size: 18px;
   font-weight: bold;

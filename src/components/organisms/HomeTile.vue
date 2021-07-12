@@ -35,15 +35,13 @@ export default defineComponent({
   },
   methods: {
     showProfile(): void {
-      (this as any).$store.dispatch("exchange/setClientProfile", this.data.uid); //プロフィール情報取得処理
+      (this as any).$store.dispatch("exchange/setClientProfile", this.data.uid); //プロフィール情報取得後、プロフィール画面へ
     },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .home-tile {
   min-width: 320px;
   max-width: 655px;

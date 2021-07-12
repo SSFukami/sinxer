@@ -15,8 +15,14 @@ export const actions: ActionTree<IcommonState, RootState> = {
     const searchWord = state.searchWord;
     if (typeof searchWord === "string" && payload !== 0) { //対象が名前から名前以外になった場合
       commit("setSearchWord", 0); //数字の初期化
-    } else if (typeof searchWord === "number" && payload === 0) {//対象が名前以外から名前になった場合
-      commit("setSearchWord", ""); //文字列に初期化
+    } else if (typeof searchWord === "number") {
+
+      if (payload === 0) { //対象が名前以外から名前になった場合
+        commit("setSearchWord", ""); //文字列に初期化
+      } else if (searchWord % 100 !== 0 && payload <= 2) { //対象が金額になった場合
+        commit("setSearchWord", 0); //数字の初期化
+      }
+
     }
   },
   error({ commit }, payload) {

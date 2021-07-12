@@ -4,10 +4,9 @@ import { RootState } from "../RootState";
 
 import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/firestore";
+import "firebase/storage";
 
 export const actions: ActionTree<ItrimmingState, RootState> = {
-
   openTrimming({ commit }): void {
     commit("setTrimmingState", true);
   },
@@ -23,22 +22,22 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
   async setSelfIcon(context): Promise<void> { //自分のアイコンのプロフィール情報取得してvuexに
     const userUid: string = context.rootGetters["auth/getUserUid"];
     //ストレージのルートのリファレンスを取得
-    let storageRef: any = firebase.storage().ref();
+    const storageRef: any = firebase.storage().ref();
     //ストレージのルートにあるuserUid+'icon.png'のリファレンスを取得   
-    let uploadRef: any | undefined = storageRef.child(userUid + 'icon.png');
+    const uploadRef: any | undefined = storageRef.child(userUid + 'icon.png');
 
-    let basicIconRef: any = firebase.storage().ref('basic_icon.png');
+    const basicIconRef: any = firebase.storage().ref('basic_icon.png');
 
     await firebase.storage().ref(userUid + 'icon.png').getDownloadURL()
-    .then(() => { //uploadRefがstorageに存在する(=アイコン登録をしたことがある)時
-      console.log("Found it. Do whatever")
-      uploadRef.getDownloadURL().then((url: any) => {
-        context.commit("setCropImage", url); 
-      });
-    })
+      .then(() => { //uploadRefがstorageに存在する(=アイコン登録をしたことがある)時
+        console.log("Found it. Do whatever")
+        uploadRef.getDownloadURL().then((url: any) => {
+          context.commit("setCropImage", url);
+        });
+      })
       .catch(() => {
-        basicIconRef.getDownloadURL().then(() =>{
-          firebase.storage().ref('basic_icon.png').getDownloadURL().then((url:any)  =>{
+        basicIconRef.getDownloadURL().then(() => {
+          firebase.storage().ref('basic_icon.png').getDownloadURL().then((url: any) => {
             context.commit("setCropImage", url);
           })
         })
@@ -47,28 +46,28 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
   async updateCropImage(context): Promise<void> {//アイコンの更新処理
     const userUid: string = context.rootGetters["auth/getUserUid"];
     //ストレージへアップロードするファイルのパスを生成する
-    let storageRef = firebase.storage().ref();
-    let uploadRef = storageRef.child(userUid + 'icon.png');
+    const storageRef = firebase.storage().ref();
+    const uploadRef = storageRef.child(userUid + 'icon.png');
 
     //base64形式の画像保存方法
     uploadRef.putString(context.state.cropImage, 'data_url').then(function () {
       console.log('Uploaded a data_url string!');
     });
   },
-  async getMixerIcon(context,payload): Promise<void>{//ミックス師のアイコン表示処理
+  async getMixerIcon(context, payload): Promise<void> {//ミックス師のアイコン表示処理
     const homeMixerUidList: any = context.rootState.exchange.homeMixerUidList;
 
-    let storageRef: any = firebase.storage().ref();
+    const storageRef: any = firebase.storage().ref();
 
-    let uploadRef: any | undefined = storageRef.child(homeMixerUidList[payload] + 'icon.png');
+    const uploadRef: any | undefined = storageRef.child(homeMixerUidList[payload] + 'icon.png');
 
-    let basicIconRef: any = firebase.storage().ref('basic_icon.png');
+    const basicIconRef: any = firebase.storage().ref('basic_icon.png');
 
     await uploadRef.getDownloadURL().then((url: any) => {
       context.commit("setMixerCropImage", url);
     }).catch(() => {
-      basicIconRef.getDownloadURL().then(() =>{
-        firebase.storage().ref('basic_icon.png').getDownloadURL().then((url:any)  =>{
+      basicIconRef.getDownloadURL().then(() => {
+        firebase.storage().ref('basic_icon.png').getDownloadURL().then((url: any) => {
           context.commit("setMixerCropImage", url);
         })
       })

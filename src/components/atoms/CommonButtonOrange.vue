@@ -24,8 +24,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 button {
   width: 100%;
   height: 32px;

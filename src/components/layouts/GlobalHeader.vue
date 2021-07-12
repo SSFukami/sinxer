@@ -57,8 +57,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .global-header {
   position: fixed;
   top: 0;
