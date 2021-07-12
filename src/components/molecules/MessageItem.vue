@@ -1,7 +1,10 @@
 <template>
   <div :class="['message-item', setClassSelf]">
-    <div class="user-icon">
-      <UserIcon />
+    <div class="user-icon" v-if="selfOrClient">
+      <UserIcon :icon="selfIcon" />
+    </div>
+    <div class="user-icon" v-else>
+      <UserIcon :icon="clientIcon"/>
     </div>
     <div class="message-body">{{ content }}</div>
     <!-- アイコン入れ替え用の空のdiv -->
@@ -16,7 +19,7 @@ import UserIcon from "@/components/atoms/UserIcon.vue";
 
 export default defineComponent({
   name: "MessageItem",
-  components:{
+  components: {
     UserIcon,
   },
   props: {
@@ -41,6 +44,15 @@ export default defineComponent({
       //書いた人が自分ならクラス付与
       return this.senderId !== this.clientId ? "self" : "";
     },
+    selfIcon(): string {
+      return (this as any).$store.state.trimming.selfIcon;
+    },
+    clientIcon(): string {
+      return (this as any).$store.state.trimming.clientIcon;
+    },
+    selfOrClient(): any {
+      return this.senderId !== this.clientId ? true : false;
+    },
   },
 });
 </script>
@@ -50,7 +62,7 @@ export default defineComponent({
 
 .message-item {
   width: 100%;
-  height:auto;
+  height: auto;
   display: grid;
   grid-template-columns: 48px 1fr 48px;
   column-gap: 8px;

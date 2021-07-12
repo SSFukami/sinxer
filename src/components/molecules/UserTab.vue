@@ -31,6 +31,9 @@ export default defineComponent({
     },
     icon:String,
   },
+  created(){
+    // this.searchMixerIcon(this.data.uid!);
+  },
   computed: {
     setClassSelected(): string {
       //選択されたタブにクラス付与
@@ -40,13 +43,18 @@ export default defineComponent({
   methods: {
     clickTab(): void {
       this.$emit("select-client", this.data);
+      (this as any).$store.dispatch("trimming/searchClientIcon", this.data.uid);
+      (this as any).$store.dispatch("trimming/searchSelfIcon");
     },
+    // searchMixerIcon(uid:string){
+    //   (this as any).$store.dispatch("trimming/searchMixerIcon",uid);
+    //   console.log(uid);
+    // }
   },
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
 
 .user-tab {
   width: 100%;
@@ -60,9 +68,8 @@ export default defineComponent({
   .icon {
     width: 52px;
     height: 52px;
-    background: $-primary-600;
     border-radius: 50%;
-    margin: 2px 0px 0px 2px; //上下左右中央揃え用
+    margin: 1px 0px 0px 2px; //上下左右中央揃え用
   }
 
   .name {

@@ -32,5 +32,8 @@ export const mutations: MutationTree<IexchangeState> = {
   },
   getMixerUidList(state: IexchangeState, payload:string[]): void {
     state.homeMixerUidList = payload;
+  },
+  getClientUidList(state: IexchangeState, payload:string[]): void {
+    state.clientUidList = payload;
   }
 };

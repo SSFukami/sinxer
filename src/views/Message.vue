@@ -14,6 +14,7 @@
           :key="index"
           :data="data"
           :selected="data.uid === selectedUid"
+          :icon="iconList[index]?.url"
           @select-client="selectClient"
         />
       </div>
@@ -50,6 +51,8 @@ import CommonButton from "@/components/atoms/CommonButton.vue";
 import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
 import MessageForm from "@/components/molecules/MessageForm.vue";
+
+import { ItrimmingState } from "@/store/trimming/models.ts";
 
 import { messageDataType, profileDataType } from "@/store/exchange/models";
 
@@ -98,7 +101,6 @@ export default defineComponent({
     filteredClientList(): profileDataType[] {
       //検索後のチャット相手のリスト
       const clientList = (this as any).$store.state.exchange.clientList; //チャット相手のリスト
-      // console.log(clientList);
       const word = this.searchWord;
       const filteredList = clientList.filter((client: profileDataType) => {
         const result: number = client.name.indexOf(word); //ワードが一致した最初のインデックス
@@ -114,6 +116,10 @@ export default defineComponent({
     messageDataList(): messageDataType[] {
       //チャット相手とのコメントリスト
       return (this as any).$store.state.exchange.messageList;
+    },
+    iconList(): ItrimmingState[] {
+      //ホームに表示するMix師のアイコンのリスト
+      return (this as any).$store.state.trimming.iconList;
     },
   },
   methods: {

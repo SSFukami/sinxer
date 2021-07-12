@@ -20,7 +20,8 @@
         v-for="(data, index) in homeMixerList"
         :key="index"
         :data="data"
-        @click="getMixerIcon(index)"
+        :icon="iconList[index]?.url"
+        @click="setMixerIcon(iconList[index]?.url)"
       />
     </div>
   </div>
@@ -32,6 +33,7 @@ import { defineComponent } from "vue";
 import SelectBox from "@/components/atoms/SelectBox.vue";
 import SearchForm from "@/components/molecules/SearchForm.vue";
 import HomeTile, { ImixerData } from "@/components/organisms/HomeTile.vue";
+import { ItrimmingState } from "@/store/trimming/models.ts";
 
 import { HOME_SEARCH_TYPE_LIST, IselectBoxList } from "@/mixins/selectBoxList";
 
@@ -67,6 +69,10 @@ export default defineComponent({
       //ホームに表示するMix師のリスト
       return (this as any).$store.state.exchange.homeMixerList;
     },
+    iconList(): ItrimmingState[] {
+      //ホームに表示するMix師のアイコンのリスト
+      return (this as any).$store.state.trimming.iconList;
+    },
   },
   methods: {
     changeSearchWord(value: string | number) {
@@ -81,16 +87,15 @@ export default defineComponent({
       //検索処理
       (this as any).$store.dispatch("exchange/searchMixer");
     },
-    getMixerIcon(index: number): void {
-      (this as any).$store.dispatch("trimming/getMixerIcon",index);
+    setMixerIcon(url: string){
+      //HomeTileに表示してあるアイコンをProfile画面にセット
+      (this as any).$store.dispatch("trimming/mixerProfileIcon",url);
     },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .page {
   &-wrapper {
     background-color: $-primary-400;

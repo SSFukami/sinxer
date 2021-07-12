@@ -22,6 +22,7 @@ export interface IexchangeState {
     homeMixerUidList: string[];
 
     clientList: profileDataType[];
+    clientUidList: string[];
     selectedUid: string;
     messageList: messageDataType[];
 
@@ -37,6 +38,7 @@ export class ExchangeState implements IexchangeState {
     homeMixerUidList = []; //ホームに表示するMix師のUidのリスト
 
     clientList = []; //チャットのやりとりをする相手のリスト
+    clientUidList = []; //ユーザータブに表示するMix師のUidのリスト
     selectedUid = ""; //開いているチャット相手のUID
     messageList = []; //選択した相手とのチャットデータのリスト
 
