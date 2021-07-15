@@ -40,8 +40,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           const userDoc: firebase.firestore.DocumentData | undefined = doc.data();
           for (let k in defaultProfile) {
             profileData[k] = userDoc?.[k];
-            // console.log(k);
-            // console.log(profileData[k]);
           }
         }
       })
@@ -129,7 +127,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     // console.log(mixerUidList);
     context.commit("setHomeMixerList", mixerList); //vuexに保存
     context.commit("getMixerUidList", mixerUidList);
-    context.dispatch("trimming/getMixerIcon",null,{root:true});
+    context.dispatch("trimming/getMixerIcon", null, { root: true });
   },
   async searchMixer({ commit, dispatch, rootState }): Promise<void> { //検索にヒットしたMixerのデータ取得
     const searchWord = rootState.common.searchWord;
@@ -150,10 +148,13 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           .catch((error) => {
             console.log("Error getting documents: ", error);
           });
+        //   console.log(mixerUidList);
+        // commit("getMixerUidList", mixerUidList);//一番最後のこの処理を書いたけど
         break;
       case 1: //料金の上限で検索
         if (typeof searchWord === "number") {
           mixerList = getHitMixer('fee', searchWord, '<');
+          mixerUidList = await getHitMixerUid('fee', searchWord, '<');
         } else {
           alert("数字を入力して検索する必要があります");
         }
@@ -161,6 +162,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       case 2: //料金の下限で検索
         if (typeof searchWord === "number") {
           mixerList = getHitMixer('fee', searchWord, '>');
+          mixerUidList = await getHitMixerUid('fee', searchWord, '>');
         } else {
           alert("数字を入力して検索する必要があります");
         }
@@ -168,6 +170,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       case 3: //納期の上限で検索
         if (typeof searchWord === "number") {
           mixerList = getHitMixer('deadline', searchWord, '<');
+          mixerUidList = await getHitMixerUid('deadline', searchWord, '<');
         } else {
           alert("数字を入力して検索する必要があります");
         }
@@ -175,13 +178,13 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       case 4: //納期の下限で検索
         if (typeof searchWord === "number") {
           mixerList = getHitMixer('deadline', searchWord, '>');
+          mixerUidList = await getHitMixerUid('deadline', searchWord, '>');
         } else {
           alert("数字を入力して検索する必要があります");
         }
         break;
     }
 
-    console.log(mixerList, searchType, searchWord);
     commit("setHomeMixerList", mixerList); //vuexに保存
     commit("getMixerUidList", mixerUidList);
     dispatch("trimming/getMixerIcon", null, { root: true });
@@ -219,8 +222,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       });
 
     context.commit("setClientList", clientList);
-    context.commit("getClientUidList",clientUidList);
-    context.dispatch("trimming/getClientIcon", null, {root : true});
+    context.commit("getClientUidList", clientUidList);
+    context.dispatch("trimming/getClientIcon", null, { root: true });
   },
   async setMessageData(context, payload: string): Promise<void> { //指定した相手とのチャットデータをdbから取得
     const userUid: string = context.rootGetters["auth/getUserUid"];
@@ -308,6 +311,20 @@ function getHitMixer(field: string, searchWord: number, type: '<' | '>'): Partia
     });
 
   return mixerList;
+}
+
+async function getHitMixerUid(field: string, searchWord: number, type: '<' | '>'): Promise<string[]> {
+  const mixerUidList: string[] = [];
+  await firebase.firestore().collection('mixers').where(field, type, searchWord).get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        mixerUidList.push(doc.data().uid);
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+  return mixerUidList;
 }
 
 function updateClientDoc(userDocRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>, profileData: { [key: string]: string }, userUid: string, clientJob: string): void { //顧客側のドキュメント下の更新

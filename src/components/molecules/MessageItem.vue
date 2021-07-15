@@ -1,10 +1,7 @@
 <template>
   <div :class="['message-item', setClassSelf]">
-    <div class="user-icon" v-if="selfOrClient">
-      <UserIcon :icon="selfIcon" />
-    </div>
-    <div class="user-icon" v-else>
-      <UserIcon :icon="clientIcon"/>
+    <div class="user-icon">
+      <UserIcon :icon="selfOrClientIcon" />
     </div>
     <div class="message-body">{{ content }}</div>
     <!-- アイコン入れ替え用の空のdiv -->
@@ -50,8 +47,8 @@ export default defineComponent({
     clientIcon(): string {
       return (this as any).$store.state.trimming.clientIcon;
     },
-    selfOrClient(): any {
-      return this.senderId !== this.clientId ? true : false;
+    selfOrClientIcon(): string {
+      return this.senderId !== this.clientId ? this.selfIcon : this.clientIcon;
     },
   },
 });

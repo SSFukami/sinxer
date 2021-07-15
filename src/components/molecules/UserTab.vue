@@ -31,9 +31,6 @@ export default defineComponent({
     },
     icon:String,
   },
-  created(){
-    // this.searchMixerIcon(this.data.uid!);
-  },
   computed: {
     setClassSelected(): string {
       //選択されたタブにクラス付与
@@ -43,13 +40,7 @@ export default defineComponent({
   methods: {
     clickTab(): void {
       this.$emit("select-client", this.data);
-      (this as any).$store.dispatch("trimming/searchClientIcon", this.data.uid);
-      (this as any).$store.dispatch("trimming/searchSelfIcon");
     },
-    // searchMixerIcon(uid:string){
-    //   (this as any).$store.dispatch("trimming/searchMixerIcon",uid);
-    //   console.log(uid);
-    // }
   },
 });
 </script>

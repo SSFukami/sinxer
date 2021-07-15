@@ -14,8 +14,9 @@
           :key="index"
           :data="data"
           :selected="data.uid === selectedUid"
-          :icon="iconList[index]?.url"
+          :icon="iconList[index]"
           @select-client="selectClient"
+          @click="clickTab(data.uid)"
         />
       </div>
     </div>
@@ -51,8 +52,6 @@ import CommonButton from "@/components/atoms/CommonButton.vue";
 import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
 import MessageForm from "@/components/molecules/MessageForm.vue";
-
-import { ItrimmingState } from "@/store/trimming/models.ts";
 
 import { messageDataType, profileDataType } from "@/store/exchange/models";
 
@@ -117,8 +116,8 @@ export default defineComponent({
       //チャット相手とのコメントリスト
       return (this as any).$store.state.exchange.messageList;
     },
-    iconList(): ItrimmingState[] {
-      //ホームに表示するMix師のアイコンのリスト
+    iconList(): string[] {
+      //ユーザータブに表示するMix師のアイコンのリスト
       return (this as any).$store.state.trimming.iconList;
     },
   },
@@ -140,6 +139,10 @@ export default defineComponent({
       //メッセージをdbに送信する処理
       (this as any).$store.dispatch("exchange/sendMessage", this.message);
       this.message = "";
+    },
+    clickTab(uid:string): void {
+      (this as any).$store.dispatch("trimming/searchClientIcon", uid);
+      (this as any).$store.dispatch("trimming/searchSelfIcon");
     },
   },
 });

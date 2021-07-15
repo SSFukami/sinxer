@@ -33,11 +33,6 @@ export default defineComponent({
     },
     icon: String,
   },
-  computed: {
-    mixerCropImage(): string {
-      return (this as any).$store.state.trimming.mixerCropImage;
-    },
-  },
   methods: {
     showProfile(): void {
       (this as any).$store.dispatch("exchange/setClientProfile", this.data.uid); //プロフィール情報取得処理

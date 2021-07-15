@@ -17,6 +17,7 @@ export const mutations: MutationTree<IexchangeState> = {
   },
   setHomeMixerList(state: IexchangeState, payload: profileDataType[]): void { //ホームに表示するMix師のリストの変更
     state.homeMixerList = payload;
+    // console.log(state.homeMixerList);
   },
   setClientList(state: IexchangeState, payload: profileDataType[]): void { //チャット相手のリストの変更
     state.clientList = payload;

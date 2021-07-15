@@ -19,8 +19,6 @@ export const actions: ActionTree<IauthState, RootState> = {
         dispatch("initUserDocument", { user: user.user, jobNumber: payload.jobNumber }); //作成後すぐにdbに追加
         await dispatch("setJobState", payload.jobNumber); //vuexに歌い手かmixerか保存
 
-        dispatch("trimming/createDefaultIcon", null ,{root: true});//デフォルトのアイコンを作成
-
         //成功したらモーダル閉じて編集画面へ
         dispatch("modal/closeModal", null, { root: true });
         router.push('/edit');

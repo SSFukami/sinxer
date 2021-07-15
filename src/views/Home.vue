@@ -20,8 +20,8 @@
         v-for="(data, index) in homeMixerList"
         :key="index"
         :data="data"
-        :icon="iconList[index]?.url"
-        @click="setMixerIcon(iconList[index]?.url)"
+        :icon="iconList[index]"
+        @click="setMixerIcon(iconList[index])"
       />
     </div>
   </div>
@@ -69,7 +69,7 @@ export default defineComponent({
       //ホームに表示するMix師のリスト
       return (this as any).$store.state.exchange.homeMixerList;
     },
-    iconList(): ItrimmingState[] {
+    iconList(): string[] {
       //ホームに表示するMix師のアイコンのリスト
       return (this as any).$store.state.trimming.iconList;
     },
@@ -89,7 +89,7 @@ export default defineComponent({
     },
     setMixerIcon(url: string){
       //HomeTileに表示してあるアイコンをProfile画面にセット
-      (this as any).$store.dispatch("trimming/mixerProfileIcon",url);
+      (this as any).$store.commit("trimming/setMixerProfileIcon",url);
     },
   },
 });
