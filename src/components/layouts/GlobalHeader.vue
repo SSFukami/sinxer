@@ -18,8 +18,8 @@
       </button>
     </div>
     <div class="auth-button" v-else>
-      <div class="letter">
-        ようこそ、{{ $store.state.exchange.selfProfileData.name }}さん！
+      <div class="header-icon">
+        <UserIcon :icon="selfIcon" />
       </div>
       <button class="auth-button-right" @click="setLogOutModal">
         ログアウト
@@ -32,11 +32,18 @@
 import { defineComponent } from "vue";
 
 import HeaderLogo from "@/components/atoms/HeaderLogo.vue";
+import UserIcon from "@/components/atoms/UserIcon.vue";
 
 export default defineComponent({
   name: "GlobalHeader",
   components: {
     HeaderLogo,
+    UserIcon,
+  },
+  computed: {
+    selfIcon(): string {
+      return (this as any).$store.state.trimming.storageSelfIcon; //自分のアイコン
+    },
   },
   methods: {
     openAside(): void {
@@ -48,7 +55,7 @@ export default defineComponent({
       (this as any).$store.commit("common/setLogInLabel", label); //新規登録かログインかを変更
       (this as any).$store.dispatch("modal/setModal", "LogInForm"); //モーダル開く
     },
-    setLogOutModal(label: string): void {
+    setLogOutModal(): void {
       //ログアウトモーダルを開く処理
       (this as any).$store.dispatch("modal/setModal", "ConfirmLogOut");
     },
@@ -92,6 +99,7 @@ export default defineComponent({
 }
 .auth-button {
   display: flex;
+  align-items: center;
   &-left {
     font-size: 15px;
     color: $-primary-100;
@@ -112,10 +120,10 @@ export default defineComponent({
     cursor: pointer;
   }
 
-  .letter {
-    font-size: 15px;
-    color: $-primary-100;
-    padding: 0px 8px;
+  .header-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
   }
 }
 </style>

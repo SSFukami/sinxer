@@ -51,7 +51,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         console.log(error);
       });
 
-    context.commit("setSelfProfile", profileData); //vuex更新
+      context.commit("setSelfProfile", profileData); //vuex更新
+      context.dispatch("trimming/setSelfIcon", null, { root: true }); //自分のアイコン情報を取得
   },
   async updateProfile(context, payload: IformData[]): Promise<void> { //dbのプロフィール情報更新処理
     const defaultProfile = context.rootState.auth.singerState ? DEFAULT_SINGER_DATA : DEFAULT_MIXER_DATA;
@@ -101,6 +102,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     const random: number = Math.random();
     const mixerList: Partial<ImixerData>[] = [];
     let mixerUidList: string[] = new Array();
+
     if (random < 0.5) { //半分の確率
       await firebase.firestore().collection("mixers").orderBy(field).limit(12).get() //上から12人分取得
         .then((querySnapshot) => {
@@ -178,8 +180,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       alert("数字を入力して検索してください");
     }
 
-
-    console.log(mixerList, searchType, searchWord);
     commit("setHomeMixerList", mixerList); //vuexに保存
   },
   async getHitMixer(context, payload: { field: string, searchWord: number, type: '<' | '>' }): Promise<Partial<ImixerData>[]> {

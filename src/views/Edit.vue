@@ -235,7 +235,7 @@ export default defineComponent({
         }
       } else {
         this.setFormDataValue(); //フォームのデータをvuexの情報に戻す
-        (this as any).$store.dispatch("trimming/setSelfIcon");
+        (this as any).$store.dispatch("trimming/undoChangedIcon"); //アイコンを戻す
       }
     },
   },

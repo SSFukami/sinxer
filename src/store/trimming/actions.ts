@@ -33,28 +33,38 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
         console.log("Found it. Do whatever")
         uploadRef.getDownloadURL().then((url: any) => {
           context.commit("setCropImage", url);
+          context.commit("setStorageSelfIcon", url);
         });
       })
       .catch(() => {
         basicIconRef.getDownloadURL().then(() => {
           firebase.storage().ref('basic_icon.png').getDownloadURL().then((url: any) => {
             context.commit("setCropImage", url);
-          })
-        })
-      })
+            context.commit("setStorageSelfIcon", url);
+          });
+        });
+      });
   },
-  async updateCropImage(context): Promise<void> {//アイコンの更新処理
+  async updateCropImage(context): Promise<void> { //アイコンの更新処理
+    const cropImage = context.state.cropImage;
+
     const userUid: string = context.rootGetters["auth/getUserUid"];
     //ストレージへアップロードするファイルのパスを生成する
     const storageRef = firebase.storage().ref();
     const uploadRef = storageRef.child(userUid + 'icon.png');
 
     //base64形式の画像保存方法
-    uploadRef.putString(context.state.cropImage, 'data_url').then(function () {
+    uploadRef.putString(cropImage, 'data_url').then(function () {
       console.log('Uploaded a data_url string!');
     });
+
+    context.commit("setStorageSelfIcon", cropImage); //データベース用を変更
   },
-  async getMixerIcon(context, payload): Promise<void> {//ミックス師のアイコン表示処理
+  undoChangedIcon({ state, commit }): void { //編集されたアイコンを元に戻す処理
+    const storageIcon = state.storageSelfIcon;
+    commit("setCropImage", storageIcon); //storageIconをコピー
+  },
+  async getMixerIcon(context, payload): Promise<void> { //ミックス師のアイコン表示処理
     const homeMixerUidList: any = context.rootState.exchange.homeMixerUidList;
 
     const storageRef: any = firebase.storage().ref();
@@ -69,8 +79,8 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
       basicIconRef.getDownloadURL().then(() => {
         firebase.storage().ref('basic_icon.png').getDownloadURL().then((url: any) => {
           context.commit("setMixerCropImage", url);
-        })
-      })
+        });
+      });
     });
   },
 };

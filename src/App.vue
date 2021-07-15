@@ -6,9 +6,7 @@
     </div>
     <GlobalAside />
     <Modal v-show="$store.state.modal.isOpening" />
-    <Trimming 
-    v-show="$store.state.trimming.isOpeningTrimming"
-    />
+    <Trimming v-show="$store.state.trimming.isOpeningTrimming" />
   </div>
 </template>
 
@@ -19,7 +17,7 @@ import GlobalHeader from "@/components/layouts/GlobalHeader.vue";
 import GlobalAside from "@/components/layouts/GlobalAside.vue";
 
 import Modal from "@/components/organisms/Modal/index.vue";
-import Trimming from "@/components/layouts/Trimming.vue"
+import Trimming from "@/components/layouts/Trimming.vue";
 
 export default defineComponent({
   name: "App",
@@ -27,11 +25,10 @@ export default defineComponent({
     GlobalHeader,
     GlobalAside,
     Modal,
-    Trimming 
+    Trimming,
   },
   created() {
     (this as any).$store.dispatch("exchange/setSelfProfile"); //自分のプロフィール情報を取得
-    (this as any).$store.dispatch("trimming/setSelfIcon"); //自分のアイコン情報を取得
     (this as any).$store.dispatch("auth/onAuthChanged"); //認証変化の検知
   },
   watch: {
