@@ -249,8 +249,8 @@ export default defineComponent({
   padding: 15px;
   border-radius: 50%;
   position: absolute;
-  &:hover{
-    background:rgba(236, 225, 225, 0.5);
+  &:hover {
+    background: rgba(236, 225, 225, 0.5);
   }
 }
 .add-file {

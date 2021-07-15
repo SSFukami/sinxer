@@ -135,8 +135,9 @@ export default defineComponent({
     showProfile(clientUid: string): void {
       //アイコンクリック時、プロフィール表示
       const isSinger: boolean = (this as any).$store.state.auth.singerState;
-      if (!isSinger) { //mix師なら
-       (this as any).$store.commit("exchange/setIsShowingSinger", true); //歌い手のプロフィールを出せるように変更
+      if (!isSinger) {
+        //mix師なら
+        (this as any).$store.commit("exchange/setIsShowingSinger", true); //歌い手のプロフィールを出せるように変更
       }
 
       (this as any).$store.dispatch("exchange/setClientProfile", clientUid); //プロフィール情報取得後、プロフィール画面へ

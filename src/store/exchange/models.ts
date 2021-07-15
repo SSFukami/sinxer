@@ -40,5 +40,5 @@ export class ExchangeState implements IexchangeState {
     selectedUid = ""; //開いているチャット相手のUID
     messageList = []; //選択した相手とのチャットデータのリスト
 
-    unsubscribe = () => {}; //メッセージのリスナー処理
+    unsubscribe = () => { }; //メッセージのリスナー処理
 }

@@ -7,7 +7,7 @@
       :option="formData.option"
       @change-value="changeValue"
     />
-    <CommonButton label="検索" @click-event="searchMixer"/>
+    <CommonButton label="検索" @click-event="searchMixer" />
   </div>
 </template>
 
@@ -28,17 +28,20 @@ export default defineComponent({
     CommonButton,
   },
   props: {
-    searchWord: { //検索ワード
+    searchWord: {
+      //検索ワード
       type: [String, Number],
       required: true,
     },
-    formData: { //検索ボックスの種類
+    formData: {
+      //検索ボックスの種類
       type: Object as PropType<IselectBoxList>,
       required: true,
     },
   },
   methods: {
-    changeValue(value: string | number, key: number) { //検索ワードを文字列にして変更
+    changeValue(value: string | number, key: number) {
+      //検索ワードを文字列にして変更
       this.$emit("change-value", value);
     },
     searchMixer(): void {

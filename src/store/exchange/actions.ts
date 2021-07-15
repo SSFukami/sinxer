@@ -51,8 +51,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         console.log(error);
       });
 
-      context.commit("setSelfProfile", profileData); //vuex更新
-      context.dispatch("trimming/setSelfIcon", null, { root: true }); //自分のアイコン情報を取得
+    context.commit("setSelfProfile", profileData); //vuex更新
+    context.dispatch("trimming/setSelfIcon", null, { root: true }); //自分のアイコン情報を取得
   },
   async updateProfile(context, payload: IformData[]): Promise<void> { //dbのプロフィール情報更新処理
     const defaultProfile = context.rootState.auth.singerState ? DEFAULT_SINGER_DATA : DEFAULT_MIXER_DATA;

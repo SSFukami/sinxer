@@ -38,10 +38,12 @@ export default defineComponent({
     },
   },
   methods: {
-    clickTab(): void { //クリックした人とのメッセージを表示
+    clickTab(): void {
+      //クリックした人とのメッセージを表示
       this.$emit("select-client", this.data);
     },
-    clickIcon(): void { //クリックした人のプロフィールを表示
+    clickIcon(): void {
+      //クリックした人のプロフィールを表示
       this.$emit("show-profile", this.data.uid);
     },
   },

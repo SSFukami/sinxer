@@ -1,12 +1,12 @@
 <template>
   <div class="page">
     <div class="confirm-header">
-      <RequestHeader @click-button="clickButton"/>
+      <RequestHeader @click-button="clickButton" />
     </div>
     <div class="page-contents">
       <div class="page-contents-left">
         <div class="icon">
-          <UserIcon :icon="mixerCropImage"/>
+          <UserIcon :icon="mixerCropImage" />
         </div>
       </div>
       <div class="page-contents-right" v-if="isShowingSinger">
@@ -175,8 +175,7 @@ export default defineComponent({
         (this as any).$router.push("/message"); //ユーザーが歌い手ならメッセージ画面へ
       } else if (id === 0) {
         alert("Mix師の方はご依頼することはできません"); //Mix師向け
-      } 
-      else {
+      } else {
         this.transBack(); //プロフィール画面を閉じる
       }
     },

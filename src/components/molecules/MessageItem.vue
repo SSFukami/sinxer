@@ -16,7 +16,7 @@ import UserIcon from "@/components/atoms/UserIcon.vue";
 
 export default defineComponent({
   name: "MessageItem",
-  components:{
+  components: {
     UserIcon,
   },
   props: {
@@ -43,8 +43,10 @@ export default defineComponent({
     },
   },
   methods: {
-    clickIcon(): void { //アイコンクリック時に相手のプロフィールを表示
-      if (this.senderId === this.clientId) { //相手のアイコンかどうか
+    clickIcon(): void {
+      //アイコンクリック時に相手のプロフィールを表示
+      if (this.senderId === this.clientId) {
+        //相手のアイコンかどうか
         this.$emit("show-profile", this.clientId);
       }
     },
@@ -55,7 +57,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .message-item {
   width: 100%;
-  height:auto;
+  height: auto;
   display: grid;
   grid-template-columns: 48px 1fr 48px;
   column-gap: 8px;

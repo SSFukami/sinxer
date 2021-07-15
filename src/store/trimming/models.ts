@@ -3,7 +3,7 @@ export interface ItrimmingState {
   uploadedImage: string;
   cropImage: string;
   storageSelfIcon: string;
-  mixerCropImage:string;
+  mixerCropImage: string;
 }
 
 export class TrimmingState implements ItrimmingState {

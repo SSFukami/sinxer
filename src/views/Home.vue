@@ -82,7 +82,7 @@ export default defineComponent({
       (this as any).$store.dispatch("exchange/searchMixer");
     },
     getMixerIcon(index: number): void {
-      (this as any).$store.dispatch("trimming/getMixerIcon",index);
+      (this as any).$store.dispatch("trimming/getMixerIcon", index);
     },
   },
 });
