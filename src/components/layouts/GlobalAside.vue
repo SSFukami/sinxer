@@ -36,30 +36,28 @@ export default defineComponent({
       asideMenuList: ASIDE_MENU_LIST, //メニューのデータがあるリスト
     };
   },
-  methods: {
-    closeAside(): void {
-      //サイドバーを閉じる処理
-      (this as any).$store.dispatch("common/closeAside");
-    },
-    setLogOutModal(label: string): void {
-      //ログアウトモーダルを開く処理
-      (this as any).$store.dispatch("modal/setModal", "ConfirmLogOut");
-      //サイドバーを閉じる処理
-      (this as any).$store.dispatch("common/closeAside");
-    },
-  },
   computed: {
     setClassOpen(): string {
       //サイドバーが開いた時のクラス
       return (this as any).$store.state.common.isOpeningAside ? "open" : "";
     },
   },
+  methods: {
+    closeAside(): void {
+      //サイドバーを閉じる処理
+      (this as any).$store.dispatch("common/closeAside");
+    },
+    setLogOutModal(): void {
+      //ログアウトモーダルを開く処理
+      (this as any).$store.dispatch("modal/setModal", "ConfirmLogOut");
+      //サイドバーを閉じる処理
+      (this as any).$store.dispatch("common/closeAside");
+    },
+  },
 });
 </script>
 
 <style lang="scss" scopped>
-@import "@/assets/scss/color.scss";
-
 .aside-wrapper {
   z-index: -1; //通常はページの裏側
   width: 100%;

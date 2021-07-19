@@ -4,10 +4,9 @@ import { RootState } from "../RootState";
 
 import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/firestore";
+import "firebase/storage";
 
 export const actions: ActionTree<ItrimmingState, RootState> = {
-
   openTrimming({ commit }): void {
     commit("setTrimmingState", true);
   },

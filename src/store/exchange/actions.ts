@@ -41,6 +41,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           for (let k in defaultProfile) {
             profileData[k] = userDoc?.[k];
           }
+        } else { //アカウント情報がない場合firebaseでログアウトさせる
+          context.dispatch("auth/signOut", null, { root: true });
         }
       })
       .catch((error) => {
@@ -133,58 +135,59 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     let mixerUidList: string[] = new Array();
     let mixerList: Partial<ImixerData>[] = [];
 
-    switch (searchType) {
-      case 0: //名前を前方一致で検索
-        await firebase.firestore().collection('mixers').orderBy('name').startAt(searchWord).endAt(searchWord + '\uf8ff').get()
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              mixerList.push(doc.data());
-              const mixerUid = doc.data().uid;
-              mixerUidList.push(mixerUid);
-            });
-          })
-          .catch((error) => {
-            console.log("Error getting documents: ", error);
+    if (searchType === 0) { //名前を前方一致で検索
+      await firebase.firestore().collection('mixers').orderBy('name').startAt(searchWord).endAt(searchWord + '\uf8ff').get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            mixerList.push(doc.data());
+            const mixerUid = doc.data().uid;
+            mixerUidList.push(mixerUid);
           });
-        break;
-      case 1: //料金の上限で検索
-        if (typeof searchWord === "number") {
-          mixerList = getHitMixer('fee', searchWord, '<');
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+    } else if (typeof searchWord === "number") {
+      let searchData: { field: string, searchWord: number, type: '<' | '>' } = { field: '', searchWord: searchWord, type: '<' }; //検索内容を条件によって変更する
+      switch (searchType) {
+        case 1: //料金の上限で検索
+          searchData = { field: 'fee', searchWord: searchWord, type: '<' };
           mixerUidList = await getHitMixerUid('fee', searchWord, '<');
-        } else {
-          alert("数字を入力して検索する必要があります");
-        }
-        break;
-      case 2: //料金の下限で検索
-        if (typeof searchWord === "number") {
-          mixerList = getHitMixer('fee', searchWord, '>');
+          break;
+        case 2: //料金の下限で検索
+          searchData = { field: 'fee', searchWord: searchWord, type: '>' };
           mixerUidList = await getHitMixerUid('fee', searchWord, '>');
-        } else {
-          alert("数字を入力して検索する必要があります");
-        }
-        break;
-      case 3: //納期の上限で検索
-        if (typeof searchWord === "number") {
-          mixerList = getHitMixer('deadline', searchWord, '<');
+          break;
+        case 3: //納期の上限で検索
+          searchData = { field: 'deadline', searchWord: searchWord, type: '<' };
           mixerUidList = await getHitMixerUid('deadline', searchWord, '<');
-        } else {
-          alert("数字を入力して検索する必要があります");
-        }
-        break;
-      case 4: //納期の下限で検索
-        if (typeof searchWord === "number") {
-          mixerList = getHitMixer('deadline', searchWord, '>');
+          break;
+        case 4: //納期の下限で検索
+          searchData = { field: 'deadline', searchWord: searchWord, type: '>' };
           mixerUidList = await getHitMixerUid('deadline', searchWord, '>');
-        } else {
-          alert("数字を入力して検索する必要があります");
-        }
-        break;
+          break;
+      }
+
+      await firebase.firestore().collection('mixers').where(searchData.field, searchData.type, searchData.searchWord).get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            mixerList.push(doc.data());
+            const mixerUid = doc.data().uid;
+            mixerUidList.push(mixerUid);
+          });
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+    } else {
+      alert("数字を入力して検索してください");
     }
 
     commit("setHomeMixerList", mixerList); //vuexに保存
     commit("setUidList", mixerUidList);
     dispatch("trimming/getClientIcon", null, { root: true });
   },
+
   async startMessage(context, payload: ImixerData): Promise<void> { //歌い手側が依頼した時にチャット相手に追加
     const userUid: string = context.rootGetters["auth/getUserUid"];
 
@@ -291,21 +294,6 @@ function getSortField(): string { //ソートするMix師のフィールドを�
   const fieldList: string[] = [...Object.keys(defaultMixerData), "uid"];
   const randomNum: number = Math.floor(Math.random() * fieldList.length);
   return fieldList[randomNum];
-}
-
-function getHitMixer(field: string, searchWord: number, type: '<' | '>'): Partial<ImixerData>[] {
-  const mixerList: Partial<ImixerData>[] = [];
-  firebase.firestore().collection('mixers').where(field, type, searchWord).get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        mixerList.push(doc.data());
-      });
-    })
-    .catch((error) => {
-      console.log("Error getting documents: ", error);
-    });
-
-  return mixerList;
 }
 
 async function getHitMixerUid(field: string, searchWord: number, type: '<' | '>'): Promise<string[]> {

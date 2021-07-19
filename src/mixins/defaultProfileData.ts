@@ -6,7 +6,7 @@ export interface IsingerData {
     [key: string]: string;
 }
 
-export const DEFAULT_SINGER_DATA: IsingerData = { //歌い手のデータの初期値(後にiconキー追加)
+export const DEFAULT_SINGER_DATA: IsingerData = { //歌い手のデータの初期値
     name: "お名前",
     detail: "よろしくお願いします。",
     twitter: "@",
@@ -22,7 +22,7 @@ export interface ImixerData {
     deadline: number;
 }
 
-export const DEFAULT_MIXER_DATA: ImixerData = { //Mixerのデータの初期値(後にiconキー追加)
+export const DEFAULT_MIXER_DATA: ImixerData = { //Mixerのデータの初期値
     name: "お名前",
     detail: "よろしくお願いします。",
     twitter: "@",

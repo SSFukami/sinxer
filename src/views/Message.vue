@@ -17,6 +17,7 @@
           :icon="iconList[index]"
           @select-client="selectClient"
           @click="clickTab(data.uid)"
+          @show-profile="showProfile"
         />
       </div>
     </div>
@@ -28,6 +29,7 @@
           :senderId="item.uid"
           :content="item.content"
           :clientId="selectedUid"
+          @show-profile="showProfile"
         />
       </div>
       <div class="message-content-nobody" v-else>まだ話し相手がいません</div>
@@ -135,6 +137,15 @@ export default defineComponent({
       (this as any).$store.commit("exchange/setSelectedUid", data.uid); //どの相手を選択したかvuexに保存
       (this as any).$store.dispatch("exchange/setMessageData", data.uid); //選択した相手とのチャット内容をdbから取得
     },
+    showProfile(clientUid: string): void {
+      //アイコンクリック時、プロフィール表示
+      const isSinger: boolean = (this as any).$store.state.auth.singerState;
+      if (!isSinger) { //mix師なら
+       (this as any).$store.commit("exchange/setIsShowingSinger", true); //歌い手のプロフィールを出せるように変更
+      }
+
+      (this as any).$store.dispatch("exchange/setClientProfile", clientUid); //プロフィール情報取得後、プロフィール画面へ
+    },
     sendMessage(): void {
       //メッセージをdbに送信する処理
       (this as any).$store.dispatch("exchange/sendMessage", this.message);
@@ -149,8 +160,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .page {
   background-color: $-primary-300;
   display: grid;

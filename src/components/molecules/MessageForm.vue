@@ -39,8 +39,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/color.scss";
-
 .message-form {
   height: 32px;
   display: grid;

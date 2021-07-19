@@ -97,13 +97,23 @@ export default defineComponent({
 <style lang="scss" scoped>
 .page {
   &-wrapper {
+    //背景をつけるためのdivクラス
     background-color: $-primary-400;
     .home-header {
       width: 50%;
-      min-width: 320px;
+      min-width: 568px;
       height: 48px;
+      display: flex;
       margin: 0 auto; //左右中央揃え用
       padding-top: 8px; //上下中央揃え用
+
+      select {
+        width: 244px;
+      }
+      .search-form {
+        flex: 1;
+        margin-left: 16px;
+      }
     }
   }
 
@@ -124,6 +134,28 @@ export default defineComponent({
     width: 100%;
     height: 50px;
     visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  //狭い場合、ホームヘッダーを２段に
+  .page-wrapper {
+    padding: 0px 50px;
+    .home-header {
+      width: 60%;
+      height: 88px;
+      min-width: 320px;
+      flex-direction: column;
+
+      .search-form {
+        margin-top: 8px;
+        margin-left: 0px;
+      }
+    }
+  }
+
+  .home-content {
+    height: calc(100% - 88px); //home-headerの分引く
   }
 }
 </style>

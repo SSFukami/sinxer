@@ -55,8 +55,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .modal-frame {
   z-index: 1000;
   width: 400px;

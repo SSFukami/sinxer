@@ -1,7 +1,7 @@
 <template>
   <div :class="['message-item', setClassSelf]">
     <div class="user-icon">
-      <UserIcon :icon="selfOrClientIcon" />
+      <UserIcon :icon="selfOrClientIcon" @click="clickIcon"/>
     </div>
     <div class="message-body">{{ content }}</div>
     <!-- アイコン入れ替え用の空のdiv -->
@@ -51,12 +51,17 @@ export default defineComponent({
       return this.senderId !== this.clientId ? this.selfIcon : this.clientIcon;
     },
   },
+  methods: {
+    clickIcon(): void { //アイコンクリック時に相手のプロフィールを表示
+      if (this.senderId === this.clientId) { //相手のアイコンかどうか
+        this.$emit("show-profile", this.clientId);
+      }
+    },
+  },
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/color.scss";
-
 .message-item {
   width: 100%;
   height: auto;

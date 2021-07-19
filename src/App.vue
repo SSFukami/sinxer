@@ -31,7 +31,7 @@ export default defineComponent({
   },
   created() {
     (this as any).$store.dispatch("exchange/setSelfProfile"); //自分のプロフィール情報を取得
-    (this as any).$store.dispatch("trimming/setSelfIcon");//自分のアイコン情報を取得
+    (this as any).$store.dispatch("trimming/setSelfIcon"); //自分のアイコン情報を取得
     (this as any).$store.dispatch("auth/onAuthChanged"); //認証変化の検知
   },
   watch: {
