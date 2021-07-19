@@ -218,7 +218,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     context.commit("setClientList", clientList);
     context.commit("setUidList", clientUidList);
-    context.dispatch("trimming/getMixerIcon", clientList.length, { root: true });
+    context.dispatch("trimming/getClientIcon", clientList.length, { root: true });
   },
   async setMessageData(context, payload: string): Promise<void> { //指定した相手とのチャットデータをdbから取得
     const userUid: string = context.rootGetters["auth/getUserUid"];
