@@ -115,7 +115,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           querySnapshot.forEach((doc) => {
             mixerList.push(doc.data());
             const mixerUid = doc.data().uid;
-            // console.log(mixerUidList);
             mixerUidList.push(mixerUid);
           });
         })
@@ -124,10 +123,9 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         });
     }
 
-    // console.log(mixerUidList);
     context.commit("setHomeMixerList", mixerList); //vuexに保存
-    context.commit("setMixerUidList", mixerUidList);
-    context.dispatch("trimming/getMixerIcon", null, { root: true });
+    context.commit("setUidList", mixerUidList);
+    context.dispatch("trimming/getClientIcon", mixerList.length, { root: true });
   },
   async searchMixer({ commit, dispatch, rootState }): Promise<void> { //検索にヒットしたMixerのデータ取得
     const searchWord = rootState.common.searchWord;
@@ -148,8 +146,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           .catch((error) => {
             console.log("Error getting documents: ", error);
           });
-        //   console.log(mixerUidList);
-        // commit("getMixerUidList", mixerUidList);//一番最後のこの処理を書いたけど
         break;
       case 1: //料金の上限で検索
         if (typeof searchWord === "number") {
@@ -186,15 +182,14 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     }
 
     commit("setHomeMixerList", mixerList); //vuexに保存
-    commit("seetMixerUidList", mixerUidList);
-    dispatch("trimming/getMixerIcon", null, { root: true });
+    commit("setUidList", mixerUidList);
+    dispatch("trimming/getClientIcon", mixerList.length, { root: true });
   },
   async startMessage(context, payload: ImixerData): Promise<void> { //歌い手側が依頼した時にチャット相手に追加
     const userUid: string = context.rootGetters["auth/getUserUid"];
 
     await firebase.firestore().collection('singers').doc(userUid).collection('clients').doc(payload.uid).set(payload)
       .then(() => {
-        context.dispatch("setClientList"); //チャット相手のリストの更新
         context.commit("setSelectedUid", payload.uid) //依頼した相手とのメッセージ画面を表示させるようにする
         router.push('/message');
       })
@@ -222,8 +217,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       });
 
     context.commit("setClientList", clientList);
-    context.commit("setClientUidList", clientUidList);
-    context.dispatch("trimming/getClientIcon", null, { root: true });
+    context.commit("setUidList", clientUidList);
+    context.dispatch("trimming/getMixerIcon", clientList.length, { root: true });
   },
   async setMessageData(context, payload: string): Promise<void> { //指定した相手とのチャットデータをdbから取得
     const userUid: string = context.rootGetters["auth/getUserUid"];

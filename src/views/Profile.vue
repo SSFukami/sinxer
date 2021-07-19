@@ -169,7 +169,6 @@ export default defineComponent({
         const clientProfile = (this as any).$store.state.exchange
           .clientProfileData; //閲覧中のプロフィール情報
         (this as any).$store.dispatch("exchange/startMessage", clientProfile); //チャット相手に登録する処理
-        (this as any).$router.push("/message"); //ユーザーが歌い手ならメッセージ画面へ
       } else if (id === 0) {
         alert("Mix師の方はご依頼することはできません"); //Mix師向け
       } 
