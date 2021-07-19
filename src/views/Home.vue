@@ -20,7 +20,8 @@
         v-for="(data, index) in homeMixerList"
         :key="index"
         :data="data"
-        @click="getMixerIcon(index)"
+        :icon="iconList[index]"
+        @click="setMixerIcon(iconList[index])"
       />
     </div>
   </div>
@@ -67,6 +68,10 @@ export default defineComponent({
       //ホームに表示するMix師のリスト
       return (this as any).$store.state.exchange.homeMixerList;
     },
+    iconList(): string[] {
+      //ホームに表示するMix師のアイコンのリスト
+      return (this as any).$store.state.trimming.iconList;
+    },
   },
   methods: {
     changeSearchWord(value: string | number) {
@@ -81,8 +86,9 @@ export default defineComponent({
       //検索処理
       (this as any).$store.dispatch("exchange/searchMixer");
     },
-    getMixerIcon(index: number): void {
-      (this as any).$store.dispatch("trimming/getMixerIcon",index);
+    setMixerIcon(url: string){
+      //HomeTileに表示してあるアイコンをProfile画面にセット
+      (this as any).$store.commit("trimming/setMixerProfileIcon",url);
     },
   },
 });

@@ -6,7 +6,7 @@
     <div class="page-contents">
       <div class="page-contents-left">
         <div class="icon">
-          <UserIcon :icon="mixerCropImage"/>
+          <UserIcon :icon="mixerProfileIcon"/>
         </div>
       </div>
       <div class="page-contents-right" v-if="isShowingSinger">
@@ -135,8 +135,8 @@ export default defineComponent({
       //歌い手のプロフィールの場合true
       return (this as any).$store.state.exchange.isShowingSinger;
     },
-    mixerCropImage(): string {
-      return (this as any).$store.state.trimming.mixerCropImage;
+    mixerProfileIcon(): string {
+      return (this as any).$store.state.trimming.mixerProfileIcon;
     },
   },
   methods: {
@@ -172,7 +172,6 @@ export default defineComponent({
         const clientProfile = (this as any).$store.state.exchange
           .clientProfileData; //閲覧中のプロフィール情報
         (this as any).$store.dispatch("exchange/startMessage", clientProfile); //チャット相手に登録する処理
-        (this as any).$router.push("/message"); //ユーザーが歌い手ならメッセージ画面へ
       } else if (id === 0) {
         alert("Mix師の方はご依頼することはできません"); //Mix師向け
       } 

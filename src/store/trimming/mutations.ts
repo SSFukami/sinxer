@@ -16,7 +16,20 @@ export const mutations: MutationTree<ItrimmingState> = {
   setCropImage(state: ItrimmingState, payload: string): void {
     state.cropImage = payload;
   },
-  setMixerCropImage(state: ItrimmingState, payload: string): void {
-    state.mixerCropImage = payload;
+  setIconList(state: ItrimmingState, payload: any): void {//ホーム画面とユーザータブのアイコンのリスト
+    state.iconList = payload;
   },
+  resetIconList(state: ItrimmingState): void {//ホーム画面とユーザータブのアイコンのリストを0に
+    state.iconList.length = 0;
+  },
+  setMixerProfileIcon(state: ItrimmingState, payload: string): void {//プロフィール画面のアイコン
+    state.mixerProfileIcon = payload;
+  },
+  setSelfIcon(state: ItrimmingState, payload: string): void {//MessageItemの自分のアイコン
+    state.selfIcon = payload;
+  },
+  setClientIcon(state: ItrimmingState, payload: string): void {//MessageItemの話し相手のアイコン
+    state.clientIcon = payload;
+  },
+
 };

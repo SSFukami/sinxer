@@ -49,6 +49,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .user-tab {
   width: 100%;
   height: 56px;
@@ -61,9 +62,8 @@ export default defineComponent({
   .icon {
     width: 52px;
     height: 52px;
-    background: $-primary-600;
     border-radius: 50%;
-    margin: 2px 0px 0px 2px; //上下左右中央揃え用
+    margin: 1px 0px 0px 2px; //上下左右中央揃え用
   }
 
   .name {

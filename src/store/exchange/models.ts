@@ -19,7 +19,7 @@ export interface IexchangeState {
 
     isShowingSinger: boolean;
     homeMixerList: profileDataType[];
-    homeMixerUidList: string[];
+    uidList: string[];
 
     clientList: profileDataType[];
     selectedUid: string;
@@ -34,7 +34,7 @@ export class ExchangeState implements IexchangeState {
 
     isShowingSinger = false; //歌い手のプロフィールを閲覧中ならtrue
     homeMixerList = []; //ホームに表示するMix師のリスト
-    homeMixerUidList = []; //ホームに表示するMix師のUidのリスト
+    uidList = []; //クライアントのUidのリスト
 
     clientList = []; //チャットのやりとりをする相手のリスト
     selectedUid = ""; //開いているチャット相手のUID

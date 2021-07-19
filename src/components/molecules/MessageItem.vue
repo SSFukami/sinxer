@@ -1,7 +1,7 @@
 <template>
   <div :class="['message-item', setClassSelf]">
     <div class="user-icon">
-      <UserIcon @click="clickIcon" />
+      <UserIcon :icon="selfOrClientIcon" @click="clickIcon"/>
     </div>
     <div class="message-body">{{ content }}</div>
     <!-- アイコン入れ替え用の空のdiv -->
@@ -16,7 +16,7 @@ import UserIcon from "@/components/atoms/UserIcon.vue";
 
 export default defineComponent({
   name: "MessageItem",
-  components:{
+  components: {
     UserIcon,
   },
   props: {
@@ -41,6 +41,15 @@ export default defineComponent({
       //書いた人が自分ならクラス付与
       return this.senderId !== this.clientId ? "self" : "";
     },
+    selfIcon(): string {
+      return (this as any).$store.state.trimming.selfIcon;
+    },
+    clientIcon(): string {
+      return (this as any).$store.state.trimming.clientIcon;
+    },
+    selfOrClientIcon(): string {
+      return this.senderId !== this.clientId ? this.selfIcon : this.clientIcon;
+    },
   },
   methods: {
     clickIcon(): void { //アイコンクリック時に相手のプロフィールを表示
@@ -55,7 +64,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .message-item {
   width: 100%;
-  height:auto;
+  height: auto;
   display: grid;
   grid-template-columns: 48px 1fr 48px;
   column-gap: 8px;

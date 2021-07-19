@@ -14,7 +14,9 @@
           :key="index"
           :data="data"
           :selected="data.uid === selectedUid"
+          :icon="iconList[index]"
           @select-client="selectClient"
+          @click="clickTab(data.uid)"
           @show-profile="showProfile"
         />
       </div>
@@ -100,7 +102,6 @@ export default defineComponent({
     filteredClientList(): profileDataType[] {
       //検索後のチャット相手のリスト
       const clientList = (this as any).$store.state.exchange.clientList; //チャット相手のリスト
-      // console.log(clientList);
       const word = this.searchWord;
       const filteredList = clientList.filter((client: profileDataType) => {
         const result: number = client.name.indexOf(word); //ワードが一致した最初のインデックス
@@ -116,6 +117,10 @@ export default defineComponent({
     messageDataList(): messageDataType[] {
       //チャット相手とのコメントリスト
       return (this as any).$store.state.exchange.messageList;
+    },
+    iconList(): string[] {
+      //ユーザータブに表示するMix師のアイコンのリスト
+      return (this as any).$store.state.trimming.iconList;
     },
   },
   methods: {
@@ -145,6 +150,10 @@ export default defineComponent({
       //メッセージをdbに送信する処理
       (this as any).$store.dispatch("exchange/sendMessage", this.message);
       this.message = "";
+    },
+    clickTab(uid:string): void {
+      (this as any).$store.dispatch("trimming/searchClientIcon", uid);
+      (this as any).$store.dispatch("trimming/searchSelfIcon");
     },
   },
 });
