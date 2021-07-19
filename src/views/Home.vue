@@ -33,7 +33,6 @@ import { defineComponent } from "vue";
 import SelectBox from "@/components/atoms/SelectBox.vue";
 import SearchForm from "@/components/molecules/SearchForm.vue";
 import HomeTile, { ImixerData } from "@/components/organisms/HomeTile.vue";
-import { ItrimmingState } from "@/store/trimming/models.ts";
 
 import { HOME_SEARCH_TYPE_LIST, IselectBoxList } from "@/mixins/selectBoxList";
 

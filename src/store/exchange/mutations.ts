@@ -31,10 +31,10 @@ export const mutations: MutationTree<IexchangeState> = {
   setUnsubscribe(state: IexchangeState, payload: () => void): void { //チャット相手との会話データのリストの変更
     state.unsubscribe = payload;
   },
-  getMixerUidList(state: IexchangeState, payload:string[]): void {
+  setMixerUidList(state: IexchangeState, payload:string[]): void {
     state.homeMixerUidList = payload;
   },
-  getClientUidList(state: IexchangeState, payload:string[]): void {
+  setClientUidList(state: IexchangeState, payload:string[]): void {
     state.clientUidList = payload;
   }
 };
