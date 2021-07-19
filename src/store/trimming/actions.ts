@@ -45,14 +45,14 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
       console.log('Uploaded a data_url string!');
     });
   },
-  async getClientIcon(context,payload): Promise<void> {//ホーム画面とユーザータブのアイコン表示処理
+  async getClientIcon(context): Promise<void> {//ホーム画面とユーザータブのアイコン表示処理
     context.commit("resetIconList");
     //まずiconListを空にする
-    const repetition: number = payload;
-    //繰り返す回数を決める
     const uidList: any = context.rootState.exchange.uidList;
     //表示されるユーザーのidのリスト
-    const mixerCropImageList: any = context.state.iconList;
+    const repetition: number = uidList.length;
+    //繰り返す回数を決める
+    const clientCropImageList: any = context.state.iconList;
     //表示するアイコンのurlを格納するリスト
     const basicIconUrl: any = "https://firebasestorage.googleapis.com/v0/b/sinxer-49d2b.appspot.com/o/basic_icon.png?alt=media&token=110e9ab6-54d6-40f4-9429-eb4a91ec1f36";
     //basic_icon.pngのurlを代入
@@ -63,12 +63,12 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
       let uploadRef: any | undefined = firebase.storage().ref().child(uid + 'icon.png');
       await uploadRef.getDownloadURL().then((url: any) => {
         //アイコンのurlとuidが一致したらそのurlをurlリストに格納
-        mixerCropImageList.push(url);
+        clientCropImageList.push(url);
       }).catch(() => {
         //一致しなかったらデフォルトのアイコンを格納
-        mixerCropImageList.push(basicIconUrl);
+        clientCropImageList.push(basicIconUrl);
       });
-      context.commit("setIconList", mixerCropImageList);
+      context.commit("setIconList", clientCropImageList);
     }
   },
   async searchSelfIcon(context): Promise<void> {
