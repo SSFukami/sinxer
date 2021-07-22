@@ -154,19 +154,15 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       switch (searchType) {
         case 1: //料金の上限で検索
           searchData = { field: 'fee', searchWord: searchWord, type: '<' };
-          mixerUidList = await getHitMixerUid('fee', searchWord, '<');
           break;
         case 2: //料金の下限で検索
           searchData = { field: 'fee', searchWord: searchWord, type: '>' };
-          mixerUidList = await getHitMixerUid('fee', searchWord, '>');
           break;
         case 3: //納期の上限で検索
           searchData = { field: 'deadline', searchWord: searchWord, type: '<' };
-          mixerUidList = await getHitMixerUid('deadline', searchWord, '<');
           break;
         case 4: //納期の下限で検索
           searchData = { field: 'deadline', searchWord: searchWord, type: '>' };
-          mixerUidList = await getHitMixerUid('deadline', searchWord, '>');
           break;
       }
 
@@ -295,20 +291,6 @@ function getSortField(): string { //ソートするMix師のフィールドを�
   const fieldList: string[] = [...Object.keys(defaultMixerData), "uid"];
   const randomNum: number = Math.floor(Math.random() * fieldList.length);
   return fieldList[randomNum];
-}
-
-async function getHitMixerUid(field: string, searchWord: number, type: '<' | '>'): Promise<string[]> {
-  const mixerUidList: string[] = [];
-  await firebase.firestore().collection('mixers').where(field, type, searchWord).get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        mixerUidList.push(doc.data().uid);
-      });
-    })
-    .catch((error) => {
-      console.log("Error getting documents: ", error);
-    });
-  return mixerUidList;
 }
 
 function updateClientDoc(userDocRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>, profileData: { [key: string]: string }, userUid: string, clientJob: string): void { //顧客側のドキュメント下の更新
