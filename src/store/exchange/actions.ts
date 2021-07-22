@@ -182,20 +182,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     commit("setHomeMixerList", mixerList); //vuexに保存
   },
-  async getHitMixer(context, payload: { field: string, searchWord: number, type: '<' | '>' }): Promise<Partial<ImixerData>[]> {
-    const mixerList: Partial<ImixerData>[] = [];
-    firebase.firestore().collection('mixers').where(payload.field, payload.type, payload.searchWord).get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          mixerList.push(doc.data());
-        });
-      })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-
-    return mixerList;
-  },
   async startMessage(context, payload: ImixerData): Promise<void> { //歌い手側が依頼した時にチャット相手に追加
     const userUid: string = context.rootGetters["auth/getUserUid"];
 
