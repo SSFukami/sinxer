@@ -237,7 +237,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         });
       })
       .catch((error) => {
-        console.log(error, "内容ないyo");
+        console.log(error);
       });
 
     context.commit("setMessageList", messageList);
