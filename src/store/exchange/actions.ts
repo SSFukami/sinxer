@@ -40,8 +40,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           const userDoc: firebase.firestore.DocumentData | undefined = doc.data();
           for (let k in defaultProfile) {
             profileData[k] = userDoc?.[k];
-            // console.log(k);
-            // console.log(profileData[k]);
           }
         } else { //アカウント情報がない場合firebaseでログアウトさせる
           context.dispatch("auth/signOut", null, { root: true });
@@ -97,7 +95,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     context.commit("setClientProfile", profileData); //vuex更新
   },
-  async setHomeTile({ commit }): Promise<void> {
+  async setHomeTile(context): Promise<void> {
     const field: string = getSortField();
     const random: number = Math.random();
     const mixerList: Partial<ImixerData>[] = [];
@@ -109,7 +107,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           querySnapshot.forEach((doc) => {
             mixerList.push(doc.data());
             const mixerUid = doc.data().uid;
-            // console.log(mixerUidList);
             mixerUidList.push(mixerUid);
           });
         })
@@ -122,7 +119,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           querySnapshot.forEach((doc) => {
             mixerList.push(doc.data());
             const mixerUid = doc.data().uid;
-            // console.log(mixerUidList);
             mixerUidList.push(mixerUid);
           });
         })
@@ -131,13 +127,14 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         });
     }
 
-    commit("setHomeMixerList", mixerList); //vuexに保存
-    commit("getMixerUidList", mixerUidList);
+    context.commit("setHomeMixerList", mixerList); //vuexに保存
+    context.commit("setUidList", mixerUidList);
+    context.dispatch("trimming/getClientIcon", null, { root: true });
   },
-  async searchMixer({ commit, rootState }): Promise<void> { //検索にヒットしたMixerのデータ取得
+  async searchMixer({ commit, dispatch, rootState }): Promise<void> { //検索にヒットしたMixerのデータ取得
     const searchWord = rootState.common.searchWord;
     const searchType = rootState.common.searchTypeId;
-
+    let mixerUidList: string[] = new Array();
     let mixerList: Partial<ImixerData>[] = [];
 
     if (searchType === 0) { //名前を前方一致で検索
@@ -145,6 +142,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             mixerList.push(doc.data());
+            const mixerUid = doc.data().uid;
+            mixerUidList.push(mixerUid);
           });
         })
         .catch((error) => {
@@ -155,15 +154,19 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       switch (searchType) {
         case 1: //料金の上限で検索
           searchData = { field: 'fee', searchWord: searchWord, type: '<' };
+          mixerUidList = await getHitMixerUid('fee', searchWord, '<');
           break;
         case 2: //料金の下限で検索
           searchData = { field: 'fee', searchWord: searchWord, type: '>' };
+          mixerUidList = await getHitMixerUid('fee', searchWord, '>');
           break;
         case 3: //納期の上限で検索
           searchData = { field: 'deadline', searchWord: searchWord, type: '<' };
+          mixerUidList = await getHitMixerUid('deadline', searchWord, '<');
           break;
         case 4: //納期の下限で検索
           searchData = { field: 'deadline', searchWord: searchWord, type: '>' };
+          mixerUidList = await getHitMixerUid('deadline', searchWord, '>');
           break;
       }
 
@@ -171,6 +174,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             mixerList.push(doc.data());
+            const mixerUid = doc.data().uid;
+            mixerUidList.push(mixerUid);
           });
         })
         .catch((error) => {
@@ -181,13 +186,14 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     }
 
     commit("setHomeMixerList", mixerList); //vuexに保存
+    commit("setUidList", mixerUidList);
+    dispatch("trimming/getClientIcon", null, { root: true });
   },
   async startMessage(context, payload: ImixerData): Promise<void> { //歌い手側が依頼した時にチャット相手に追加
     const userUid: string = context.rootGetters["auth/getUserUid"];
 
     await firebase.firestore().collection('singers').doc(userUid).collection('clients').doc(payload.uid).set(payload)
       .then(() => {
-        context.dispatch("setClientList"); //チャット相手のリストの更新
         context.commit("setSelectedUid", payload.uid) //依頼した相手とのメッセージ画面を表示させるようにする
         router.push('/message');
       })
@@ -200,10 +206,14 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     const job: string = context.rootGetters["auth/getJob"];
 
     const clientList: { [key: string]: string }[] = []; //データを格納する配列
+    let clientUidList: string[] = new Array();
+
     await firebase.firestore().collection(job).doc(userUid).collection('clients').get()
       .then((doc) => {
         doc.forEach(element => {
           clientList.push(element.data()); //取得したデータを配列に
+          const userTabUid = element.data().uid;
+          clientUidList.push(userTabUid);
         });
       })
       .catch((error) => {
@@ -211,6 +221,8 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       });
 
     context.commit("setClientList", clientList);
+    context.commit("setUidList", clientUidList);
+    context.dispatch("trimming/getClientIcon", null, { root: true });
   },
   async setMessageData(context, payload: string): Promise<void> { //指定した相手とのチャットデータをdbから取得
     const userUid: string = context.rootGetters["auth/getUserUid"];
@@ -283,6 +295,20 @@ function getSortField(): string { //ソートするMix師のフィールドを�
   const fieldList: string[] = [...Object.keys(defaultMixerData), "uid"];
   const randomNum: number = Math.floor(Math.random() * fieldList.length);
   return fieldList[randomNum];
+}
+
+async function getHitMixerUid(field: string, searchWord: number, type: '<' | '>'): Promise<string[]> {
+  const mixerUidList: string[] = [];
+  await firebase.firestore().collection('mixers').where(field, type, searchWord).get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        mixerUidList.push(doc.data().uid);
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+  return mixerUidList;
 }
 
 function updateClientDoc(userDocRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>, profileData: { [key: string]: string }, userUid: string, clientJob: string): void { //顧客側のドキュメント下の更新

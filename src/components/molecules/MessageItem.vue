@@ -1,7 +1,7 @@
 <template>
   <div :class="['message-item', setClassSelf]">
     <div class="user-icon">
-      <UserIcon @click="clickIcon" />
+      <UserIcon :icon="selfOrClientIcon" @click="clickIcon"/>
     </div>
     <div class="message-body">{{ content }}</div>
     <!-- アイコン入れ替え用の空のdiv -->
@@ -40,6 +40,15 @@ export default defineComponent({
     setClassSelf(): string {
       //書いた人が自分ならクラス付与
       return this.senderId !== this.clientId ? "self" : "";
+    },
+    selfIcon(): string {
+      return (this as any).$store.state.trimming.selfIcon;
+    },
+    clientIcon(): string {
+      return (this as any).$store.state.trimming.clientIcon;
+    },
+    selfOrClientIcon(): string {
+      return this.senderId !== this.clientId ? this.selfIcon : this.clientIcon;
     },
   },
   methods: {
