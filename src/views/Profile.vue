@@ -1,12 +1,12 @@
 <template>
   <div class="page">
     <div class="confirm-header">
-      <RequestHeader @click-button="clickButton"/>
+      <RequestHeader @click-button="clickButton" />
     </div>
     <div class="page-contents">
       <div class="page-contents-left">
         <div class="icon">
-          <UserIcon :icon="mixerProfileIcon"/>
+          <UserIcon :icon="mixerProfileIcon" />
         </div>
       </div>
       <div class="page-contents-right" v-if="isShowingSinger">
@@ -174,8 +174,7 @@ export default defineComponent({
         (this as any).$store.dispatch("exchange/startMessage", clientProfile); //チャット相手に登録する処理
       } else if (id === 0) {
         alert("Mix師の方はご依頼することはできません"); //Mix師向け
-      } 
-      else {
+      } else {
         this.transBack(); //プロフィール画面を閉じる
       }
     },

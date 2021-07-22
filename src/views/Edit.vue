@@ -235,7 +235,7 @@ export default defineComponent({
         }
       } else {
         this.setFormDataValue(); //フォームのデータをvuexの情報に戻す
-        (this as any).$store.dispatch("trimming/setSelfIcon");
+        (this as any).$store.dispatch("trimming/undoChangedIcon"); //アイコンを戻す
       }
     },
   },
@@ -249,8 +249,8 @@ export default defineComponent({
   padding: 15px;
   border-radius: 50%;
   position: absolute;
-  &:hover{
-    background:rgba(236, 225, 225, 0.5);
+  &:hover {
+    background: rgba(236, 225, 225, 0.5);
   }
 }
 .add-file {

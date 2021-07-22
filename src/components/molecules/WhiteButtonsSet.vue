@@ -1,7 +1,10 @@
 <template>
   <div class="white-button">
     <div class="white-button-set" v-for="list in data" :key="list.id">
-      <CommonButtonWhite :label="list.label" @click-event="clickButton(list.id)" />
+      <CommonButtonWhite
+        :label="list.label"
+        @click-event="clickButton(list.id)"
+      />
     </div>
   </div>
 </template>
@@ -29,7 +32,8 @@ export default defineComponent({
     },
   },
   methods: {
-    clickButton(id: number): void { //idでボタンの種類判別
+    clickButton(id: number): void {
+      //idでボタンの種類判別
       this.$emit("click-event", id);
     },
   },
@@ -38,7 +42,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .white-button {
-  width:120px;
+  width: 120px;
   &-set:first-child {
     //v-forしてる最初の要素
     padding-bottom: 16px;

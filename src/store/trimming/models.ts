@@ -2,16 +2,18 @@ export interface ItrimmingState {
   isOpeningTrimming: boolean;
   uploadedImage: string;
   cropImage: string;
-  mixerProfileIcon:string;
-  iconList:string[];
+  storageSelfIcon: string;
+  mixerProfileIcon: string;
+  iconList: string[];
   selfIcon: string;
-  clientIcon:string;
+  clientIcon: string;
 }
 
 export class TrimmingState implements ItrimmingState {
   isOpeningTrimming = false; //トリミングエリアが開いているときはtrue
   uploadedImage = ""; //選択した元の画像
   cropImage = ""; //トリミングした左上に表示されるアイコン
+  storageSelfIcon = ""; //データベースに保存されているユーザーのアイコン
   mixerProfileIcon = "";//プロフィール画面などで表示するミックス師のアイコン
   iconList = [];//プロフィール画面などで表示するアイコンのリスト
   selfIcon = "";//メッセージ画面で表示される自分のアイコン

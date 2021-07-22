@@ -50,6 +50,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
       });
 
     context.commit("setSelfProfile", profileData); //vuex更新
+    context.dispatch("trimming/setSelfIcon", null, { root: true }); //自分のアイコン情報を取得
   },
   async updateProfile(context, payload: IformData[]): Promise<void> { //dbのプロフィール情報更新処理
     const defaultProfile = context.rootState.auth.singerState ? DEFAULT_SINGER_DATA : DEFAULT_MIXER_DATA;
@@ -99,6 +100,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     const random: number = Math.random();
     const mixerList: Partial<ImixerData>[] = [];
     let mixerUidList: string[] = new Array();
+
     if (random < 0.5) { //半分の確率
       await firebase.firestore().collection("mixers").orderBy(field).limit(12).get() //上から12人分取得
         .then((querySnapshot) => {
@@ -187,7 +189,6 @@ export const actions: ActionTree<IexchangeState, RootState> = {
     commit("setUidList", mixerUidList);
     dispatch("trimming/getClientIcon", null, { root: true });
   },
-
   async startMessage(context, payload: ImixerData): Promise<void> { //歌い手側が依頼した時にチャット相手に追加
     const userUid: string = context.rootGetters["auth/getUserUid"];
 

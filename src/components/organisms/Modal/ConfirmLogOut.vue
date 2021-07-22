@@ -32,13 +32,15 @@ export default defineComponent({
     CommonButton,
   },
   methods: {
-    closeModal(): void { //キャンセル時はモーダル閉じる
+    closeModal(): void {
+      //キャンセル時はモーダル閉じる
       (this as any).$store.dispatch("modal/closeModal");
     },
-    signOut(): void { //ログアウト処理
+    signOut(): void {
+      //ログアウト処理
       (this as any).$store.dispatch("auth/signOut");
     },
-  }
+  },
 });
 </script>
 

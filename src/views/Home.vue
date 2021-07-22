@@ -86,9 +86,9 @@ export default defineComponent({
       //検索処理
       (this as any).$store.dispatch("exchange/searchMixer");
     },
-    setMixerIcon(url: string){
+    setMixerIcon(url: string) {
       //HomeTileに表示してあるアイコンをProfile画面にセット
-      (this as any).$store.commit("trimming/setMixerProfileIcon",url);
+      (this as any).$store.commit("trimming/setMixerProfileIcon", url);
     },
   },
 });
