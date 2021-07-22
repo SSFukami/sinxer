@@ -58,7 +58,7 @@ export default defineComponent({
         //相手のアイコンかどうか
         this.$emit("show-profile", this.clientId);
       }
-      (this as any).$store.commit("trimming/setMixerProfileIcon", url);
+      (this as any).$store.commit("trimming/setProfileIcon", url);
     },
   },
 });
