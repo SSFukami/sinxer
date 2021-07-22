@@ -16,7 +16,6 @@
           :selected="data.uid === selectedUid"
           :icon="iconList[index]"
           @select-client="selectClient"
-          @click="clickTab(data.uid)"
           @show-profile="showProfile"
         />
       </div>
@@ -136,6 +135,7 @@ export default defineComponent({
       //ユーザータブをクリック時の処理
       (this as any).$store.commit("exchange/setSelectedUid", data.uid); //どの相手を選択したかvuexに保存
       (this as any).$store.dispatch("exchange/setMessageData", data.uid); //選択した相手とのチャット内容をdbから取得
+      (this as any).$store.dispatch("trimming/searchClientIcon", data.uid);
     },
     showProfile(clientUid: string): void {
       //アイコンクリック時、プロフィール表示
@@ -151,10 +151,6 @@ export default defineComponent({
       //メッセージをdbに送信する処理
       (this as any).$store.dispatch("exchange/sendMessage", this.message);
       this.message = "";
-    },
-    clickTab(uid:string): void {
-      (this as any).$store.dispatch("trimming/searchClientIcon", uid);
-      (this as any).$store.dispatch("trimming/searchSelfIcon");
     },
   },
 });
