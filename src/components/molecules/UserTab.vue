@@ -44,14 +44,13 @@ export default defineComponent({
     },
     clickIcon(): void {
       //クリックした人のプロフィールを表示
-      this.$emit("show-profile", this.data.uid,this.icon);
+      this.$emit("show-profile", this.data.uid, this.icon);
     },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-
 .user-tab {
   width: 100%;
   height: 56px;
