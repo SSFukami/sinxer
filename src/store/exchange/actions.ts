@@ -193,6 +193,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
         router.push('/message');
         context.commit("setSelectedUid", payload.uid) //依頼した相手とのメッセージ画面を表示させるようにする
         context.dispatch("setMessageData", payload.uid) //相手とのメッセージ内容取得
+        context.dispatch("trimming/searchClientIcon", payload.uid, { root: true }); //依頼した相手のアイコンを表示
       })
       .catch((error) => {
         console.log(error);

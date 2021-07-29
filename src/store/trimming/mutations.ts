@@ -27,7 +27,6 @@ export const mutations: MutationTree<ItrimmingState> = {
   },
   setProfileIcon(state: ItrimmingState, payload: string): void { //プロフィール画面のアイコン
     state.profileIcon = payload;
-    console.log(payload);
   },
   setSelfIcon(state: ItrimmingState, payload: string): void { //MessageItemの自分のアイコン
     state.selfIcon = payload;
