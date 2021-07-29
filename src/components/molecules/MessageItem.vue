@@ -56,7 +56,7 @@ export default defineComponent({
       //アイコンクリック時に相手のプロフィールを表示
       if (this.senderId === this.clientId) {
         //相手のアイコンかどうか
-        this.$emit("show-profile", this.clientId);
+        this.$emit("show-profile", this.clientId, this.selfOrClientIcon);
       }
     },
   },
