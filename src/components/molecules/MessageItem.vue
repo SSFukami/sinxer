@@ -1,7 +1,7 @@
 <template>
   <div :class="['message-item', setClassSelf]">
     <div class="user-icon">
-      <UserIcon :icon="selfOrClientIcon" @click="clickIcon()" />
+      <UserIcon :icon="selfOrClientIcon" @click="clickIcon" />
     </div>
     <div class="message-body">{{ content }}</div>
     <!-- アイコン入れ替え用の空のdiv -->
