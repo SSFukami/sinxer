@@ -82,4 +82,17 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
       context.commit("setIconList", clientCropImageList);
     }
   },
+  async searchClientIcon(context,payload): Promise<void> {
+    const userUid: string = payload;
+    const basicIconRef: any = firebase.storage().ref('basic_icon.png');
+    await firebase.storage().ref(userUid + 'icon.png').getDownloadURL()
+      .then((url: any) => {
+        context.commit("setClientIcon", url);
+      })
+      .catch(() => {
+        basicIconRef.getDownloadURL().then((url: any) => {
+          context.commit("setClientIcon", url);
+        })
+      })
+  },
 };

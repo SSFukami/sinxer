@@ -25,8 +25,9 @@ export const mutations: MutationTree<ItrimmingState> = {
   resetIconList(state: ItrimmingState): void { //ホーム画面とユーザータブのアイコンのリストを0に
     state.iconList.length = 0;
   },
-  setMixerProfileIcon(state: ItrimmingState, payload: string): void { //プロフィール画面のアイコン
-    state.mixerProfileIcon = payload;
+  setProfileIcon(state: ItrimmingState, payload: string): void { //プロフィール画面のアイコン
+    state.profileIcon = payload;
+    console.log(payload);
   },
   setSelfIcon(state: ItrimmingState, payload: string): void { //MessageItemの自分のアイコン
     state.selfIcon = payload;

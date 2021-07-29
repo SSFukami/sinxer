@@ -1,7 +1,7 @@
 <template>
   <div :class="['message-item', setClassSelf]">
     <div class="user-icon">
-      <UserIcon :icon="selfOrClientIcon" @click="clickIcon"/>
+      <UserIcon :icon="selfOrClientIcon" @click="clickIcon()" />
     </div>
     <div class="message-body">{{ content }}</div>
     <!-- アイコン入れ替え用の空のdiv -->
@@ -42,7 +42,7 @@ export default defineComponent({
       return this.senderId !== this.clientId ? "self" : "";
     },
     selfIcon(): string {
-      return (this as any).$store.state.trimming.selfIcon;
+      return (this as any).$store.state.trimming.storageSelfIcon;
     },
     clientIcon(): string {
       return (this as any).$store.state.trimming.clientIcon;
@@ -56,7 +56,7 @@ export default defineComponent({
       //アイコンクリック時に相手のプロフィールを表示
       if (this.senderId === this.clientId) {
         //相手のアイコンかどうか
-        this.$emit("show-profile", this.clientId);
+        this.$emit("show-profile", this.clientId, this.selfOrClientIcon);
       }
     },
   },

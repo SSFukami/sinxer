@@ -6,7 +6,7 @@
     <div class="page-contents">
       <div class="page-contents-left">
         <div class="icon">
-          <UserIcon :icon="mixerProfileIcon" />
+          <UserIcon :icon="profileIcon" />
         </div>
       </div>
       <div class="page-contents-right" v-if="isShowingSinger">
@@ -135,8 +135,8 @@ export default defineComponent({
       //歌い手のプロフィールの場合true
       return (this as any).$store.state.exchange.isShowingSinger;
     },
-    mixerProfileIcon(): string {
-      return (this as any).$store.state.trimming.mixerProfileIcon;
+    profileIcon(): string {
+      return (this as any).$store.state.trimming.profileIcon;
     },
   },
   methods: {

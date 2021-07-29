@@ -135,16 +135,16 @@ export default defineComponent({
       //ユーザータブをクリック時の処理
       (this as any).$store.commit("exchange/setSelectedUid", data.uid); //どの相手を選択したかvuexに保存
       (this as any).$store.dispatch("exchange/setMessageData", data.uid); //選択した相手とのチャット内容をdbから取得
-      // (this as any).$store.dispatch("trimming/searchClientIcon", data.uid);
+      (this as any).$store.dispatch("trimming/searchClientIcon", data.uid);
     },
-    showProfile(clientUid: string): void {
+    showProfile(clientUid: string, icon: string): void {
       //アイコンクリック時、プロフィール表示
       const isSinger: boolean = (this as any).$store.state.auth.singerState;
       if (!isSinger) {
         //mix師なら
         (this as any).$store.commit("exchange/setIsShowingSinger", true); //歌い手のプロフィールを出せるように変更
       }
-
+      (this as any).$store.commit("trimming/setProfileIcon", icon);
       (this as any).$store.dispatch("exchange/setClientProfile", clientUid); //プロフィール情報取得後、プロフィール画面へ
     },
     sendMessage(): void {

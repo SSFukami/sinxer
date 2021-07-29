@@ -88,7 +88,7 @@ export default defineComponent({
     },
     setMixerIcon(url: string) {
       //HomeTileに表示してあるアイコンをProfile画面にセット
-      (this as any).$store.commit("trimming/setMixerProfileIcon", url);
+      (this as any).$store.commit("trimming/setProfileIcon", url);
     },
   },
 });

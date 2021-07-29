@@ -4,7 +4,7 @@ export interface ItrimmingState {
   cropImage: string;
 
   storageSelfIcon: string;
-  mixerProfileIcon: string;
+  profileIcon: string;
   iconList: string[];
   selfIcon: string;
   clientIcon: string;
@@ -16,8 +16,8 @@ export class TrimmingState implements ItrimmingState {
   cropImage = ""; //トリミングした左上に表示されるアイコン
 
   storageSelfIcon = ""; //データベースに保存されているユーザーのアイコン
-  mixerProfileIcon = ""; //プロフィール画面などで表示するミックス師のアイコン
-  iconList = []; //プロフィール画面などで表示するアイコンのリスト
-  selfIcon = ""; //メッセージ画面で表示される自分のアイコン
-  clientIcon = ""; //メッセージ画面で表示される相手のアイコン
+  profileIcon = "";//プロフィール画面などで表示するミックス師のアイコン
+  iconList = [];//プロフィール画面などで表示するアイコンのリスト
+  selfIcon = "";//メッセージ画面で表示される自分のアイコン
+  clientIcon = "";//メッセージ画面で表示される相手のアイコン
 }
