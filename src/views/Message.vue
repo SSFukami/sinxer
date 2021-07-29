@@ -54,7 +54,11 @@ import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
 import MessageForm from "@/components/molecules/MessageForm.vue";
 
-import { messageDataType, profileDataType, profileDataIconType} from "@/store/exchange/models";
+import {
+  messageDataType,
+  profileDataType,
+  profileDataIconType,
+} from "@/store/exchange/models";
 
 type DataType = {
   //TypeScriptの型宣言
@@ -102,12 +106,12 @@ export default defineComponent({
       //検索後のチャット相手のリスト
       const clientList = (this as any).$store.state.exchange.clientList; //チャット相手のリスト
       const iconList = (this as any).$store.state.trimming.iconList;
-      let newClientList:any[] =[];
-      for(let i=0; i<clientList.length; i++){
+      let newClientList: any[] = [];
+      for (let i = 0; i < clientList.length; i++) {
         let icon = iconList[i];
-        const url = {...clientList[i],icon};
+        const url = { ...clientList[i], icon };
         newClientList.push(url);
-      };
+      }
       const word = this.searchWord;
       const filteredList = newClientList.filter((client: profileDataType) => {
         const result: number = client.name.indexOf(word); //ワードが一致した最初のインデックス
