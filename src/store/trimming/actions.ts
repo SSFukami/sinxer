@@ -65,6 +65,7 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
     //表示するアイコンのurlを格納するリスト
     const basicIconUrl = "https://firebasestorage.googleapis.com/v0/b/sinxer-49d2b.appspot.com/o/basic_icon.png?alt=media&token=110e9ab6-54d6-40f4-9429-eb4a91ec1f36";
     //basic_icon.pngのurlを代入
+
     for (let i = 0; i < repetition; i++) {
       //表示するアイコンを取得する
       const uid: string = uidList[i];

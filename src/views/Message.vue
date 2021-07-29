@@ -79,11 +79,11 @@ export default defineComponent({
   },
   created() {
     (this as any).$store.dispatch("exchange/setClientList"); //チャット相手のリストを取得
-    (this as any).$store.commit("exchange/setSelectedUid", ""); //相手未選択状態に
-    (this as any).$store.commit("exchange/setMessageList", []); //チャット内容初期化
   },
   unmounted() {
     (this as any).$store.dispatch("exchange/stopMessageListener"); //リスナーを停止
+    (this as any).$store.commit("exchange/setSelectedUid", ""); //相手未選択状態に
+    (this as any).$store.commit("exchange/setMessageList", []); //チャット内容初期化
   },
   watch: {
     selectedUid: async function (newValue: string) {

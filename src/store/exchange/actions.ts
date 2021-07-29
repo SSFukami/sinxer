@@ -190,8 +190,9 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     await firebase.firestore().collection('singers').doc(userUid).collection('clients').doc(payload.uid).set(payload)
       .then(() => {
-        context.commit("setSelectedUid", payload.uid) //依頼した相手とのメッセージ画面を表示させるようにする
         router.push('/message');
+        context.commit("setSelectedUid", payload.uid) //依頼した相手とのメッセージ画面を表示させるようにする
+        context.dispatch("setMessageData", payload.uid) //相手とのメッセージ内容取得
       })
       .catch((error) => {
         console.log(error);
