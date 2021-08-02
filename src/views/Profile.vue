@@ -47,7 +47,6 @@ type IprofileData = {
 type DataType = {
   singerList: IprofileData[];
   mixerList: IprofileData[];
-  backButtonLabel: string;
 };
 
 export default defineComponent({
@@ -117,7 +116,6 @@ export default defineComponent({
           value: 0,
         },
       ],
-      backButtonLabel: "戻る",
     };
   },
   created() {
@@ -135,7 +133,7 @@ export default defineComponent({
       //歌い手のプロフィールの場合true
       return (this as any).$store.state.exchange.isShowingSinger;
     },
-    profileIcon(): string {
+    profileIcon(): string { //閲覧する相手のアイコン
       return (this as any).$store.state.trimming.profileIcon;
     },
   },

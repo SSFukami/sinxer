@@ -31,12 +31,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import EditForm, { IformData } from "@/components/organisms/EditForm.vue";
+import UserIcon from "@/components/atoms/UserIcon.vue";
 import CommonButton from "@/components/atoms/CommonButton.vue";
 import WhiteButtonsSet, {
   ButtonsSetType as IButtonsData,
 } from "@/components/molecules/WhiteButtonsSet.vue";
-import UserIcon from "@/components/atoms/UserIcon.vue";
+import EditForm, { IformData } from "@/components/organisms/EditForm.vue";
 
 import {
   DEFAULT_SINGER_DATA,
@@ -149,24 +149,21 @@ export default defineComponent({
       //歌い手としてログインしているならtrue
       return (this as any).$store.state.auth.singerState;
     },
-    cropImage(): string {
+    cropImage(): string { //自分の編集中のアイコン
       return (this as any).$store.state.trimming.cropImage;
     },
   },
   methods: {
-    onFileChange(e: any) {
+    onFileChange(e: any) { //アイコンクリック時の処理
       const files = e.target.files || e.dataTransfer.files;
       (this as any).$store.dispatch("trimming/openTrimming"); //トリミングエリアの表示
       this.createImage(files[0]);
     },
-    //アップロードした画像を表示
-    createImage(file: any) {
-      let uploadedImage: any = "";
+    createImage(file: any) { //アップロードした画像を表示
       const reader = new FileReader();
       reader.onload = (e) => {
         //データの読み込みが正常に完了した時に発火
-        uploadedImage = e.target!.result; //画像データそのもの
-        (this as any).$store.dispatch("trimming/updateImage", uploadedImage);
+        (this as any).$store.commit("trimming/setUploadedImage", e.target!.result);
       };
       reader.readAsDataURL(file); //fileの内容をbase64形式で読み込み
       reader.onloadend;

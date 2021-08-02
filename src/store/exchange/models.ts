@@ -13,8 +13,6 @@ export type messageDataType = {
     content: string;
 }
 
-export type profileDataIconType = profileDataType & {};
-
 export interface IexchangeState {
     selfProfileData: Partial<profileDataType>; //キーはdefaultProfileと同じ
     clientProfileData: Partial<profileDataType>; //キーはdefaultProfileのキーとuid

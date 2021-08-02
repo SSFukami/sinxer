@@ -57,7 +57,6 @@ import MessageForm from "@/components/molecules/MessageForm.vue";
 import {
   messageDataType,
   profileDataType,
-  profileDataIconType,
 } from "@/store/exchange/models";
 
 type DataType = {
@@ -102,18 +101,20 @@ export default defineComponent({
     },
   },
   computed: {
-    filteredClientList(): profileDataIconType[] {
+    filteredClientList(): (profileDataType & { icon: string })[] {
       //検索後のチャット相手のリスト
-      const clientList = (this as any).$store.state.exchange.clientList; //チャット相手のリスト
+      const clientList: profileDataType[] = (this as any).$store.state.exchange.clientList; //チャット相手のリスト
       const iconList = (this as any).$store.state.trimming.iconList;
-      let newClientList: any[] = [];
+      let newClientList: (profileDataType & { icon: string })[] = [];
       for (let i = 0; i < clientList.length; i++) {
-        let icon = iconList[i];
-        const url = { ...clientList[i], icon };
-        newClientList.push(url);
+        newClientList[i] = {
+          ...clientList[i],
+          icon: iconList[i]
+        };
       }
+
       const word = this.searchWord;
-      const filteredList = newClientList.filter((client: profileDataType) => {
+      const filteredList = newClientList.filter((client: profileDataType & { icon: string }) => {
         const result: number = client.name.indexOf(word); //ワードが一致した最初のインデックス
         return result !== -1;
       });
@@ -142,7 +143,7 @@ export default defineComponent({
       //ユーザータブをクリック時の処理
       (this as any).$store.commit("exchange/setSelectedUid", data.uid); //どの相手を選択したかvuexに保存
       (this as any).$store.dispatch("exchange/setMessageData", data.uid); //選択した相手とのチャット内容をdbから取得
-      (this as any).$store.dispatch("trimming/searchClientIcon", data.uid);
+      (this as any).$store.dispatch("trimming/searchClientIcon", data.uid); //話し相手のアイコン取得
     },
     showProfile(clientUid: string, icon: string): void {
       //アイコンクリック時、プロフィール表示
@@ -151,7 +152,8 @@ export default defineComponent({
         //mix師なら
         (this as any).$store.commit("exchange/setIsShowingSinger", true); //歌い手のプロフィールを出せるように変更
       }
-      (this as any).$store.commit("trimming/setProfileIcon", icon);
+
+      (this as any).$store.commit("trimming/setProfileIcon", icon); //プロフィール画面で出すアイコン
       (this as any).$store.dispatch("exchange/setClientProfile", clientUid); //プロフィール情報取得後、プロフィール画面へ
     },
     sendMessage(): void {

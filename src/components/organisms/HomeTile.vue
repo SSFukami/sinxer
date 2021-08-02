@@ -27,11 +27,14 @@ export default defineComponent({
   },
   props: {
     data: {
-      //1~12の表示されてる順番
+      //mix師のプロフィール情報
       type: Object as PropType<ImixerData>,
       required: true,
     },
-    icon: String,
+    icon: { //mix師のアイコン
+      type: String,
+      required: true,
+    },
   },
   methods: {
     showProfile(): void {

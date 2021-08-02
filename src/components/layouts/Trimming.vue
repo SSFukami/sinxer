@@ -26,7 +26,6 @@ import { defineComponent } from "vue";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
-
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
 export default defineComponent({
@@ -36,14 +35,14 @@ export default defineComponent({
     CommonButtonWhite,
   },
   methods: {
-    cropImage() {
+    cropImage() { //トリミングされた箇所を切り取る処理
       const cropImg = (this as any).$refs.cropper
         .getCroppedCanvas()
         .toDataURL();
       (this as any).$store.dispatch("trimming/closeTrimming");
       (this as any).$store.dispatch("trimming/cropImage", cropImg); //登録前のアイコンを表示
     },
-    closeTrimming(): void {
+    closeTrimming(): void { //トリミング処理を閉じる処理
       (this as any).$store.dispatch("trimming/closeTrimming");
     },
   },

@@ -129,7 +129,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     context.commit("setHomeMixerList", mixerList); //vuexに保存
     context.commit("setUidList", mixerUidList);
-    context.dispatch("trimming/getClientIcon", null, { root: true });
+    context.dispatch("trimming/getClientIcon", null, { root: true }); //表示するアイコン取得処理
   },
   async searchMixer({ commit, dispatch, rootState }): Promise<void> { //検索にヒットしたMixerのデータ取得
     const searchWord = rootState.common.searchWord;
@@ -183,7 +183,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     commit("setHomeMixerList", mixerList); //vuexに保存
     commit("setUidList", mixerUidList);
-    dispatch("trimming/getClientIcon", null, { root: true });
+    dispatch("trimming/getClientIcon", null, { root: true }); //表示するアイコン取得処理
   },
   async startMessage(context, payload: ImixerData): Promise<void> { //歌い手側が依頼した時にチャット相手に追加
     const userUid: string = context.rootGetters["auth/getUserUid"];
@@ -220,7 +220,7 @@ export const actions: ActionTree<IexchangeState, RootState> = {
 
     context.commit("setClientList", clientList);
     context.commit("setUidList", clientUidList);
-    context.dispatch("trimming/getClientIcon", null, { root: true });
+    context.dispatch("trimming/getClientIcon", null, { root: true }); //表示するアイコン取得処理
   },
   async setMessageData(context, payload: string): Promise<void> { //指定した相手とのチャットデータをdbから取得
     const userUid: string = context.rootGetters["auth/getUserUid"];

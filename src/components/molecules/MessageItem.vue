@@ -41,14 +41,10 @@ export default defineComponent({
       //書いた人が自分ならクラス付与
       return this.senderId !== this.clientId ? "self" : "";
     },
-    selfIcon(): string {
-      return (this as any).$store.state.trimming.storageSelfIcon;
-    },
-    clientIcon(): string {
-      return (this as any).$store.state.trimming.clientIcon;
-    },
-    selfOrClientIcon(): string {
-      return this.senderId !== this.clientId ? this.selfIcon : this.clientIcon;
+    selfOrClientIcon(): string { //メッセージ主のアイコン
+      const selfIcon = (this as any).$store.state.trimming.storageSelfIcon;
+      const clientIcon = (this as any).$store.state.trimming.clientIcon;
+      return this.senderId !== this.clientId ? selfIcon : clientIcon; //Idが相手のかで切り替え
     },
   },
   methods: {
