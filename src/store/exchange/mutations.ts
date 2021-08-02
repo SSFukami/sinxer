@@ -18,6 +18,9 @@ export const mutations: MutationTree<IexchangeState> = {
   setHomeMixerList(state: IexchangeState, payload: profileDataType[]): void { //ホームに表示するMix師のリストの変更
     state.homeMixerList = payload;
   },
+  setUidList(state: IexchangeState, payload: string[]): void { //ホームやメッセージ画面でアイコンを表示する相手のUIDリスト
+    state.uidList = payload;
+  },
   setClientList(state: IexchangeState, payload: profileDataType[]): void { //チャット相手のリストの変更
     state.clientList = payload;
   },
@@ -29,8 +32,5 @@ export const mutations: MutationTree<IexchangeState> = {
   },
   setUnsubscribe(state: IexchangeState, payload: () => void): void { //チャット相手との会話データのリストの変更
     state.unsubscribe = payload;
-  },
-  setUidList(state: IexchangeState, payload:string[]): void {
-    state.uidList = payload;
   },
 };

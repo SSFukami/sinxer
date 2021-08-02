@@ -7,16 +7,13 @@ import "firebase/auth";
 import "firebase/storage";
 
 export const actions: ActionTree<ItrimmingState, RootState> = {
-  openTrimming({ commit }): void {
+  openTrimming({ commit }): void { //トリミング画面を開く
     commit("setTrimmingState", true);
   },
-  closeTrimming({ commit }): void {
+  closeTrimming({ commit }): void { //トリミング画面を閉じる
     commit("setTrimmingState", false);
   },
-  updateImage({ commit }, payload): void {
-    commit("setTrimmingImage", payload);
-  },
-  cropImage({ commit }, payload): void {
+  cropImage({ commit }, payload): void { //トリミング直後の画像を変更
     commit("setCropImage", payload);
   },
   async setSelfIcon(context): Promise<void> { //自分のアイコンのプロフィール情報取得してvuexに
@@ -54,7 +51,7 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
     const storageIcon = state.storageSelfIcon;
     commit("setCropImage", storageIcon); //storageIconをコピー
   },
-  async getClientIcon(context): Promise<void> {//ホーム画面とユーザータブのアイコン表示処理
+  async getClientIcon(context): Promise<void> { //ホーム画面かユーザータブのアイコン取得
     context.commit("resetIconList");
     //まずiconListを空にする
     const uidList = context.rootState.exchange.uidList;
@@ -79,20 +76,22 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
         //一致しなかったらデフォルトのアイコンを格納
         clientCropImageList.push(basicIconUrl);
       });
-      context.commit("setIconList", clientCropImageList);
     }
+
+    context.commit("setIconList", clientCropImageList);
   },
-  async searchClientIcon({ commit }, payload): Promise<void> {
+  async searchClientIcon({ commit }, payload: string): Promise<void> { //話し相手のアイコン取得処理
     const userUid: string = payload;
-    const basicIconRef: any = firebase.storage().ref('basic_icon.png');
+    const basicIconRef = firebase.storage().ref('basic_icon.png');
+
     await firebase.storage().ref(userUid + 'icon.png').getDownloadURL()
-      .then((url: any) => {
+      .then((url: string) => {
         commit("setClientIcon", url);
       })
       .catch(() => {
-        basicIconRef.getDownloadURL().then((url: any) => {
+        basicIconRef.getDownloadURL().then((url: string) => {
           commit("setClientIcon", url);
-        })
-      })
+        });
+      });
   },
 };

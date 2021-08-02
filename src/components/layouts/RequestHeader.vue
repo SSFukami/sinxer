@@ -13,10 +13,10 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "RequestHeader",
   methods: {
-    transHome(): void {
+    transHome(): void { //一つ前の画面へ
       this.$emit("click-button", 1);
     },
-    clickButton(): void {
+    clickButton(): void { //Mix師への依頼処理
       this.$emit("click-button", 0);
     },
   },

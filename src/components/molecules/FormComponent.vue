@@ -38,8 +38,8 @@ export default defineComponent({
     TextArea,
   },
   props: {
-    form: {
-      type: Object as PropType<PropFormType>, //フォームのデータ
+    form: { //フォームのデータ
+      type: Object as PropType<PropFormType>,
       required: true,
     },
   },

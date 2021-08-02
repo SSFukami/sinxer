@@ -18,7 +18,7 @@
       />
     </div>
     <div class="select-button">
-      <CommonButtonWhite :label="label" @click-event="cropImage" />
+      <CommonButtonWhite label="決定" @click-event="cropImage" />
     </div>
   </div>
 </template>
@@ -33,7 +33,6 @@ import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 type DataType = {
   targetWidth: number;
   targetHeight: number;
-  label: string;
 };
 
 export default defineComponent({
@@ -46,18 +45,17 @@ export default defineComponent({
     return {
       targetWidth: 1,
       targetHeight: 1,
-      label: "決定",
     };
   },
   methods: {
-    cropImage() {
+    cropImage() { //トリミングされた箇所を切り取る処理
       const cropImg = (this as any).$refs.cropper
         .getCroppedCanvas()
         .toDataURL();
       (this as any).$store.dispatch("trimming/closeTrimming");
       (this as any).$store.dispatch("trimming/cropImage", cropImg); //登録前のアイコンを表示
     },
-    closeTrimming(): void {
+    closeTrimming(): void { //トリミング処理を閉じる処理
       (this as any).$store.dispatch("trimming/closeTrimming");
     },
   },

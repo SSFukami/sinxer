@@ -32,7 +32,7 @@ export default defineComponent({
     (this as any).$store.dispatch("auth/onAuthChanged"); //認証変化の検知
   },
   watch: {
-    $route(): void {
+    $route(): void { //ページ遷移したらサイドバー閉じる
       (this as any).$store.dispatch("common/closeAside");
     },
   },
