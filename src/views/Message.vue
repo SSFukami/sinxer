@@ -14,7 +14,7 @@
           :key="index"
           :data="data"
           :selected="data.uid === selectedUid"
-          :icon="iconList[index]"
+          :icon="data.icon"
           @select-client="selectClient"
           @show-profile="showProfile"
         />
@@ -54,7 +54,11 @@ import UserTab from "@/components/molecules/UserTab.vue";
 import MessageItem from "@/components/molecules/MessageItem.vue";
 import MessageForm from "@/components/molecules/MessageForm.vue";
 
-import { messageDataType, profileDataType } from "@/store/exchange/models";
+import {
+  messageDataType,
+  profileDataType,
+  profileDataIconType,
+} from "@/store/exchange/models";
 
 type DataType = {
   //TypeScriptの型宣言
@@ -98,11 +102,18 @@ export default defineComponent({
     },
   },
   computed: {
-    filteredClientList(): profileDataType[] {
+    filteredClientList(): profileDataIconType[] {
       //検索後のチャット相手のリスト
       const clientList = (this as any).$store.state.exchange.clientList; //チャット相手のリスト
+      const iconList = (this as any).$store.state.trimming.iconList;
+      let newClientList: any[] = [];
+      for (let i = 0; i < clientList.length; i++) {
+        let icon = iconList[i];
+        const url = { ...clientList[i], icon };
+        newClientList.push(url);
+      }
       const word = this.searchWord;
-      const filteredList = clientList.filter((client: profileDataType) => {
+      const filteredList = newClientList.filter((client: profileDataType) => {
         const result: number = client.name.indexOf(word); //ワードが一致した最初のインデックス
         return result !== -1;
       });
@@ -116,10 +127,6 @@ export default defineComponent({
     messageDataList(): messageDataType[] {
       //チャット相手とのコメントリスト
       return (this as any).$store.state.exchange.messageList;
-    },
-    iconList(): string[] {
-      //ユーザータブに表示するMix師のアイコンのリスト
-      return (this as any).$store.state.trimming.iconList;
     },
   },
   methods: {
