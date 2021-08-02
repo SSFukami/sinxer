@@ -5,20 +5,19 @@
         class="image"
         ref="cropper"
         :guides="true"
-        :view-mode="2"
+        :view-mode="0"
+        responsive="false"
         :auto-crop-area="0.5"
-        :min-container-width="1000"
-        :min-container-height="500"
         :background="true"
         :rotatable="false"
         :src="$store.state.trimming.uploadedImage"
-        :aspect-ratio="targetWidth / targetHeight"
+        :aspect-ratio="1 / 1"
         :img-style="{ height: '500px' }"
         drag-mode="crop"
       />
     </div>
     <div class="select-button">
-      <CommonButtonWhite :label="label" @click-event="cropImage" />
+      <CommonButtonWhite :label="決定" @click-event="cropImage" />
     </div>
   </div>
 </template>
@@ -30,24 +29,11 @@ import "cropperjs/dist/cropper.css";
 
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
-type DataType = {
-  targetWidth: number;
-  targetHeight: number;
-  label: string;
-};
-
 export default defineComponent({
   name: "Trimming",
   components: {
     VueCropper,
     CommonButtonWhite,
-  },
-  data(): DataType {
-    return {
-      targetWidth: 1,
-      targetHeight: 1,
-      label: "決定",
-    };
   },
   methods: {
     cropImage() {
@@ -73,17 +59,20 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   position: fixed;
-  padding-left: 100px;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   &-image {
+    width:80%;
+    height:80%;
     padding-right: 10px;
+    padding-top:50px;
+    padding-left: 40px;
   }
 }
 .select-button {
-  width: 120px;
+  width: 10%;
   height: 32px;
 }
 </style>

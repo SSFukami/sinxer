@@ -45,7 +45,7 @@ export const actions: ActionTree<ItrimmingState, RootState> = {
 
     //base64形式の画像保存方法
     uploadRef.putString(cropImage, 'data_url').then(function () {
-      console.log('Uploaded a data_url string!');
+      console.log('Upload!');
     });
 
     context.commit("setStorageSelfIcon", cropImage); //データベース用を変更

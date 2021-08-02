@@ -158,7 +158,6 @@ export default defineComponent({
       const files = e.target.files || e.dataTransfer.files;
       (this as any).$store.dispatch("trimming/openTrimming"); //トリミングエリアの表示
       this.createImage(files[0]);
-      console.log(files);
     },
     //アップロードした画像を表示
     createImage(file: any) {
