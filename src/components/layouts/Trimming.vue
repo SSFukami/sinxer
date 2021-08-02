@@ -6,7 +6,6 @@
         ref="cropper"
         :guides="true"
         :view-mode="0"
-        responsive="false"
         :auto-crop-area="0.5"
         :background="true"
         :rotatable="false"
@@ -17,7 +16,7 @@
       />
     </div>
     <div class="select-button">
-      <CommonButtonWhite :label="決定" @click-event="cropImage" />
+      <CommonButtonWhite label="決定" @click-event="cropImage" />
     </div>
   </div>
 </template>
@@ -26,6 +25,7 @@
 import { defineComponent } from "vue";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
+
 
 import CommonButtonWhite from "@/components/atoms/CommonButtonWhite.vue";
 
