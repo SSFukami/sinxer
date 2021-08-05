@@ -31,10 +31,7 @@ export default defineComponent({
       type: Object as PropType<ImixerData>,
       required: true,
     },
-    icon: { //mix師のアイコン
-      type: String,
-      required: true,
-    },
+    icon: String,
   },
   methods: {
     showProfile(): void {

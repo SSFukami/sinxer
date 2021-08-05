@@ -32,6 +32,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 textarea {
   font-size: 20px;
+  font-family: inherit;
   width: 100%;
   height: 180px;
   color: $-primary-800;
