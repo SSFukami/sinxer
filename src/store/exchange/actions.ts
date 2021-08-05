@@ -150,19 +150,19 @@ export const actions: ActionTree<IexchangeState, RootState> = {
           console.log("Error getting documents: ", error);
         });
     } else if (typeof searchWord === "number") {
-      let searchData: { field: string, searchWord: number, type: '<' | '>' } = { field: '', searchWord: searchWord, type: '<' }; //検索内容を条件によって変更する
+      let searchData: { field: string, searchWord: number, type: '<=' | '>=' } = { field: '', searchWord: searchWord, type: '<=' }; //検索内容を条件によって変更する
       switch (searchType) {
         case 1: //料金の上限で検索
-          searchData = { field: 'fee', searchWord: searchWord, type: '<' };
+          searchData = { field: 'fee', searchWord: searchWord, type: '<=' };
           break;
         case 2: //料金の下限で検索
-          searchData = { field: 'fee', searchWord: searchWord, type: '>' };
+          searchData = { field: 'fee', searchWord: searchWord, type: '>=' };
           break;
         case 3: //納期の上限で検索
-          searchData = { field: 'deadline', searchWord: searchWord, type: '<' };
+          searchData = { field: 'deadline', searchWord: searchWord, type: '<=' };
           break;
         case 4: //納期の下限で検索
-          searchData = { field: 'deadline', searchWord: searchWord, type: '>' };
+          searchData = { field: 'deadline', searchWord: searchWord, type: '>=' };
           break;
       }
 

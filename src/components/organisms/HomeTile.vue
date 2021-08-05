@@ -33,7 +33,6 @@ export default defineComponent({
     },
     icon: { //mix師のアイコン
       type: String,
-      required: true,
     },
   },
   methods: {
