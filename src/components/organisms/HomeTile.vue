@@ -7,8 +7,8 @@
       <div class="name-content">{{ data.name }}</div>
     </div>
     <div class="detail">{{ data.detail }}</div>
-    <div class="fee">{{ data.fee }}</div>
-    <div class="deadline">{{ data.deadline }}</div>
+    <div class="fee">料金<br>{{ data.fee }}円</div>
+    <div class="deadline">納期<br>{{ data.deadline }}日</div>
   </div>
 </template>
 
