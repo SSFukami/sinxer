@@ -23,6 +23,7 @@
         :icon="iconList[index]"
         @click="setMixerIcon(iconList[index])"
       />
+      <div class="invisible" v-show="homeMixerList.length % 2 != 0"></div>
     </div>
   </div>
 </template>
@@ -132,8 +133,12 @@ export default defineComponent({
     //画面下の空白のための文字列
     content: "要素の直後にコンテンツを追加";
     width: 100%;
-    height: 50px;
+    height: 25px;
     visibility: hidden;
+  }
+  .invisible {
+    visibility: hidden;
+    height: 20px;
   }
 }
 
