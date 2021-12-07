@@ -20,9 +20,11 @@ https://sinxer-49d2b.web.app/
 
 # 開発環境
 
+・HTML、CSS
+
 ・TypeScript　4.1.6 
 
-・ue 3.0.0
+・Vue 3.0.0
 
 ・Node.js 12.18.4
 
