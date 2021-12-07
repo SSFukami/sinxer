@@ -16,6 +16,15 @@ https://sinxer-49d2b.web.app/
 
 パスワード：11112222
 
+# 開発環境
+
+・TypeScript　4.1.6 
+
+・ue 3.0.0
+
+・Node.js 12.18.4
+
+・firebase　8.10.0
 
 # 主な機能
 
